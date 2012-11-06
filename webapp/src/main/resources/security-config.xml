@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- =========================================================
+   Shiro Core Components - Not Spring Specific
+   ========================================================= -->
+    <!-- Shiro's main business-tier object for web-enabled applications
+         (use DefaultSecurityManager instead when there is no web environment)-->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="sessionMode" value="native"/>
+        <property name="realms">
+            <list>
+                <ref bean="nodeableBasicUserRealm"/>
+                <ref bean="nodeableCustomUserRealm"/>
+            </list>
+        </property>
+    </bean>
+
+    <!-- basic authorization, just the login method right now -->
+    <bean id="nodeableBasicUserRealm" class="com.streamreduce.security.realm.UsernamePasswordAuthorizingRealm">
+        <property name="name" value="nodeableBasicUserRealm"/>
+        <property name="credentialsMatcher">
+            <!-- Sha256 hashes the password (using the username as the salt) then base64 encodes it: -->
+            <bean class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+                <property name="hashAlgorithmName" value="SHA-256"/>
+                <!-- true means hex encoded, false means base64 encoded -->
+                <property name="storedCredentialsHexEncoded" value="false"/>
+            </bean>
+        </property>
+    </bean>
+
+    <!-- all resources that require the custom API Authentication Token in the header, this is on the User object -->
+    <bean id="nodeableCustomUserRealm" class="com.streamreduce.security.realm.UserTokenAuthorizingRealm">
+        <property name="name" value="nodeableCustomUserRealm"/>
+        <property name="credentialsMatcher">
+            <bean class="org.apache.shiro.authc.credential.SimpleCredentialsMatcher"/>
+        </property>
+    </bean>
+
+    <!-- this is for the IMG connections (inbound) that require the API key associated with that connection -->
+    <bean id="nodeableCustomGatewayRealm" class="com.streamreduce.security.realm.GatewayTokenAuthorizingRealm">
+        <property name="name" value="nodeableCustomGatewayRealm"/>
+        <property name="credentialsMatcher">
+            <bean class="org.apache.shiro.authc.credential.SimpleCredentialsMatcher"/>
+        </property>
+    </bean>
+
+    <!-- =========================================================
+         Shiro Spring-specific integration
+         ========================================================= -->
+    <!-- Post processor that automatically invokes init() and destroy() methods
+         for Spring-configured Shiro objects so you don't have to
+         1) specify an init-method and destroy-method attributes for every bean
+            definition and
+         2) even know which Shiro objects require these methods to be
+            called. -->
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+
+    <!-- Enable Shiro Annotations for Spring-configured beans.  Only run after
+         the lifecycleBeanProcessor has run: -->
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+          depends-on="lifecycleBeanPostProcessor"/>
+
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
+
+</beans>

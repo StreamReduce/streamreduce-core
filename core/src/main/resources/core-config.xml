@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+           ">
+
+    <!-- ===================================================================
+         -  Core Config
+         =================================================================== -->
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath*:application.properties</value>
+                <value>classpath*:cache.properties</value>
+                <value>classpath*:cloud.properties</value>
+                <value>classpath*:database.properties</value>
+                <value>classpath*:email.properties</value>
+                <value>classpath*:github.properties</value>
+                <value>classpath*:jira.properties</value>
+                <value>classpath*:messagebroker.properties</value>
+                <value>classpath*:pingdom.properties</value>
+                <value>classpath*:search.properties</value>
+                <value>classpath*:server.properties</value>
+                <value>classpath*:webhdfs.properties</value>
+
+                <value>classpath*:override.properties</value>
+            </list>
+        </property>
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+    </bean>
+
+    <!-- Email properties file -->
+    <util:properties id="emailProperties" location="classpath:email.properties"/>
+    <!-- Messages properties file -->
+    <util:properties id="messageProperties" location="classpath:messages.properties"/>
+
+    <!-- Enable annotation configuration -->
+    <context:annotation-config/>
+
+    <!-- enable AOP annotation access -->
+    <aop:aspectj-autoproxy/>
+
+    <!-- Scan sample packages for Spring annotations -->
+    <context:component-scan base-package="com.streamreduce.rest"/>
+    <context:component-scan base-package="com.streamreduce.core"/>
+    <context:component-scan base-package="com.streamreduce.connections"/>
+    <context:component-scan base-package="com.streamreduce.client"/>
+    <context:component-scan base-package="com.streamreduce.datasource.patch"/>
+
+    <!-- allows us to use the @Async annotation for the task executor -->
+    <task:annotation-driven executor="taskExecutor"/>
+
+    <!-- there is a less verbose way in spring 3.0,but we can't set the threadFactory with custom names -->
+    <bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+        <property name="corePoolSize" value="100"/>
+        <property name="maxPoolSize" value="100"/>
+        <!-- block instead of reject -->
+        <!--<property name="rejectedExecutionHandler">-->
+        <!--<bean class="java.util.concurrent.ThreadPoolExecutor$CallerRunsPolicy"/>-->
+        <!--</property>-->
+        <property name="threadFactory">
+            <!-- Customize thread names -->
+            <bean class="org.springframework.scheduling.concurrent.CustomizableThreadFactory">
+                <property name="threadGroupName" value="pool-async-events"/>
+                <property name="threadNamePrefix" value="async-event-thread-"/>
+            </bean>
+        </property>
+    </bean>
+
+    <!-- Amazon Email Service -->
+    <bean id="simpleEmailServiceClient" class="com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceClient">
+        <constructor-arg index="0" type="com.amazonaws.auth.AWSCredentials">
+            <bean class="com.amazonaws.auth.BasicAWSCredentials">
+                <constructor-arg index="0" type="java.lang.String" value="${email.aws.accessKeyId}"/>
+                <constructor-arg index="1" type="java.lang.String" value="${email.aws.secretKey}"/>
+            </bean>
+        </constructor-arg>
+    </bean>
+
+</beans>

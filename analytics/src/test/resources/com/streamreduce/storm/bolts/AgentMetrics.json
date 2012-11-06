@@ -1,0 +1,102 @@
+{
+  "cpu_time_idle": 3442648450,
+  "cpu_time_iow": null,
+  "cpu_time_irq": null,
+  "cpu_time_nice": 0,
+  "cpu_time_sirq": null,
+  "cpu_time_sys": 62834870,
+  "cpu_time_user": 101667680,
+  "disk_io": {
+    "disk0": {
+      "read_count": 1750929,
+      "write_kbytes": 122543823,
+      "write_count": 4053365,
+      "read_time": 10046773,
+      "write_time": 43678915,
+      "read_kbytes": 35385686
+    }
+  },
+  "elapsed_time": 79,
+  "generated": "2012-04-23T15:36:51.592496",
+  "load_avg_0": 0.64208984375,
+  "load_avg_1": 0.91748046875,
+  "load_avg_2": 0.9765625,
+  "open_connections": 147,
+  "open_files": 548,
+  "network_io": {
+    "gif0": {
+      "packets_out": 0,
+      "kbytes_in": 0,
+      "packets_in": 0,
+      "kbytes_out": 0
+    },
+    "en0": {
+      "packets_out": 0,
+      "kbytes_in": 0,
+      "packets_in": 0,
+      "kbytes_out": 0
+    },
+    "en1": {
+      "packets_out": 12364245,
+      "kbytes_in": 10487415,
+      "packets_in": 9334187,
+      "kbytes_out": 1079030
+    },
+    "lo0": {
+      "packets_out": 1417664,
+      "kbytes_in": 232942,
+      "packets_in": 1417664,
+      "kbytes_out": 232942
+    },
+    "p2p0": {
+      "packets_out": 0,
+      "kbytes_in": 0,
+      "packets_in": 0,
+      "kbytes_out": 0
+    },
+    "stf0": {
+      "packets_out": 0,
+      "kbytes_in": 0,
+      "packets_in": 0,
+      "kbytes_out": 0
+    },
+    "fw0": {
+      "packets_out": 0,
+      "kbytes_in": 0,
+      "packets_in": 0,
+      "kbytes_out": 0
+    }
+  },
+  "partitions": {
+    "/dev": {
+      "total": 183,
+      "used": 183,
+      "free": 0
+    },
+    "/net": {
+      "total": 0,
+      "used": 0,
+      "free": 0
+    },
+    "/": {
+      "total": 487546976,
+      "used": 161206556,
+      "free": 326084420
+    },
+    "/home": {
+      "total": 0,
+      "used": 0,
+      "free": 0
+    }
+  },
+  "phy_ram_free": 724948,
+  "phy_ram_total": 8388608,
+  "phy_ram_used": 7663660,
+  "processes": 100,
+  "uptime": 2085187,
+  "users_total": 49,
+  "users_unique": 10,
+  "vir_ram_free": 200448,
+  "vir_ram_used": 61696,
+  "vir_ram_total": 262144
+}

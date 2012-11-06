@@ -1,0 +1,6 @@
+The analytics .zip file contains:
+* all analytics code and dependencies in lib
+* a wrapper.conf file that is used to configure the jvm/logging
+* a bin directory for running the service through the Tanuki Java Service Wrapper. 
+
+To run analytics, ensure that all files in bin/ have execute permissions and run `bin/nodeable-analytics start|stop|restart|console`.

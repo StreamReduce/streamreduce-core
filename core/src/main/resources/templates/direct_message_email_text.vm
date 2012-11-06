@@ -1,0 +1,8 @@
+New Message on Nodeable!
+
+${sobaMessage.transformedMessage}
+#foreach( ${mesageComment} in ${sobaMessage.comments} ) @${mesageComment.senderName}: ${mesageComment.comment}
+#end
+
+Feedback and suggestions are always welcome. Please send us an email at support@nodeable.com
+and let us know what you think.

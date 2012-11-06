@@ -1,0 +1,33 @@
+{
+  "plainValue": "Nodeable",
+  "objectValue": {
+    "plainValue": "Nodeable",
+    "objectValue": {
+      "plainValue": "Nodeable"
+    },
+    "arrayValue": [
+      "Nodeable",
+      {
+        "plainValue": "Nodeable"
+      },
+      [
+        "Nodeable",
+        {
+          "plainValue": "Nodeable"
+        }
+      ]
+    ]
+  },
+  "arrayValue": [
+    "Nodeable",
+    {
+      "plainValue": "Nodeable"
+    },
+    [
+      "Nodeable",
+      {
+        "plainValue": "Nodeable"
+      }
+    ]
+  ]
+}

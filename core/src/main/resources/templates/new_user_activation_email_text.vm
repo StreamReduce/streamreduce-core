@@ -1,0 +1,13 @@
+Nodeable User Activation
+
+To verify and complete your registration with Nodeable, please click the link below:
+
+${urlPrefix}/verify/signup/${secretKey}
+
+Once you have created an account, you can immediately add your own data sources. Our
+StreamReduce engine provides instant visibility to the most important trends, summaries, and
+anomalies that help make your business more efficient. You can also configure outbound
+destinations, such as Hadoop, for additional processing.
+
+Feedback and suggestions are always welcome. Please send us an email at support@nodeable.com
+and let us know what you think.

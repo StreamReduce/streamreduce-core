@@ -1,0 +1,505 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.streamreduce</groupId>
+    <artifactId>server</artifactId>
+    <packaging>pom</packaging>
+    <name>Nodeable Server :: Parent</name>
+    <version>1.0.1-SNAPSHOT</version>
+    <description>Parent Module for all Nodeable Server-Side Java Components.</description>
+
+    <modules>
+        <module>core</module>
+        <module>analytics</module>
+        <module>common</module>
+        <module>system-tests</module>
+        <module>rest</module>
+        <module>webapp</module>
+    </modules>
+
+
+    <properties>
+        <mule.version>3.2.1</mule.version>
+        <jdk.version>1.6</jdk.version>
+        <spring.version>3.1.2.RELEASE</spring.version>
+        <metrics.version>2.0.3</metrics.version>
+        <slf4j.version>1.6.1</slf4j.version>
+        <activemq.version>5.6.0</activemq.version>
+        <jclouds.version>1.5.0</jclouds.version>
+        <camel.version>2.10.0</camel.version>
+        <jackson.version>1.9.7</jackson.version>
+        <mongo-java-driver.version>2.7.3</mongo-java-driver.version>
+        <net.sf.json-lib.version>2.4</net.sf.json-lib.version>
+        <joda-time.version>2.1</joda-time.version>
+        <shiro.version>1.2.1</shiro.version>
+        <jersey.version>1.13</jersey.version>
+        <aws-java-sdk.version>1.3.21</aws-java-sdk.version>
+    </properties>
+
+
+    <repositories>
+        <repository>
+            <id>muleforge-repo</id>
+            <name>MuleForge Repository</name>
+            <url>http://repository.muleforge.org</url>
+            <layout>default</layout>
+        </repository>
+
+        <repository>
+            <id>codehaus-repo</id>
+            <name>Codehaus Repository</name>
+            <url>http://dist.codehaus.org/mule/dependencies/maven2</url>
+            <layout>default</layout>
+        </repository>
+
+        <repository>
+            <id>codehaus</id>
+            <name>Codehaus Maven Release Repository</name>
+            <url>http://repository.codehaus.org</url>
+        </repository>
+
+        <repository>
+            <id>codehaus-snapshots</id>
+            <name>Codehaus Maven Snapshots Repository</name>
+            <url>http://snapshots.repository.codehaus.org</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+
+        <repository>
+            <id>codehaus-dist-snapshots</id>
+            <name>Codehaus Maven Dist Snapshots Repository</name>
+            <url>http://snapshots.dist.codehaus.org/mule/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+
+        <repository>
+            <id>maven2-repository.java.net</id>
+            <name>Java.net Repository for Maven</name>
+            <url>http://download.java.net/maven/2/</url>
+            <layout>default</layout>
+        </repository>
+
+        <repository>
+            <id>jclouds-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+
+        <repository>
+            <id>jboss-maven2-release-repository</id>
+            <name>JBoss</name>
+            <url>https://repository.jboss.org/nexus/content/groups/public</url>
+        </repository>
+
+        <repository>
+            <id>Morphia</id>
+            <url>http://morphia.googlecode.com/svn/mavenrepo/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+
+        <repository>
+            <id>nodeable.repository</id>
+            <url>https://admin-01.nodeable.com/nexus/content/repositories/nodeable.repository</url>
+        </repository>
+
+        <repository>
+            <id>thirdparty</id>
+            <url>https://admin-01.nodeable.com/nexus/content/repositories/thirdparty</url>
+        </repository>
+
+        <repository>
+            <id>thirdparty-snapshots</id>
+            <url>https://admin-01.nodeable.com/nexus/content/repositories/thirdparty-snapshots</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </repository>
+
+        <repository>
+            <id>atlassian</id>
+            <url>https://maven.atlassian.com/public</url>
+        </repository>
+
+        <repository>
+            <id>clojars.org</id>
+            <url>http://clojars.org/repo</url>
+        </repository>
+
+        <repository>
+            <id>google-api-services</id>
+            <url>http://mavenrepo.google-api-java-client.googlecode.com/hg</url>
+        </repository>
+    </repositories>
+
+
+    <distributionManagement>
+        <repository>
+            <id>releases</id>
+            <name>Internal Releases</name>
+            <url>https://admin-01.nodeable.com/nexus/content/repositories/releases</url>
+        </repository>
+
+        <snapshotRepository>
+            <id>snapshots</id>
+            <url>https://admin-01.nodeable.com/nexus/content/repositories/snapshots</url>
+            <uniqueVersion>false</uniqueVersion>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>2.3.2</version>
+                    <configuration>
+                        <source>${jdk.version}</source>
+                        <target>${jdk.version}</target>
+                        <encoding>ISO-8859-1</encoding>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>test-jar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>2.4</version>
+                    <executions>
+                        <execution>
+                            <id>generate-resourcedoc</id>
+                            <goals>
+                                <goal>javadoc</goal>
+                            </goals>
+                            <phase>generate-sources</phase>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <encoding>UTF-8</encoding>
+                        <verbose>false</verbose>
+                        <show>public</show>
+                        <subpackages>com.streamreduce.rest.resource</subpackages>
+                        <doclet>com.sun.jersey.wadl.resourcedoc.ResourceDoclet</doclet>
+                        <docletArtifacts>
+                            <docletArtifact>
+                                <groupId>com.sun.jersey.contribs</groupId>
+                                <artifactId>wadl-resourcedoc-doclet</artifactId>
+                                <version>1.9.1</version>
+                            </docletArtifact>
+                            <!--
+                                Also specify jersey and xerces as doclet artifacts as the ResourceDoclet
+                                uses classes provided by them to generate the resourcedoc.
+                            -->
+                            <docletArtifact>
+                                <groupId>com.sun.jersey</groupId>
+                                <artifactId>jersey-server</artifactId>
+                                <version>${jersey.version}</version>
+                            </docletArtifact>
+                            <docletArtifact>
+                                <groupId>xerces</groupId>
+                                <artifactId>xercesImpl</artifactId>
+                                <version>2.6.1</version>
+                            </docletArtifact>
+                        </docletArtifacts>
+                        <additionalparam>-output ${project.basedir}/target/resourcedoc.xml</additionalparam>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>com.sun.jersey.contribs</groupId>
+                    <artifactId>maven-wadl-plugin</artifactId>
+                    <version>1.9.1</version>
+                    <configuration>
+                        <formatWadlFile>true</formatWadlFile>
+                        <wadlGenerators>
+                            <wadlGeneratorDescription>
+                                <className>
+                                    com.sun.jersey.server.wadl.generators.WadlGeneratorApplicationDoc
+                                </className>
+                                <properties>
+                                    <property>
+                                        <name>applicationDocsFile</name>
+                                        <value>${project.basedir}/src/main/resources/application-doc.xml
+                                        </value>
+                                    </property>
+                                </properties>
+                            </wadlGeneratorDescription>
+                            <wadlGeneratorDescription>
+                                <className>
+                                    com.sun.jersey.server.wadl.generators.resourcedoc.WadlGeneratorResourceDocSupport
+                                </className>
+                                <properties>
+                                    <property>
+                                        <name>resourceDocFile</name>
+                                        <value>${project.basedir}/target/resourcedoc.xml</value>
+                                    </property>
+                                </properties>
+                            </wadlGeneratorDescription>
+                        </wadlGenerators>
+                    </configuration>
+
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.slf4j</groupId>
+                            <artifactId>slf4j-api</artifactId>
+                            <version>1.6.4</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>com.google.guava</groupId>
+                            <artifactId>guava</artifactId>
+                            <version>12.0</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.springframework</groupId>
+                            <artifactId>spring-beans</artifactId>
+                            <version>${spring.version}</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>net.sf.ezmorph</groupId>
+                            <artifactId>ezmorph</artifactId>
+                            <version>1.0.6</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>commons-collections</groupId>
+                            <artifactId>commons-collections</artifactId>
+                            <version>3.2.1</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>commons-beanutils</groupId>
+                            <artifactId>commons-beanutils</artifactId>
+                            <version>1.8.3</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.mongodb</groupId>
+                            <artifactId>mongo-java-driver</artifactId>
+                            <version>${mongo-java-driver.version}</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>net.sf.json-lib</groupId>
+                            <artifactId>json-lib</artifactId>
+                            <version>${net.sf.json-lib.version}</version>
+                            <classifier>jdk15</classifier>
+                        </dependency>
+                        <dependency>
+                            <groupId>joda-time</groupId>
+                            <artifactId>joda-time</artifactId>
+                            <version>${joda-time.version}</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>com.google.code.morphia</groupId>
+                            <artifactId>morphia</artifactId>
+                            <!-- dated snapshot stored in the Nodeable nexus repo -->
+                            <version>0.99.1-05112012</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>xml-maven-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>transform-wadls</id>
+                            <goals>
+                                <goal>transform</goal>
+                            </goals>
+                            <phase>compile</phase>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <transformationSets>
+                            <transformationSet>
+                                <dir>${project.build.outputDirectory}</dir>
+                                <includes>
+                                    <include>*.wadl</include>
+                                </includes>
+                                <stylesheet>src/main/resources/application-stylesheet.xsl</stylesheet>
+                                <outputDir>${project.basedir}/target/generated-sources/html</outputDir>
+                            </transformationSet>
+                        </transformationSets>
+                    </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>net.sf.saxon</groupId>
+                            <artifactId>saxon</artifactId>
+                            <version>8.7</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.11</version>
+                    <configuration>
+                        <excludes>
+                            <exclude>**/*IT*.java</exclude>
+                        </excludes>
+                    </configuration>
+                </plugin>
+
+                <!--
+                Use a newer version of the install plugin than what your Maven uses by default. The
+                older version failed to install the project if there was no target/classes folder.
+                Since we use mule packaging on the project we actually create and attach the zip that
+                must be installed.
+                -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>2.3.1</version>
+                </plugin>
+
+
+                <plugin>
+                    <groupId>com.github.joelittlejohn.embedmongo</groupId>
+                    <artifactId>embedmongo-maven-plugin</artifactId>
+                    <version>0.1.4</version>
+                </plugin>
+
+            </plugins>
+        </pluginManagement>
+
+
+        <plugins>
+            <plugin>
+                <groupId>com.github.joelittlejohn.embedmongo</groupId>
+                <artifactId>embedmongo-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>start</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>start</goal> <!-- use the 'run' goal instead to start mongodb and wait -->
+                        </goals>
+                        <configuration>
+                            <port>37017</port> <!-- optional, default 27017 -->
+                            <version>2.0.2</version>  <!-- optional, default 2.1.1 --> <!-- 2.0.2 is current Nodeable production version -->
+                            <logging>none</logging> <!-- optional (file|console|none), default console -->
+                            <bindIp>127.0.0.1</bindIp> <!-- optional, default is to listen on all interfaces -->
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>stop</id>
+                        <goals>
+                            <goal>stop</goal>
+                        </goals>
+                        <phase>post-integration-test</phase>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+                <version>1.6.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mongodb</groupId>
+                <artifactId>mongo-java-driver</artifactId>
+                <version>${mongo-java-driver.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>net.sf.json-lib</groupId>
+                <artifactId>json-lib</artifactId>
+                <version>${net.sf.json-lib.version}</version>
+                <classifier>jdk15</classifier>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>12.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>storm</groupId>
+                <artifactId>storm</artifactId>
+                <version>0.8.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.activemq</groupId>
+                <artifactId>activemq-pool</artifactId>
+                <version>${activemq.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.activemq</groupId>
+                <artifactId>activemq-camel</artifactId>
+                <version>${activemq.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-aws</artifactId>
+                <version>${camel.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-spring</artifactId>
+                <version>${camel.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>rome</groupId>
+                <artifactId>rome</artifactId>
+                <version>0.9</version>
+            </dependency>
+
+            <dependency>
+                <groupId>joda-time</groupId>
+                <artifactId>joda-time</artifactId>
+                <version>${joda-time.version}</version>
+            </dependency>
+
+            <!-- Managed Test Dependencies -->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.8.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-all</artifactId>
+                <version>1.8.4</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>

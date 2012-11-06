@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Amazon Elastic Compute Cloud (N. Virginia) Service Status</title>
+    <link>http://status.aws.amazon.com/</link>
+    <link rel="alternate" href="http://status.aws.amazon.com/rss/all.rss" type="application/rss+xml" title="Amazon Web Services Status Feed"/>
+    <title type="text">Current service status feed for Amazon Elastic Compute Cloud (N. Virginia).</title>
+    <language>en-us</language>
+    <pubDate>Fri,  2 Mar 2012 06:28:04 PST</pubDate>
+    <updated>Fri,  2 Mar 2012 06:28:04 PST</updated>
+    <generator>AWS Service Health Dashboard RSS Generator</generator>
+    <ttl>5</ttl>
+
+	 
+	 <item>
+	  <title type="text">Service is operating normally: Degraded performance for some EBS Volumes</title>
+	  <link>http://status.aws.amazon.com</link>
+	  <pubDate>Wed, 29 Feb 2012 16:34:59 PST</pubDate>
+	  <guid>http://status.aws.amazon.com/#EC2_1330562099</guid>
+	  <description>Between 3:57 PM PST and 4:02 PM PST a small number of EBS volumes in a single AZ in the US-EAST-1 region experienced degraded performance. The issue has been resolved and the service is operating normally.</description>
+	 </item>
+         
+	 <item>
+	  <title type="text">Informational message: Investigating degraded performance of EBS volumes</title>
+	  <link>http://status.aws.amazon.com</link>
+	  <pubDate>Wed, 29 Feb 2012 16:12:58 PST</pubDate>
+	  <guid>http://status.aws.amazon.com/#EC2_1330560778</guid>
+	  <description>We are investigating degraded performance for a small number of EBS volumes in a single AZ in the US-EAST-1 region.
+</description>
+	 </item>
+       
+  </channel>
+</rss>

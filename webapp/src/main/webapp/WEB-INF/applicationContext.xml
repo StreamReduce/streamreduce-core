@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       ">
+
+    <import resource="classpath:core-config.xml"/>
+    <import resource="classpath:security-config.xml"/>
+    <import resource="classpath:datasource-config.xml"/>
+    <import resource="classpath:camel-config.xml"/>
+    <import resource="classpath:jmx-config.xml"/>
+
+    <!-- Let's use some enterprise caching support for better performance.  You can replace this with any enterprise
+         caching framework implementation that you like (Terracotta+Ehcache, Coherence, GigaSpaces, etc -->
+    <bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+        <!-- Set a net.sf.ehcache.CacheManager instance here if you already have one.  If not, a new one
+             will be creaed with a default config:
+             <property name="cacheManager" ref="ehCacheManager"/> -->
+        <!-- If you don't have a pre-built net.sf.ehcache.CacheManager instance to inject, but you want
+             a specific Ehcache configuration to be used, specify that here.  If you don't, a default
+             will be used.:
+        <property name="cacheManagerConfigFile" value="classpath:some/path/to/ehcache.xml"/> -->
+    </bean>
+
+    <!-- Define the Shiro Filter here (as a FactoryBean) instead of directly in web.xml -
+         web.xml uses the DelegatingFilterProxy to access this bean.  This allows us
+         to wire things with more control as well utilize nice Spring things such as
+         PropertiesPlaceholderConfigurer and abstract beans or anything else we might need: -->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager"/>
+        <property name="loginUrl" value="/authentication/login"/>
+        <property name="unauthorizedUrl" value="/logout"/>
+        <property name="filterChainDefinitions">
+            <value>
+                /status/** = anon
+                /docs/** = anon
+                /authentication/login = authcBasic, roles[Users]
+                /logout = logout
+                /api/** = userToken
+                /gateway/** = apiKey
+                /agent/** = apiKey
+                /admin/** = userToken, roles[Administrators]
+                /** = authc
+            </value>
+        </property>
+    </bean>
+
+    <!-- Define any javax.servlet.Filter beans you want anywhere in this application context.   -->
+    <!-- They will automatically be acquired by the 'shiroFilter' bean above and made available -->
+    <!-- to the 'filterChainDefinitions' property.  Or you can manually/explicitly add them     -->
+    <!-- to the shiroFilter's 'filters' Map if desired. See its JavaDoc for more details.       -->
+    <bean id="apiKey" class="com.streamreduce.security.filter.GatewayTokenAuthenticatingFilter"/>
+    <bean id="userToken" class="com.streamreduce.security.filter.UserTokenAuthenticatingFilter"/>
+
+</beans>

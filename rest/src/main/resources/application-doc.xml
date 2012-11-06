@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<applicationDocs targetNamespace="http://research.sun.com/wadl/2006/10">
+    <doc xml:lang="en" title="Nodeable REST API Documentation">
+      This is documentation for Nodeable's REST API.
+    </doc>
+</applicationDocs>

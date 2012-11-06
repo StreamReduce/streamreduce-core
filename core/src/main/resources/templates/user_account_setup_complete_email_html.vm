@@ -1,0 +1,30 @@
+#include("/templates/html_email_header.vm")
+	<table width="90%" cellpadding="0" cellspacing="15" align="center">
+		<tr>
+			<td width="100%"><span style="font-size: 18px"><b>Welcome to Nodeable</b></span></td>
+		</tr>
+		<tr>
+			<td width="100%">Thank you for signing up! Nodeable provides real-time data stream processing to find the trends, summaries, and anomalies that help make your business more efficient.</td>
+		</tr>
+	</table>
+	<table width="90%" cellpadding="0" cellspacing="15" align="center">
+		<tr>
+			<td width="100%">You can login now at <a href="${urlPrefix}" style="color:#5373b7">${urlPrefix}</a>. A few tips to get started:</td>
+		</tr>
+		<tr>
+			<td width="100%"><b>Connect your Data Streams.</b> Nodeable's StreamReduce engine collects and processes events in real-time giving you instant visibility into high-level insights and trends that power your business. Add your custom sources or use our pre-built connectors via the Connections page to get personalized insights made fresh for you!</td>
+		</tr>
+		<tr>
+			<td width="100%"><b>Send Processed Data to Hadoop.</b> Nodeable enhances and normalizes your data as a real-time complement to Hadoop, trimming down the number of MapReduce jobs you need. It's easy to configure your data sources to an S3 bucket or directly into HDFS.</td>
+		</tr>
+		<tr>
+			<td width="100%"><b>Collaborate and Share.</b> Our familiar social-network style interface makes it easy to communicate and share data with your team. Invite other team members by simply adding their email address into the Connections > Humans page.</td>
+		</tr>
+	</table>
+    <br />
+    <table width="90%" cellpadding="0" cellspacing="15" align="center" style="background-color: #edf1f8">
+        <tr>
+            <td width="100%"><span style="font-size: 12px">Feedback and suggestions are always welcome. Drop us a note at <a href="mailto:support@nodeable.com" style="color:#5373b7">support@nodeable.com</a>, we love hearing from you!</span></td>
+        </tr>
+    </table>
+#include("/templates/html_email_footer.vm")

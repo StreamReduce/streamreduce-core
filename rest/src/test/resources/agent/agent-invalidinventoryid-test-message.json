@@ -1,0 +1,109 @@
+{
+    "node_id": "INVALID",
+    "data": [
+        {
+            "open_connections": 58,
+            "users_total": 49,
+            "phy_ram_total": 8388608,
+            "cpu_time_sirq": null,
+            "elapsed_time": 0,
+            "uptime": 606297,
+            "disk_io": {
+                "disk0": {
+                    "write_bytes": 24103566848,
+                    "read_count": 353569,
+                    "write_count": 929804,
+                    "read_time": 1656506519956,
+                    "read_bytes": 5931345408,
+                    "write_time": 4389909121973
+                }
+            },
+            "vir_ram_used": 0,
+            "vir_ram_total": 65536,
+            "phy_ram_free": 3325168,
+            "net_out": 0,
+            "cpu_time_irq": null,
+            "users_unique": 10,
+            "load_avg_0": 0.16552734375,
+            "generated": "2011-09-21T16:48:57.908863",
+            "network_io": {
+                "gif0": {
+                    "packets_out": 0,
+                    "bytes_in": 0,
+                    "packets_in": 0,
+                    "bytes_out": 0
+                },
+                "en0": {
+                    "packets_out": 0,
+                    "bytes_in": 0,
+                    "packets_in": 0,
+                    "bytes_out": 342
+                },
+                "en1": {
+                    "packets_out": 5107930,
+                    "bytes_in": 5556339476,
+                    "packets_in": 3572167,
+                    "bytes_out": 323015249
+                },
+                "lo0": {
+                    "packets_out": 80602,
+                    "bytes_in": 25391509,
+                    "packets_in": 80597,
+                    "bytes_out": 25388864
+                },
+                "stf0": {
+                    "packets_out": 0,
+                    "bytes_in": 0,
+                    "packets_in": 0,
+                    "bytes_out": 0
+                },
+                "vboxnet0": {
+                    "packets_out": 0,
+                    "bytes_in": 0,
+                    "packets_in": 0,
+                    "bytes_out": 0
+                },
+                "fw0": {
+                    "packets_out": 0,
+                    "bytes_in": 0,
+                    "packets_in": 0,
+                    "bytes_out": 346
+                }
+            },
+            "open_files": 491,
+            "cpu_time_user": 28689.439999999999,
+            "partitions": {
+                "/dev": {
+                    "total": 178,
+                    "used": 178,
+                    "free": 0
+                },
+                "/net": {
+                    "total": 0,
+                    "used": 0,
+                    "free": 0
+                },
+                "/": {
+                    "total": 488050672,
+                    "used": 161684180,
+                    "free": 326110492
+                },
+                "/home": {
+                    "total": 0,
+                    "used": 0,
+                    "free": 0
+                }
+            },
+            "load_avg_2": 0.3076171875,
+            "processes": 123,
+            "load_avg_1": 0.30029296875,
+            "cpu_time_sys": 24597.049999999999,
+            "vir_ram_free": 65536,
+            "phy_ram_used": 5063440,
+            "cpu_time_idle": 1192863.3899999999,
+            "cpu_time_iow": null,
+            "cpu_time_nice": 0.0,
+            "net_in": 0
+        }
+    ]
+}

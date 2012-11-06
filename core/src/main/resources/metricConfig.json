@@ -1,0 +1,112 @@
+{
+    "INVENTORY_ITEM_RESOURCE_USAGE" : {
+        "CPUUtilization.average": {
+            "name":"CPU Utilization",
+            "unit":"%",
+            "units":"%",
+            "explanation":"CPU utilization was previously at %.2f and is now at %.2f"
+        },
+        "DiskReadBytes.average": {
+            "name":"Disk Read",
+            "unit":"Byte",
+            "units":"Bytes",
+            "explanation":"Disk bytes read was previously at %.2f and is now at %.2f"
+        },
+        "DiskReadOps.average": {
+            "name":"Disk Read Ops",
+            "unit":"",
+            "units":"",
+            "explanation":"Disk reads operations was previously {0} and is now {1}"
+        },
+        "DiskWriteBytes.average": {
+            "name":"Disk Write",
+            "unit":"Byte",
+            "units":"Bytes",
+            "explanation":"Disk bytes written was previously at %.2f and is now at %.2f"
+        },
+        "DiskWriteOps.average": {
+            "name":"Disk Write Ops",
+            "unit":"",
+            "units":"",
+            "explanation":"Disk write operations was previously {0} and is now {1}"
+        },    
+        "NetworkIn.average": {
+            "name":"Network In",
+            "unit":"Byte",
+            "units":"Bytes",
+            "explanation":"Incoming network traffic was previously at %.2f and is now at %.2f"
+        },
+        "NetworkOut.average": {
+            "name":"Network Out",
+            "unit":"Byte",
+            "units":"Bytes",
+            "explanation":"Outgoing network traffic was previously at %.2f and is now at %.2f"
+        },
+        "ServerResponse.time": {
+            "name":"Response Time",
+            "unit":"milliseconds",
+            "units":"milliseconds",
+            "explanation":"Service response time was previously %.2f and is now %.2f"
+        },
+        "hosts.up": {
+            "name":"Hosts Up",
+            "unit":"",
+            "units":"",
+            "explanation":"Number of hosts up was previously %.2f and is now %.2f"
+        },
+        "hosts.down": {
+            "name":"Hosts Down",
+            "unit":"",
+            "units":"",
+            "explanation":"Number of hosts down was previously %.2f and is now %.2f"
+        },
+        "services.critical": {
+            "name":"Services Critical",
+            "unit":"",
+            "units":"",
+            "explanation":"Number of services in a critical state was previously %.2f and is now %.2f"
+        },
+        "services.unknown": {
+            "name":"Services Unknown",
+            "unit":"",
+            "units":"",
+            "explanation":"Number of services in an unknown state was previously %.2f and is now %.2f"
+        },
+        "services.warning": {
+            "name":"Services Warning",
+            "unit":"",
+            "units":"",
+            "explanation":"Number of services in a warning state was previously %.2f and is now %.2f"
+        },
+        "services.ok": {
+            "name":"Services OK",
+            "unit":"",
+            "units":"",
+            "explanation":"Number of services in an OK state was previously %.2f and is now %.2f"
+        }
+    },
+    "CONNECTION_ACTIVITY_COUNT": {
+        "": {
+            "name":"Updates",
+            "unit":"",
+            "units":"",
+            "explanation":"Total number of changes was previously at %.2f and is now at %.2f"
+        }
+    },
+    "INVENTORY_ITEM_COUNT": {
+        "": {
+            "name":"Items",
+            "unit":"",
+            "units":"",
+            "explanation":"Total number of items was previously at %.2f and is now at %.2f"
+        }
+    },
+    "USER_COUNT": {
+        "": {
+            "name":"Users",
+            "unit":"",
+            "units":"",
+            "explanation":"Total number of users was previously at %.2f and is now at %.2f"
+        }
+    }    
+}

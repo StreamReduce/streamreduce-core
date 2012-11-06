@@ -1,0 +1,11 @@
+Connection Error
+
+We detected an error with connection ${connectionName}. This is likely caused by a
+configuration problem, such as invalid user credentials, or a connectivity issue with the
+remote server. Please update the connection settings to resolve the issue.
+
+Connections settings may be edited here:
+${urlPrefix}/app#connection/edit/${connectionId}
+
+Feedback and suggestions are always welcome. Please send us an email at support@nodeable.com
+and let us know what you think.

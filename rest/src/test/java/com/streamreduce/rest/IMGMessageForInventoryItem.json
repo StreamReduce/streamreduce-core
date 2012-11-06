@@ -1,0 +1,22 @@
+{
+  "inventoryItemId": "test-object-id",
+  "message": "This is a test IMG message!",
+  "hashtags": [
+    "#test",
+    "#custom"
+  ],
+  "metrics": [
+    {
+      "name": "Metric 1",
+      "value": 5,
+      "type": "ABSOLUTE"
+    },
+    {
+      "name": "Metric 2",
+      "value": -1,
+      "type": "DELTA"
+    }
+  ],
+  "customData1": "IMG Test Message",
+  "customData2": 55555
+}

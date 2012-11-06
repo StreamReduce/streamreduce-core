@@ -1,0 +1,123 @@
+{
+  "CPUUtilization": {
+    "timestamp": {
+      "time": 1335490200000,
+      "minutes": 30,
+      "seconds": 0,
+      "hours": 19,
+      "month": 3,
+      "year": 112,
+      "timezoneOffset": 360,
+      "day": 4,
+      "date": 26
+    },
+    "unit": "PERCENT",
+    "minimum": 0,
+    "maximum": 0,
+    "customUnit": "",
+    "sum": 0,
+    "samples": 0,
+    "average": 0
+  },
+  "DiskReadOps": {
+    "timestamp": {
+      "time": 1335491400000,
+      "minutes": 50,
+      "seconds": 0,
+      "hours": 19,
+      "month": 3,
+      "year": 112,
+      "timezoneOffset": 360,
+      "day": 4,
+      "date": 26
+    },
+    "unit": "COUNT",
+    "minimum": 0,
+    "maximum": 0,
+    "customUnit": "",
+    "sum": 0,
+    "samples": 0,
+    "average": 0
+  },
+  "DiskReadBytes": {
+    "timestamp": {
+      "time": 1335491700000,
+      "minutes": 55,
+      "seconds": 0,
+      "hours": 19,
+      "month": 3,
+      "year": 112,
+      "timezoneOffset": 360,
+      "day": 4,
+      "date": 26
+    },
+    "unit": "BYTES",
+    "minimum": 0,
+    "maximum": 0,
+    "customUnit": "",
+    "sum": 0,
+    "samples": 0,
+    "average": 0
+  },
+  "NetworkIn": {
+    "timestamp": {
+      "time": 1335490800000,
+      "minutes": 40,
+      "seconds": 0,
+      "hours": 19,
+      "month": 3,
+      "year": 112,
+      "timezoneOffset": 360,
+      "day": 4,
+      "date": 26
+    },
+    "unit": "BYTES",
+    "minimum": 42,
+    "maximum": 42,
+    "customUnit": "",
+    "sum": 0,
+    "samples": 0,
+    "average": 42
+  },
+  "DiskWriteOps": {
+    "timestamp": {
+      "time": 1335491400000,
+      "minutes": 50,
+      "seconds": 0,
+      "hours": 19,
+      "month": 3,
+      "year": 112,
+      "timezoneOffset": 360,
+      "day": 4,
+      "date": 26
+    },
+    "unit": "COUNT",
+    "minimum": 0,
+    "maximum": 0,
+    "customUnit": "",
+    "sum": 0,
+    "samples": 0,
+    "average": 0
+  },
+  "NetworkOut": {
+    "timestamp": {
+      "time": 1335490800000,
+      "minutes": 40,
+      "seconds": 0,
+      "hours": 19,
+      "month": 3,
+      "year": 112,
+      "timezoneOffset": 360,
+      "day": 4,
+      "date": 26
+    },
+    "unit": "BYTES",
+    "minimum": 28,
+    "maximum": 28,
+    "customUnit": "",
+    "sum": 0,
+    "samples": 0,
+    "average": 28
+  }
+
+}

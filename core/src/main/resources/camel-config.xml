@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:camel="http://camel.apache.org/schema/spring"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+    <import resource="classpath:activemq-config.xml"/>
+
+    <bean class="com.amazonaws.auth.BasicAWSCredentials" id="basicAWSCredentials">
+        <constructor-arg index="0" value="${nodeable.aws.accessKeyId}"/>
+        <constructor-arg index="1" value="${nodeable.aws.secretKey}"/>
+    </bean>
+
+    <bean class="com.amazonaws.services.sqs.AmazonSQSClient" id="amazonSQSClient">
+        <constructor-arg index="0" type="com.amazonaws.auth.AWSCredentials" ref="basicAWSCredentials"/>
+    </bean>
+
+    <bean id="amq" class="org.apache.activemq.camel.component.ActiveMQComponent">
+        <property name="connectionFactory" ref="activeMQPooledConnectionFactory"/>
+    </bean>
+
+    <bean class="com.streamreduce.core.routes.QueueEventMapToInsightMessageRouteBuilder" id="queueEventMapToInsightMessageRouteBuilder">
+        <property name="queueName" value="${eventMapsToInsightsQueueName}"/>
+        <property name="brokerType" value="${broker.type}"/>
+        <property name="environmentPrefix" value="${broker.environment.prefix}"/>
+    </bean>
+
+    <bean class="com.streamreduce.core.routes.QueueMessageRouteBuilder" id="queueMessageRouteBuilder">
+        <property name="queueName" value="${metricsQueueName}"/>
+        <property name="brokerType" value="${broker.type}"/>
+        <property name="environmentPrefix" value="${broker.environment.prefix}"/>
+    </bean>
+
+    <bean class="com.streamreduce.core.routes.QueueOutbountMessageRouteBuilder" id="queueOutbountMessageRouteBuilder">
+        <property name="queueName" value="${outboundMessagesQueueName}"/>
+        <property name="brokerType" value="${broker.type}"/>
+        <property name="environmentPrefix" value="${broker.environment.prefix}"/>
+    </bean>
+
+    <!-- Yes, we are embedding a camel context inside of mule... we are that awesome.-->
+    <camel:camelContext id="camelContext">
+        <camel:routeBuilder ref="queueEventMapToInsightMessageRouteBuilder"/>
+        <camel:routeBuilder ref="queueMessageRouteBuilder"/>
+        <camel:routeBuilder ref="queueOutbountMessageRouteBuilder"/>
+    </camel:camelContext>
+</beans>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath*:database.properties</value>
+                <value>classpath*:override.properties</value>
+            </list>
+        </property>
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+    </bean>
+
+    <!-- ===================================================================
+         -  Datasource Config
+         =================================================================== -->
+    <bean id="businessDBMongo" class="com.streamreduce.datasource.MongoFactoryBean">
+        <property name="hostname" value="${business.database.host}"/>
+        <property name="connectionsPerHost" value="${business.database.connectionsPerHost}"/>
+    </bean>
+    <bean id="messageDBMongo" class="com.streamreduce.datasource.MongoFactoryBean">
+        <property name="hostname" value="${message.database.host}"/>
+        <property name="connectionsPerHost" value="${message.database.connectionsPerHost}"/>
+    </bean>
+
+    <bean id="businessDBMorphia" class="com.streamreduce.datasource.MorphiaFactoryBean">
+        <property name="mapPackages">
+            <list>
+                <value>com.streamreduce.core.model</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="messageDBMorphia" class="com.streamreduce.datasource.MorphiaFactoryBean">
+        <property name="mapPackages">
+            <list>
+                <value>com.streamreduce.core.model.messages</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="businessDBDatastore" class="com.streamreduce.datasource.DatastoreFactoryBean">
+        <property name="mongo" ref="businessDBMongo"/>
+        <property name="morphia" ref="businessDBMorphia"/>
+        <property name="dbName" value="${business.database.name}"/>
+    </bean>
+
+    <bean id="messageDBDatastore" class="com.streamreduce.datasource.DatastoreFactoryBean">
+        <property name="mongo" ref="messageDBMongo"/>
+        <property name="morphia" ref="messageDBMorphia"/>
+        <property name="dbName" value="${message.database.name}"/>
+    </bean>
+
+    <bean id="nodeableDB" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject" ref="businessDBMongo"/>
+        <property name="targetMethod" value="getDB"/>
+        <property name="arguments">
+            <list>
+                <value>${business.database.name}</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="messageDB" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject" ref="messageDBMongo"/>
+        <property name="targetMethod" value="getDB"/>
+        <property name="arguments">
+            <list>
+                <value>${message.database.name}</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Database bootstrapper -->
+    <bean id="bootstrapDatabaseDataPopulator" class="com.streamreduce.datasource.BootstrapDatabaseDataPopulator">
+        <property name="superUserPassword" value="${nodeable.superuser.password}"/>
+        <property name="latestPatch" value="${nodeable.latest.patch}"/>
+        <property name="patchMaster" value="${database.patch.master}"/>
+    </bean>
+
+</beans>

@@ -1,0 +1,328 @@
+/*
+ Example payload created from `curl http://localhost:9200/nodeablemsgdb/4fd75db20364eaa3418c9149/_search` to an e
+ elasticsearch instance that is using the mongodb river from a Nodeable account inbox holding SobaMessages.
+ Some messages include details and others do not.
+ */
+
+
+{
+    "_shards": {
+        "failed": 0,
+        "successful": 5,
+        "total": 5
+    },
+    "hits": {
+        "hits": [
+            {
+                "_id": "4fd75ef20364eaa3418c922c",
+                "_index": "nodeablemsgdb",
+                "_score": 1.0,
+                "_source": {
+                    "_id": "4fd75ef20364eaa3418c922c",
+                    "connectionId": "4fd75dba0364eaa3418c9178",
+                    "created": 1339514610771,
+                    "dateGenerated": 1339514610770,
+                    "hashtags": [
+                        "#amzn_linux",
+                        "#aws",
+                        "#i-10395e0d",
+                        "#sa-east-1",
+                        "#sa-east-1b"
+                    ],
+                    "modified": 1339514610771,
+                    "ownerId": "4fd75db50364eaa3418c9154",
+                    "providerId": "aws",
+                    "senderConnectionName": "Nodeable Cloud",
+                    "senderId": "4fd75ef20364eaa3418c922a",
+                    "senderName": "i-10395e0d",
+                    "transformedMessage": "i-10395e0d was added to the \"Nodeable Cloud\" connection",
+                    "type": "INVENTORY_ITEM",
+                    "version": 1,
+                    "visibility": "ACCOUNT"
+                },
+                "_type": "4fd75db20364eaa3418c9149"
+            },
+            {
+                "_id": "4fd75ef30364eaa3418c9241",
+                "_index": "nodeablemsgdb",
+                "_score": 1.0,
+                "_source": {
+                    "_id": "4fd75ef30364eaa3418c9241",
+                    "connectionId": "4fd75dba0364eaa3418c9178",
+                    "created": 1339514611500,
+                    "dateGenerated": 1339514611500,
+                    "hashtags": [
+                        "#amzn_linux",
+                        "#aws",
+                        "#eu-west-1",
+                        "#eu-west-1a",
+                        "#i-8b0aa3c3"
+                    ],
+                    "modified": 1339514611501,
+                    "ownerId": "4fd75db50364eaa3418c9154",
+                    "providerId": "aws",
+                    "senderConnectionName": "Nodeable Cloud",
+                    "senderId": "4fd75ef30364eaa3418c923f",
+                    "senderName": "i-8b0aa3c3",
+                    "transformedMessage": "i-8b0aa3c3 was added to the \"Nodeable Cloud\" connection",
+                    "type": "INVENTORY_ITEM",
+                    "version": 1,
+                    "visibility": "ACCOUNT"
+                },
+                "_type": "4fd75db20364eaa3418c9149"
+            },
+            {
+                "_id": "4fd75ef40364eaa3418c9246",
+                "_index": "nodeablemsgdb",
+                "_score": 1.0,
+                "_source": {
+                    "_id": "4fd75ef40364eaa3418c9246",
+                    "connectionId": "4fd75dba0364eaa3418c9178",
+                    "created": 1339514612685,
+                    "dateGenerated": 1339514612685,
+                    "hashtags": [
+                        "#amzn_linux",
+                        "#aws",
+                        "#nodeable-57760e32",
+                        "#us-east-1",
+                        "#us-east-1b"
+                    ],
+                    "modified": 1339514612685,
+                    "ownerId": "4fd75db50364eaa3418c9154",
+                    "providerId": "aws",
+                    "senderConnectionName": "Nodeable Cloud",
+                    "senderId": "4fd75ef40364eaa3418c9244",
+                    "senderName": "nodeable-57760e32",
+                    "transformedMessage": "nodeable-57760e32 was added to the \"Nodeable Cloud\" connection",
+                    "type": "INVENTORY_ITEM",
+                    "version": 1,
+                    "visibility": "ACCOUNT"
+                },
+                "_type": "4fd75db20364eaa3418c9149"
+            },
+            {
+                "_id": "4fd75ef50364eaa3418c925a",
+                "_index": "nodeablemsgdb",
+                "_score": 1.0,
+                "_source": {
+                    "_id": "4fd75ef50364eaa3418c925a",
+                    "connectionId": "4fd75dba0364eaa3418c9178",
+                    "created": 1339514613959,
+                    "dateGenerated": 1339514613959,
+                    "hashtags": [
+                        "#amzn_linux",
+                        "#aws",
+                        "#nodeable-f2320696",
+                        "#us-east-1",
+                        "#us-east-1a"
+                    ],
+                    "modified": 1339514613959,
+                    "ownerId": "4fd75db50364eaa3418c9154",
+                    "providerId": "aws",
+                    "senderConnectionName": "Nodeable Cloud",
+                    "senderId": "4fd75ef50364eaa3418c9258",
+                    "senderName": "nodeable-f2320696",
+                    "transformedMessage": "nodeable-f2320696 was added to the \"Nodeable Cloud\" connection",
+                    "type": "INVENTORY_ITEM",
+                    "version": 1,
+                    "visibility": "ACCOUNT"
+                },
+                "_type": "4fd75db20364eaa3418c9149"
+            },
+            {
+                "_id": "4fd75ef80364eaa3418c9282",
+                "_index": "nodeablemsgdb",
+                "_score": 1.0,
+                "_source": {
+                    "_id": "4fd75ef80364eaa3418c9282",
+                    "connectionId": "4fd75dba0364eaa3418c9178",
+                    "created": 1339514616348,
+                    "dateGenerated": 1339514616348,
+                    "hashtags": [
+                        "#amzn_linux",
+                        "#aws",
+                        "#i-31808576",
+                        "#us-west-1",
+                        "#us-west-1b"
+                    ],
+                    "modified": 1339514616348,
+                    "ownerId": "4fd75db50364eaa3418c9154",
+                    "providerId": "aws",
+                    "senderConnectionName": "Nodeable Cloud",
+                    "senderId": "4fd75ef80364eaa3418c9280",
+                    "senderName": "i-31808576",
+                    "transformedMessage": "i-31808576 was added to the \"Nodeable Cloud\" connection",
+                    "type": "INVENTORY_ITEM",
+                    "version": 1,
+                    "visibility": "ACCOUNT"
+                },
+                "_type": "4fd75db20364eaa3418c9149"
+            },
+            {
+                "_id": "4fd75ef80364eaa3418c9287",
+                "_index": "nodeablemsgdb",
+                "_score": 1.0,
+                "_source": {
+                    "_id": "4fd75ef80364eaa3418c9287",
+                    "connectionId": "4fd75dba0364eaa3418c9178",
+                    "created": 1339514616723,
+                    "dateGenerated": 1339514616723,
+                    "hashtags": [
+                        "#amzn_linux",
+                        "#aws",
+                        "#i-9b4042dc",
+                        "#us-west-1",
+                        "#us-west-1b"
+                    ],
+                    "modified": 1339514616723,
+                    "ownerId": "4fd75db50364eaa3418c9154",
+                    "providerId": "aws",
+                    "senderConnectionName": "Nodeable Cloud",
+                    "senderId": "4fd75ef80364eaa3418c9285",
+                    "senderName": "i-9b4042dc",
+                    "transformedMessage": "i-9b4042dc was added to the \"Nodeable Cloud\" connection",
+                    "type": "INVENTORY_ITEM",
+                    "version": 1,
+                    "visibility": "ACCOUNT"
+                },
+                "_type": "4fd75db20364eaa3418c9149"
+            },
+            {
+                "_id": "4fd75efb0364eaa3418c929e",
+                "_index": "nodeablemsgdb",
+                "_score": 1.0,
+                "_source": {
+                    "_id": "4fd75efb0364eaa3418c929e",
+                    "connectionId": "4fd75dbe0364eaa3418c917c",
+                    "created": 1339514619189,
+                    "dateGenerated": 1339514615280,
+                    "details": {
+                        "className": "com.streamreduce.core.model.messages.details.jira.JiraActivityDetails",
+                        "html": "<a href=\"https://nodeable.jira.com/secure/ViewProfile.jspa?name=tim\" class=\"activity-item-user activity-item-author\">Tim Golen</a> resolved       <a href=\"https://nodeable.jira.com/browse/SOBA-1698\"><span class='resolved-link'>SOBA-1698</span> - Content for Wizard page</a>\n   as 'Fixed'<blockquote>\n  <p>I am going to go ahead and close this out. This is scheduled for rollout to trunk and beta.</p> </blockquote>"
+                    },
+                    "hashtags": [
+                        "#bug",
+                        "#issue",
+                        "#jira",
+                        "#major",
+                        "#resolved",
+                        "#soba"
+                    ],
+                    "modified": 1339514619189,
+                    "ownerId": "4fd75db50364eaa3418c9154",
+                    "providerId": "jira",
+                    "senderConnectionName": "Nodeable Jira",
+                    "senderId": "4fd75ef30364eaa3418c923a",
+                    "senderName": "Nodeable Platform",
+                    "transformedMessage": "Tim Golen resolved SOBA-1698 - Content for Wizard page as 'Fixed'\nI am going to go ahead and close this out. This is scheduled for rollout to trunk and beta.",
+                    "type": "ACTIVITY",
+                    "version": 1,
+                    "visibility": "ACCOUNT"
+                },
+                "_type": "4fd75db20364eaa3418c9149"
+            },
+            {
+                "_id": "4fd760280364eaa3418c92a5",
+                "_index": "nodeablemsgdb",
+                "_score": 1.0,
+                "_source": {
+                    "_id": "4fd760280364eaa3418c92a5",
+                    "connectionId": "4fd75dbe0364eaa3418c917c",
+                    "created": 1339514920883,
+                    "dateGenerated": 1339514718714,
+                    "details": {
+                        "className": "com.streamreduce.core.model.messages.details.jira.JiraActivityDetails",
+                        "html": "<a href=\"https://nodeable.jira.com/secure/ViewProfile.jspa?name=tim\" class=\"activity-item-user activity-item-author\">Tim Golen</a> updated the Fix Version of       <a href=\"https://nodeable.jira.com/browse/SOBA-1249\">SOBA-1249 - Widget ideas for April release</a>\n  <ul class=\"updates activity-list\">\n  <li>Removed the Fix Version '<a href='https://nodeable.jira.com/browse/SOBA/fixforversion/10232'>Sandbox</a>'</li>\n  <li>Added the Fix Version '<a href='https://nodeable.jira.com/browse/SOBA/fixforversion/10430'>July</a>'</li>\n</ul>"
+                    },
+                    "hashtags": [
+                        "#bug",
+                        "#issue",
+                        "#jira",
+                        "#open",
+                        "#soba",
+                        "#trivial"
+                    ],
+                    "modified": 1339514920883,
+                    "ownerId": "4fd75db50364eaa3418c9154",
+                    "providerId": "jira",
+                    "senderConnectionName": "Nodeable Jira",
+                    "senderId": "4fd75ef30364eaa3418c923a",
+                    "senderName": "Nodeable Platform",
+                    "transformedMessage": "Tim Golen updated the Fix Version of SOBA-1249 - Widget ideas for April release\nRemoved the Fix Version 'Sandbox' Added the Fix Version 'July'",
+                    "type": "ACTIVITY",
+                    "version": 1,
+                    "visibility": "ACCOUNT"
+                },
+                "_type": "4fd75db20364eaa3418c9149"
+            },
+            {
+                "_id": "4fd7602c0364eaa3418c92ab",
+                "_index": "nodeablemsgdb",
+                "_score": 1.0,
+                "_source": {
+                    "_id": "4fd7602c0364eaa3418c92ab",
+                    "connectionId": "4fd75dbe0364eaa3418c917c",
+                    "created": 1339514924032,
+                    "dateGenerated": 1339514870722,
+                    "details": {
+                        "className": "com.streamreduce.core.model.messages.details.jira.JiraActivityDetails",
+                        "html": "<a href=\"https://nodeable.jira.com/secure/ViewProfile.jspa?name=tim\" class=\"activity-item-user activity-item-author\">Tim Golen</a> linked 2 issues<div class=\"jira-issue-key\">  <a href=\"https://nodeable.jira.com/browse/SOBA-1707\" class=\"issue-link\">SOBA-1707 - Add email message modal to the UI and a link in the social menu</a>\n</div>\n<div class=\"jira-linking-text\">blocked by</div>\n<div class=\"linked-jira-issue-key\">  <a href=\"https://nodeable.jira.com/browse/SOBA-1681\" class=\"issue-link\">SOBA-1681 - NB, User message, and user comment email notifications</a>\n</div>"
+                    },
+                    "hashtags": [
+                        "#issue",
+                        "#jira",
+                        "#major",
+                        "#open",
+                        "#soba",
+                        "#technicaltask"
+                    ],
+                    "modified": 1339514924032,
+                    "ownerId": "4fd75db50364eaa3418c9154",
+                    "providerId": "jira",
+                    "senderConnectionName": "Nodeable Jira",
+                    "senderId": "4fd75ef30364eaa3418c923a",
+                    "senderName": "Nodeable Platform",
+                    "transformedMessage": "Tim Golen linked 2 issues\nSOBA-1707 - Add email message modal to the UI and a link in the social menu blocked by SOBA-1681 - NB, User message, and user comment email notifications",
+                    "type": "ACTIVITY",
+                    "version": 1,
+                    "visibility": "ACCOUNT"
+                },
+                "_type": "4fd75db20364eaa3418c9149"
+            },
+            {
+                "_id": "4fd7a557036451ed78467c5c",
+                "_index": "nodeablemsgdb",
+                "_score": 1.0,
+                "_source": {
+                    "_id": "4fd7a557036451ed78467c5c",
+                    "connectionId": "4fd75dbe0364eaa3418c9180",
+                    "created": 1339532631460,
+                    "dateGenerated": 1339536551000,
+                    "hashtags": [
+                        "#activerecord",
+                        "#comment",
+                        "#github",
+                        "#issue",
+                        "#open",
+                        "#rails/rails"
+                    ],
+                    "modified": 1339532631460,
+                    "ownerId": "4fd75db50364eaa3418c9154",
+                    "providerId": "github",
+                    "senderConnectionName": "Nodeable GitHub",
+                    "senderId": "4fd75dc50364eaa3418c9197",
+                    "senderName": "rails",
+                    "transformedMessage": "EricR commented on issue 5011 on rails/rails\nThis still seems to be an issue in the latest version of Rails.",
+                    "type": "ACTIVITY",
+                    "version": 1,
+                    "visibility": "ACCOUNT"
+                },
+                "_type": "4fd75db20364eaa3418c9149"
+            }
+        ],
+        "max_score": 1.0,
+        "total": 1249
+    },
+    "timed_out": false,
+    "took": 1
+}

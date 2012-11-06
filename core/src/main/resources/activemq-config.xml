@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean name="activeMQConnectionFactory"
+                 class="org.apache.activemq.ActiveMQConnectionFactory">
+        <property name="brokerURL" value="${activemq.broker.url}"/>
+        <property name="prefetchPolicy" ref="queuePrefetchBean"/>
+    </bean>
+
+    <bean id="queuePrefetchBean" class="org.apache.activemq.ActiveMQPrefetchPolicy">
+         <property name="queuePrefetch" value="10"/>
+    </bean>
+
+    <bean name="activeMQPooledConnectionFactory"
+                 class="org.apache.activemq.pool.PooledConnectionFactory">
+        <constructor-arg ref="activeMQConnectionFactory"/>
+        <property name="maxConnections" value="8"/>
+        <property name="maximumActive"  value="500" />
+        <property name="idleTimeout"  value="0" /> <!-- Infinite Timeout -->
+    </bean>
+
+</beans>

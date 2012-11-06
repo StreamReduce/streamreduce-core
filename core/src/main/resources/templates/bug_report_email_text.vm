@@ -1,0 +1,12 @@
+Nodeable Feedback Report
+Your feedback report details are provided below.
+
+Feedback ID: ${uuid}
+Date Created: ${dateCreated}
+Company: ${company}
+Username: ${username}
+Summary: ${summary}
+Description: ${details}
+Debug Log ID: ${debugInfo}
+
+Feedback is always welcome, send us an email at support@nodeable.com.

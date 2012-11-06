@@ -1,0 +1,23 @@
+Welcome to Nodeable
+
+Thank you for signing up! Nodeable provides real-time data stream processing to
+find the trends, summaries, and anomalies that help make your business more
+efficient.
+
+You can login now at ${urlPrefix}. A few tips to get started:
+
+Connect your Data Streams. Nodeable's StreamReduce engine collects and processes
+events in real-time giving you instant visibility into high-level insights and
+trends that power your business. Add your custom sources or use our pre-built
+connectors via the Connections page to get personalized insights made fresh for you!
+
+Send Processed Data to Hadoop. Nodeable enhances and normalizes your data as a
+real-time complement to Hadoop, trimming down the number of MapReduce jobs you need.
+It's easy to configure your data sources to an S3 bucket or directly into HDFS.
+
+Collaborate and Share. Our familiar social-network style interface makes it easy to
+communicate and share data with your team. Invite other team members by simply
+adding their email address into the Connections > Humans page.
+
+Feedback and suggestions are always welcome. Drop us a note at support@nodeable.com,
+we love hearing from you!
