@@ -14,7 +14,23 @@
   ~    See the License for the specific language governing permissions and
   ~    limitations under the License.
   -->
-<!-- 
+<!--
+  wadl_documentation.xsl (2008-12-09)
+
+  An XSLT stylesheet for generating HTML documentation from WADL,
+  by Mark Nottingham <mnot@yahoo-inc.com>.
+
+  Copyright (c) 2006-2008 Yahoo! Inc.
+
+  This work is licensed under the Creative Commons Attribution-ShareAlike 2.5
+  License. To view a copy of this license, visit
+    http://creativecommons.org/licenses/by-sa/2.5/
+  or send a letter to
+    Creative Commons
+    543 Howard Street, 5th Floor
+    San Francisco, California, 94105, USA
+-->
+<!--
  * FIXME
     - Doesn't inherit query/header params from resource/@type
     - XML schema import, include, redefine don't import
