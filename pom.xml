@@ -40,12 +40,6 @@
 
 
     <repositories>
-        <repository>
-            <id>muleforge-repo</id>
-            <name>MuleForge Repository</name>
-            <url>http://repository.muleforge.org</url>
-            <layout>default</layout>
-        </repository>
 
         <repository>
             <id>codehaus-repo</id>
@@ -108,25 +102,6 @@
         </repository>
 
         <repository>
-            <id>nodeable.repository</id>
-            <url>https://admin-01.nodeable.com/nexus/content/repositories/nodeable.repository</url>
-        </repository>
-
-        <repository>
-            <id>thirdparty</id>
-            <url>https://admin-01.nodeable.com/nexus/content/repositories/thirdparty</url>
-        </repository>
-
-        <repository>
-            <id>thirdparty-snapshots</id>
-            <url>https://admin-01.nodeable.com/nexus/content/repositories/thirdparty-snapshots</url>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
-        </repository>
-
-        <repository>
             <id>atlassian</id>
             <url>https://maven.atlassian.com/public</url>
         </repository>
@@ -142,20 +117,6 @@
         </repository>
     </repositories>
 
-
-    <distributionManagement>
-        <repository>
-            <id>releases</id>
-            <name>Internal Releases</name>
-            <url>https://admin-01.nodeable.com/nexus/content/repositories/releases</url>
-        </repository>
-
-        <snapshotRepository>
-            <id>snapshots</id>
-            <url>https://admin-01.nodeable.com/nexus/content/repositories/snapshots</url>
-            <uniqueVersion>false</uniqueVersion>
-        </snapshotRepository>
-    </distributionManagement>
 
     <build>
         <pluginManagement>
