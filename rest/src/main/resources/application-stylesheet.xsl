@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  wadl_documentation.xsl (2008-12-09)
-
-  An XSLT stylesheet for generating HTML documentation from WADL,
-  by Mark Nottingham <mnot@yahoo-inc.com>.
-
-  Copyright (c) 2006-2008 Yahoo! Inc.
-  
-  This work is licensed under the Creative Commons Attribution-ShareAlike 2.5 
-  License. To view a copy of this license, visit 
-    http://creativecommons.org/licenses/by-sa/2.5/ 
-  or send a letter to 
-    Creative Commons
-    543 Howard Street, 5th Floor
-    San Francisco, California, 94105, USA
--->
+  ~ Copyright 2012 Nodeable Inc
+  ~
+  ~    Licensed under the Apache License, Version 2.0 (the "License");
+  ~    you may not use this file except in compliance with the License.
+  ~    You may obtain a copy of the License at
+  ~
+  ~        http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~    Unless required by applicable law or agreed to in writing, software
+  ~    distributed under the License is distributed on an "AS IS" BASIS,
+  ~    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~    See the License for the specific language governing permissions and
+  ~    limitations under the License.
+  -->
 <!-- 
  * FIXME
     - Doesn't inherit query/header params from resource/@type
