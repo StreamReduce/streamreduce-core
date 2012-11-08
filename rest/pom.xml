@@ -21,7 +21,7 @@
         <profile>
             <id>generate-rest-documentation-private</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
 
             <build>
@@ -115,7 +115,7 @@
         <profile>
             <id>generate-rest-documentation-public</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <build>
                 <plugins>
