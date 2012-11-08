@@ -22,6 +22,7 @@ import com.streamreduce.connections.AuthType;
 import com.streamreduce.connections.ConnectionProviderFactory;
 import com.streamreduce.core.dao.ConnectionDAO;
 import org.junit.After;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.util.ReflectionTestUtils;
@@ -53,6 +54,7 @@ public class ConnectionPrePersistITCase extends AbstractServiceTestCase {
     }
     
     @Test
+    @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
     public void testConnectionPrePersistGitHubProvider() {
         //Tests that the proper default authType is set for a connection with github has the providerId
         Connection c = new Connection.Builder()
@@ -69,6 +71,7 @@ public class ConnectionPrePersistITCase extends AbstractServiceTestCase {
     }
 
     @Test
+    @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
     public void testConnectionPrePersistJiraProvider() {
         //Tests that the proper default authType is set for a connection with github has the providerId
         Connection c = new Connection.Builder()
@@ -85,6 +88,7 @@ public class ConnectionPrePersistITCase extends AbstractServiceTestCase {
     }
 
     @Test
+    @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
     public void testConnectionPrePersistAwsProvider() {
         //Tests that the proper default authType is set for a connection with github has the providerId
         Connection c = new Connection.Builder()
@@ -101,6 +105,7 @@ public class ConnectionPrePersistITCase extends AbstractServiceTestCase {
     }
 
     @Test
+    @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
     public void testConnectionPrePersistRssProvider() {
         //Tests that the proper default authType is set for a connection with github has the providerId
         Connection c = new Connection.Builder()

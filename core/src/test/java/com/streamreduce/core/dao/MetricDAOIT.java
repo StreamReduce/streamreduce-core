@@ -25,6 +25,7 @@ import com.streamreduce.core.model.Metric;
 import org.bson.types.ObjectId;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.annotation.Resource;
@@ -64,6 +65,7 @@ public class MetricDAOIT extends AbstractDAOTest {
     }
 
     @Test
+    @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
     public void testGet() throws Exception {
         Assert.assertNotNull(objectId);
         MetricDAO metricDao = new MetricDAO(messageDBDatastore);

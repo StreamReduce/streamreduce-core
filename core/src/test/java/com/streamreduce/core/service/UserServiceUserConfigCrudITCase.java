@@ -19,6 +19,7 @@ package com.streamreduce.core.service;
 import com.streamreduce.AbstractServiceTestCase;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONNull;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -28,6 +29,7 @@ import org.junit.Test;
 public class UserServiceUserConfigCrudITCase extends AbstractServiceTestCase {
 
     @Test
+    @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
     public void testSaveAndReadUserObjectWithNullValueInConfig() throws Exception {
         //Test that a JSONArray with a null value doesn't cause deserialization problems when going back/forth
         //from mongo

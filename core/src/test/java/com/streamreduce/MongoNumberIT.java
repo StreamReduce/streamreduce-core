@@ -17,6 +17,8 @@
 package com.streamreduce;
 
 import static org.junit.Assert.assertTrue;
+
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -39,6 +41,7 @@ public class MongoNumberIT extends AbstractServiceTestCase {
     private GenericCollectionDAO gcdao;
 
     @Test
+    @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
     public void testNumberFidelity() {
         String json = "{\"min\":" + Constants.PERIOD_MINUTE
             + ",\"hour\":" + Constants.PERIOD_HOUR

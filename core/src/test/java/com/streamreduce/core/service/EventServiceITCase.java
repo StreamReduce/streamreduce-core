@@ -45,6 +45,7 @@ import org.bson.types.ObjectId;
 import org.jclouds.domain.Location;
 import org.jclouds.domain.LocationScope;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,6 +76,7 @@ public class EventServiceITCase extends AbstractServiceTestCase {
      * @throws Exception if anything goes wrong
      */
     @Test
+    @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
     public void testExpectedEventsForTestAccountAndTestUser() throws Exception {
         EventService eventService = applicationManager.getEventService();
         List<Event> events = eventService.getEventsForAccount(getTestAccount());
@@ -87,96 +89,100 @@ public class EventServiceITCase extends AbstractServiceTestCase {
             }
         }));
 
-        Assert.assertEquals(3,createEvents.size());
+        Assert.assertEquals(3, createEvents.size());
     }
 
 
-        /**
-         * Tests that {@link EventService#createEvent(com.streamreduce.core.event.EventId, com.streamreduce.core.model.ObjectWithId,
-         *                                            java.util.Map)}
-         * works as expected when a user is not logged in and we are creating an event.
-         */
-        @Test
-        public void testCreateEvent_ReadEventWithNoLoggedInUser ()throws Exception {
-            // Test creating an event with no logged in user
-            EventService eventService = applicationManager.getEventService();
-            SecurityService mockSecurityService = mock(SecurityService.class);
-            when(mockSecurityService.getCurrentUser()).thenThrow(new AuthenticationException());
-            ReflectionTestUtils.setField(eventService, "securityService", mockSecurityService);
+    /**
+     * Tests that {@link EventService#createEvent(com.streamreduce.core.event.EventId, com.streamreduce.core.model.ObjectWithId,
+     * java.util.Map)}
+     * works as expected when a user is not logged in and we are creating an event.
+     */
+    @Test
+    @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
+    public void testCreateEvent_ReadEventWithNoLoggedInUser() throws Exception {
+        // Test creating an event with no logged in user
+        EventService eventService = applicationManager.getEventService();
+        SecurityService mockSecurityService = mock(SecurityService.class);
+        when(mockSecurityService.getCurrentUser()).thenThrow(new AuthenticationException());
+        ReflectionTestUtils.setField(eventService, "securityService", mockSecurityService);
 
 
-            Event event = eventService.createEvent(EventId.READ, testUser, null);
-            Assert.assertNull(event);
+        Event event = eventService.createEvent(EventId.READ, testUser, null);
+        Assert.assertNull(event);
+    }
+
+    /**
+     * Tests that {@link EventService#createEvent(com.streamreduce.core.event.EventId, com.streamreduce.core.model.ObjectWithId,
+     * java.util.Map)}
+     * works as expected when a user is not logged in and we are creating a SobaMessage
+     */
+    @Test
+    @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
+    public void testCreateEvent_CreateSobaMessageWithNoLoggedInUser() throws Exception {
+        // Test creating an event with no logged in user
+        EventService eventService = applicationManager.getEventService();
+        SecurityService mockSecurityService = mock(SecurityService.class);
+        when(mockSecurityService.getCurrentUser()).thenThrow(new AuthenticationException());
+        ReflectionTestUtils.setField(eventService, "securityService", mockSecurityService);
+
+
+        // Test creating a SobaObject event with no logged in user
+        Connection connection = new Connection.Builder()
+                .provider(connectionProviderFactory.connectionProviderFromId(ProviderIdConstants.GITHUB_PROVIDER_ID))
+                .account(testAccount)
+                .alias("Test GitHub Connection")
+                .description("This is a test GitHub connection.")
+                .user(testUser)
+                .authType(AuthType.USERNAME_PASSWORD)
+                .credentials(new ConnectionCredentials("somegithubusername", "somegithubpassword"))
+                .build();
+
+        Event event = eventService.createEvent(EventId.CREATE, connection, null);
+
+        Assert.assertNotNull(event);
+    }
+
+
+    /**
+     * Tests that {@link EventService#createEvent(com.streamreduce.core.event.EventId, com.streamreduce.core.model.ObjectWithId,
+     * java.util.Map)}
+     */
+    @Test
+    @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
+    public void testCreateEvent_CreateEventWithLoggedInUser() throws Exception {
+        // Test creating an event as a logged in user
+        // (We have to mock a few things since logging a user in programmatically isn't an option)
+        EventService esMock = getEventServiceMock();
+
+        Event event = esMock.createEvent(EventId.CREATE_GLOBAL_MESSAGE, null, null);
+
+        verifyEvent(event, EventId.CREATE_GLOBAL_MESSAGE, testUser, testAccount, null, null);
+    }
+
+    /**
+     * Test that will attempt to retrieve all {@link Event} objects and verify them.
+     *
+     * @throws Exception if anything goes wrong
+     */
+    @Test
+    @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
+    public void testAllGeneratedEvents() throws Exception {
+        EventService eventService = applicationManager.getEventService();
+        List<Event> allEvents = eventService.getAllEvents();
+
+        // TODO: It would be nice to test every event scenario when time permits
+
+        for (Event event : allEvents) {
+            verifyEvent(event);
         }
+    }
 
-        /**
-         * Tests that {@link EventService#createEvent(com.streamreduce.core.event.EventId, com.streamreduce.core.model.ObjectWithId,
-         *                                            java.util.Map)}
-         * works as expected when a user is not logged in and we are creating a SobaMessage
-         */
-        @Test
-        public void testCreateEvent_CreateSobaMessageWithNoLoggedInUser ()throws Exception {
-            // Test creating an event with no logged in user
-            EventService eventService = applicationManager.getEventService();
-            SecurityService mockSecurityService = mock(SecurityService.class);
-            when(mockSecurityService.getCurrentUser()).thenThrow(new AuthenticationException());
-            ReflectionTestUtils.setField(eventService, "securityService", mockSecurityService);
-
-
-            // Test creating a SobaObject event with no logged in user
-            Connection connection = new Connection.Builder()
-                    .provider(connectionProviderFactory.connectionProviderFromId(ProviderIdConstants.GITHUB_PROVIDER_ID))
-                    .account(testAccount)
-                    .alias("Test GitHub Connection")
-                    .description("This is a test GitHub connection.")
-                    .user(testUser)
-                    .authType(AuthType.USERNAME_PASSWORD)
-                    .credentials(new ConnectionCredentials("somegithubusername", "somegithubpassword"))
-                    .build();
-
-            Event event = eventService.createEvent(EventId.CREATE, connection, null);
-
-            Assert.assertNotNull(event);
-        }
-
-
-        /**
-         * Tests that {@link EventService#createEvent(com.streamreduce.core.event.EventId, com.streamreduce.core.model.ObjectWithId,
-         *                                            java.util.Map)}
-         */
-        @Test
-        public void testCreateEvent_CreateEventWithLoggedInUser ()throws Exception {
-            // Test creating an event as a logged in user
-            // (We have to mock a few things since logging a user in programmatically isn't an option)
-            EventService esMock = getEventServiceMock();
-
-            Event event = esMock.createEvent(EventId.CREATE_GLOBAL_MESSAGE, null, null);
-
-            verifyEvent(event, EventId.CREATE_GLOBAL_MESSAGE, testUser, testAccount, null, null);
-        }
-
-        /**
-         * Test that will attempt to retrieve all {@link Event} objects and verify them.
-         *
-         * @throws Exception if anything goes wrong
-         */
-        @Test
-        public void testAllGeneratedEvents ()throws Exception {
-            EventService eventService = applicationManager.getEventService();
-            List<Event> allEvents = eventService.getAllEvents();
-
-            // TODO: It would be nice to test every event scenario when time permits
-
-            for (Event event : allEvents) {
-                verifyEvent(event);
-            }
-        }
-
-        /**
-         * Creates a mock {@link EventService} that is mocked so a user is logged in.
-         *
-         * @return the mock ApplicationManager
-         */
+    /**
+     * Creates a mock {@link EventService} that is mocked so a user is logged in.
+     *
+     * @return the mock ApplicationManager
+     */
 
     private EventService getEventServiceMock() {
         SecurityService ssMock = Mockito.mock(SecurityService.class);

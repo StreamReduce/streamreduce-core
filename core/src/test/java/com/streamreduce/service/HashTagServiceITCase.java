@@ -26,6 +26,7 @@ import com.streamreduce.core.service.ConnectionService;
 import com.streamreduce.test.service.TestUtils;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -43,6 +44,7 @@ public class HashTagServiceITCase extends AbstractServiceTestCase {
     Connection connection;
 
     @Before
+    @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
     public void setUp() throws Exception {
         super.setUp();
 
@@ -55,6 +57,7 @@ public class HashTagServiceITCase extends AbstractServiceTestCase {
 
 
     @Test
+    @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
     public void testConnectionHashtagsLowerCased() throws Exception {
         for (String hashtag : connection.getHashtags()) {
             Assert.assertEquals(hashtag.toLowerCase(), hashtag);
@@ -68,19 +71,19 @@ public class HashTagServiceITCase extends AbstractServiceTestCase {
     }
 
     @Test
+    @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
     public void testRemoveTagsFromConnectionMixedCase() throws Exception {
         connectionService.removeHashtag(connection,connection,"#JclOuDs");
         Assert.assertEquals(Sets.newTreeSet(Sets.newHashSet("#rss","#github")),connection.getHashtags());
     }
 
     @Test
+    @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
     public void testRemoveTagsFromConnectionNoLeadingPound() throws Exception {
         connectionService.createConnection(connection);
         connectionService.removeHashtag(connection,connection,"jclouds");
 
         Assert.assertEquals(Sets.newTreeSet(Sets.newHashSet("#rss", "#github")),connection.getHashtags());
     }
-
-
 
 }

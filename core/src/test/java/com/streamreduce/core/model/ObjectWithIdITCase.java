@@ -20,6 +20,7 @@ import com.streamreduce.AbstractServiceTestCase;
 import com.streamreduce.core.service.ConnectionService;
 import com.streamreduce.test.service.TestUtils;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -35,6 +36,7 @@ public class ObjectWithIdITCase extends AbstractServiceTestCase {
     private ConnectionService connectionService;
 
     @Test
+    @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
     public void testObjectVersioning() throws Exception {
         Connection testConnection = TestUtils.createFeedConnectionWithSpecificOutboundDatatypes();
         testConnection.setAccount(testAccount);

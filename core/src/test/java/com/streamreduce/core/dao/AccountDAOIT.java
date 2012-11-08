@@ -23,6 +23,7 @@ import com.streamreduce.core.model.Account;
 import javax.annotation.Resource;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -53,6 +54,7 @@ public class AccountDAOIT extends AbstractDAOTest {
     }
 
     @Test
+    @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
     public void testFindByName() {
         Account returnedAccount = accountDAO.findByName("AccountDAOTest-testAccount");
         assertEquals(returnedAccount,testAccount);

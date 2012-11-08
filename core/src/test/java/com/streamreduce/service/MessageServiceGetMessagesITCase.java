@@ -35,6 +35,7 @@ import java.util.Map;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -61,6 +62,7 @@ public class MessageServiceGetMessagesITCase extends AbstractServiceTestCase {
     }
 
     @Test
+    @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
     public void testGetAllMessagesAscOrder() throws Exception {
         List<SobaMessage> messages = messageService.getAllMessages(user, null, null, 4, true, null, null, null, false);
         Assert.assertEquals(2, messages.size());
@@ -78,6 +80,7 @@ public class MessageServiceGetMessagesITCase extends AbstractServiceTestCase {
     }
 
     @Test
+    @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
     public void testGetAllMessagesDescOrder() throws Exception {
         List<SobaMessage> messages = messageService.getAllMessages(user, null, null, 4, false, null, null, null, false);
         Assert.assertEquals(2, messages.size());
@@ -94,12 +97,14 @@ public class MessageServiceGetMessagesITCase extends AbstractServiceTestCase {
     }
 
     @Test
+    @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
     public void testGetAllMessagesSearchByHashtagORSender() throws Exception {
         List<SobaMessage> messages = messageService.getAllMessages(user, null, null, 4, false, null, Lists.newArrayList("#foo"), "nodeable", false);
         Assert.assertEquals(2, messages.size());
     }
 
     @Test
+    @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
     public void testGetAllMessagesShowsPrivatesForOwner() throws Exception {
         long beforeCreateConnectionTimestamp = System.currentTimeMillis();
         testService.createSampleRssFeedPrivateConnectionAndRefresh(testUser);
@@ -116,6 +121,7 @@ public class MessageServiceGetMessagesITCase extends AbstractServiceTestCase {
     }
 
     @Test
+    @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
     public void testGetAllMessagesSearchParameterForTransformedMessage() throws Exception {
         testService.createSampleRssFeedPrivateConnectionAndRefresh(testUser);
 
@@ -125,6 +131,7 @@ public class MessageServiceGetMessagesITCase extends AbstractServiceTestCase {
     }
 
     @Test
+    @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
     public void testGetAllMessagesSearchParameterForSenderName() throws Exception {
         Connection c = testService.createSampleRssFeedPrivateConnectionAndRefresh(testUser);
 
@@ -135,6 +142,7 @@ public class MessageServiceGetMessagesITCase extends AbstractServiceTestCase {
 
 
     @Test
+    @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
     public void testGetMessagesExcludesInsights() throws Exception {
         // Create a connection just to get some messages to assert against... this should create 3 messages for the testUser's account
         long beforeCreateConnectionTimestamp = System.currentTimeMillis();
@@ -153,6 +161,7 @@ public class MessageServiceGetMessagesITCase extends AbstractServiceTestCase {
     }
 
     @Test
+    @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
     public void testSendNodebellyAnalyticsMessage() throws Exception {
         long sampleTime = System.currentTimeMillis();
         sendInsightMessage(sampleTime);
@@ -164,6 +173,7 @@ public class MessageServiceGetMessagesITCase extends AbstractServiceTestCase {
 
 
     @Test
+    @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
     public void testGetAllMessagesSearchParameterDoesNotRevealPrivates() throws Exception {
         long beforeCreateConnectionTimestamp = System.currentTimeMillis();
         Connection c = testService.createSampleRssFeedPrivateConnectionAndRefresh(testUser);
@@ -177,6 +187,7 @@ public class MessageServiceGetMessagesITCase extends AbstractServiceTestCase {
     }
 
     @Test
+    @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
     public void testGetAllMessagesReturnsInsightsAndConversations() throws Exception {
         //ElasticSearch can't be implemented soon enough.
 

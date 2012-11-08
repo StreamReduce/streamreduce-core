@@ -19,6 +19,7 @@ package com.streamreduce.core.service;
 import com.streamreduce.AbstractServiceTestCase;
 import com.streamreduce.core.dao.OAuthRequestTokenDao;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.scribe.model.Token;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,7 @@ public class MongoDbOAuthTokenCacheServiceIT extends AbstractServiceTestCase {
     }
 
     @Test
+    @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
     public void testRetrieveToken() throws Exception {
         Token retrievedToken = oAuthTokenCacheService.retrieveToken("access");
         assertEquals("access",retrievedToken.getToken());
@@ -50,6 +52,7 @@ public class MongoDbOAuthTokenCacheServiceIT extends AbstractServiceTestCase {
     }
 
     @Test
+    @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
     public void testCacheTokenWithSameKey() throws Exception {
         Token newToken = new Token("access","anotherSecret");
         oAuthTokenCacheService.cacheToken(newToken);
@@ -59,12 +62,14 @@ public class MongoDbOAuthTokenCacheServiceIT extends AbstractServiceTestCase {
     }
 
     @Test
+    @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
     public void testRetrieveTokenNullKey() throws Exception {
         Token retrievedToken = oAuthTokenCacheService.retrieveToken(null);
         assertEquals(null,retrievedToken);
     }
 
     @Test
+    @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
     public void testRemoveToken() throws Exception {
         oAuthTokenCacheService.removeToken("access");
         Token retrievedToken = oAuthTokenCacheService.retrieveToken("access");
@@ -72,12 +77,12 @@ public class MongoDbOAuthTokenCacheServiceIT extends AbstractServiceTestCase {
     }
 
     @Test
+    @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
     public void testRetrieveAndRemoveToken() throws Exception {
         Token retrievedToken = oAuthTokenCacheService.retrieveAndRemoveToken("access");
         assertEquals("access",retrievedToken.getToken());
         assertEquals("secret",retrievedToken.getSecret());
         Token retrievedTokenAfterRemoval = oAuthTokenCacheService.retrieveToken("access");
         assertNull(retrievedTokenAfterRemoval);
-
     }
 }

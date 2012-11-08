@@ -26,6 +26,7 @@ import com.streamreduce.core.model.messages.details.MessageDetailsType;
 import com.streamreduce.test.service.TestService;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -55,6 +56,7 @@ public class RefreshFeedMessagesITCase extends AbstractServiceTestCase{
     }
 
     @Test
+    @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
     public void testRefreshFeedMessagesSavesFeedEntryDetails() throws Exception {
         //Integration test that ensures that a SobaMessage saved from a feed entry persists its FeedEntryDetails and
         //that those same FeedEntryDetails are retrievable from the MessageService.

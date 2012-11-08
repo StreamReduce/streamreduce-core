@@ -19,6 +19,7 @@ package com.streamreduce.core.service;
 import com.streamreduce.AbstractServiceTestCase;
 import com.streamreduce.core.model.User;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -28,6 +29,7 @@ public class UserServiceGetSuperUserITCase extends AbstractServiceTestCase {
     UserService userService;
 
     @Test
+    @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
     public void testGetSuperUserReturnsNewUserInstance() {
         //Tests that UserServer.getSuperUser() returns different references to equal SuperUser objects.
         User superUserA = userService.getSuperUser();

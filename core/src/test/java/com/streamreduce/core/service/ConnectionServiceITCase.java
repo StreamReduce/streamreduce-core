@@ -24,6 +24,7 @@ import com.streamreduce.core.model.Connection;
 import org.bson.types.ObjectId;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -52,6 +53,7 @@ public class ConnectionServiceITCase extends AbstractServiceTestCase {
     }
 
     @Test
+    @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
     public void testListAllConnections() throws Exception {
 
         Account nAccount = testUser.getAccount();
@@ -64,6 +66,7 @@ public class ConnectionServiceITCase extends AbstractServiceTestCase {
     }
 
     @Test(expected = ConnectionNotFoundException.class)
+    @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
     public void testGetConnectionThrowsConnectionNotFoundForNewObjectId() throws ConnectionNotFoundException {
         connectionService.getConnection(new ObjectId());
     }

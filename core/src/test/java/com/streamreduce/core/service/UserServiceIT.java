@@ -20,6 +20,7 @@ import com.streamreduce.AbstractServiceTestCase;
 import com.streamreduce.core.model.User;
 import com.streamreduce.test.service.TestUtils;
 import org.bson.types.ObjectId;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.util.ReflectionTestUtils;
@@ -34,6 +35,7 @@ public class UserServiceIT extends AbstractServiceTestCase {
     UserService userService;
 
     @Test
+    @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
     public void testCreateUser_PersistDefaultConfig() throws Exception {
         //Test that createUser persists a default config
 

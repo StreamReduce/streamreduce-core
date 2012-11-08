@@ -20,6 +20,7 @@ import com.streamreduce.AbstractServiceTestCase;
 import com.streamreduce.connections.AuthType;
 import com.streamreduce.connections.ConnectionProvidersForTests;
 import com.streamreduce.core.dao.ConnectionDAO;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.util.ReflectionTestUtils;
@@ -38,12 +39,14 @@ public class ConnectionValidationITCase extends AbstractServiceTestCase {
     ConnectionDAO connectionDAO;
 
     @Test
+    @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
     public void testCreateConnectionHappyPath() throws Exception {
         //Tests creating a connection works
         connectionDAO.save(instantiateValidConnection());
     }
 
     @Test(expected = ConstraintViolationException.class)
+    @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
     public void testCreateConnectionFailsEmptyProviderId() throws Exception {
         Connection c = instantiateValidConnection();
         c.setProviderId("    ");
@@ -51,6 +54,7 @@ public class ConnectionValidationITCase extends AbstractServiceTestCase {
     }
 
     @Test(expected = ConstraintViolationException.class)
+    @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
     public void testCreateConnectionFailsInvalidProviderId() throws Exception {
         Connection c = instantiateValidConnection();
         c.setProviderId("adsadfasf");
@@ -58,6 +62,7 @@ public class ConnectionValidationITCase extends AbstractServiceTestCase {
     }
 
     @Test(expected = ConstraintViolationException.class)
+    @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
     public void testCreateConnectionFailsEmptyType() throws Exception {
         Connection c = instantiateValidConnection();
         c.setType("   ");
@@ -65,6 +70,7 @@ public class ConnectionValidationITCase extends AbstractServiceTestCase {
     }
 
     @Test(expected = ConstraintViolationException.class)
+    @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
     public void testCreateConnectionFailsInvalidType() throws Exception {
         Connection c = instantiateValidConnection();
         c.setType("adfasfasf");
@@ -72,6 +78,7 @@ public class ConnectionValidationITCase extends AbstractServiceTestCase {
     }
 
     @Test(expected = ConstraintViolationException.class)
+    @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
     public void testCreateConnectionFailsInvalidURL() throws Exception {
         Connection c = instantiateValidConnection();
         c.setUrl("really this is not a URL");
@@ -79,6 +86,7 @@ public class ConnectionValidationITCase extends AbstractServiceTestCase {
     }
 
     @Test(expected = ConstraintViolationException.class)
+    @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
     public void testCreateConnectionFailsNullAccount() throws Exception {
         Connection c = instantiateValidConnection();
         c.setAccount(null);
@@ -86,6 +94,7 @@ public class ConnectionValidationITCase extends AbstractServiceTestCase {
     }
 
     @Test(expected = ConstraintViolationException.class)
+    @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
     public void testEmptyAlias() throws Exception {
         Connection c = instantiateValidConnection();
         ReflectionTestUtils.setField(c,"alias","");
@@ -93,6 +102,7 @@ public class ConnectionValidationITCase extends AbstractServiceTestCase {
     }
 
     @Test(expected = ConstraintViolationException.class)
+    @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
     public void testBlankAlias() throws Exception {
         Connection c = instantiateValidConnection();
         ReflectionTestUtils.setField(c, "alias", "      ");
@@ -100,6 +110,7 @@ public class ConnectionValidationITCase extends AbstractServiceTestCase {
     }
 
     @Test(expected = ConstraintViolationException.class)
+    @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
     public void testMaxLengthAlias() throws Exception {
         Connection c = instantiateValidConnection();
         StringBuilder sb = new StringBuilder();
@@ -111,6 +122,7 @@ public class ConnectionValidationITCase extends AbstractServiceTestCase {
     }
 
     @Test(expected = ConstraintViolationException.class)
+    @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
     public void testNullAccount() throws Exception {
         Connection c = instantiateValidConnection();
         c.setAccount(null);

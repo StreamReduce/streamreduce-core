@@ -36,6 +36,7 @@ import com.streamreduce.ConnectionTypeConstants;
 import com.streamreduce.storm.MockOutputCollector;
 import com.streamreduce.storm.MongoClient;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -49,6 +50,7 @@ public class InternalConnectionInventoryBoltIT {
      * @throws Exception if anything goes wrong
      */
     @Test
+    @Ignore("This test assumes a mongo instance is alive on localhost at 27017.  Ignored until this restriction is lifted")
     public void testExecute() throws Exception {
         MongoClient mongoClient = new MongoClient(MongoClient.BUSINESSDB_CONFIG_ID);
         List<BasicDBObject> connections = mongoClient.getConnections();
