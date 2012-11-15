@@ -16,10 +16,10 @@
 
 package com.streamreduce.util;
 
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.Map;
 
 /**
  * <p>Author: Nick Heudecker</p>

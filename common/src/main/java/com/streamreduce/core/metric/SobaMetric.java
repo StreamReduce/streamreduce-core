@@ -17,11 +17,12 @@
 package com.streamreduce.core.metric;
 
 import com.streamreduce.analytics.MetricName;
-import com.streamreduce.util.NodeableMetricUtils;
-import org.bson.types.ObjectId;
+import com.streamreduce.util.SobaMetricUtils;
 
 import java.io.Serializable;
 import java.util.Map;
+
+import org.bson.types.ObjectId;
 
 /**
  * <p>Author: Nick Heudecker</p>
@@ -41,20 +42,20 @@ public class SobaMetric implements Serializable {
     public SobaMetric() {}
 
     public SobaMetric(Map m) {
-        this.anomaly = NodeableMetricUtils.getBoolean("anomaly", m, false);
-        this.granularity = MetricGranularity.fromValue(NodeableMetricUtils.getLong("granularity", m, MetricGranularity.MINUTE.getMillis()));
+        this.anomaly = SobaMetricUtils.getBoolean("anomaly", m, false);
+        this.granularity = MetricGranularity.fromValue(SobaMetricUtils.getLong("granularity", m, MetricGranularity.MINUTE.getMillis()));
         this.stream = new MetricStream(
-                NodeableMetricUtils.getString("metricAccount", m),
-                NodeableMetricUtils.getString("metricConnection", m),
-                NodeableMetricUtils.getString("metricInventoryItem", m));
-        this.name = MetricName.fromValue(NodeableMetricUtils.getString("metricName", m));
-        this.timestamp = NodeableMetricUtils.getLong("metricTimestamp", m);
-        this.value = new MetricValue(NodeableMetricUtils.getString("metricValue", m),
-                NodeableMetricUtils.getFloat("avgy", m),
-                NodeableMetricUtils.getFloat("stddev", m),
-                NodeableMetricUtils.getFloat("diff", m),
-                NodeableMetricUtils.getFloat("min", m),
-                NodeableMetricUtils.getFloat("max", m));
+                SobaMetricUtils.getString("metricAccount", m),
+                SobaMetricUtils.getString("metricConnection", m),
+                SobaMetricUtils.getString("metricInventoryItem", m));
+        this.name = MetricName.fromValue(SobaMetricUtils.getString("metricName", m));
+        this.timestamp = SobaMetricUtils.getLong("metricTimestamp", m);
+        this.value = new MetricValue(SobaMetricUtils.getString("metricValue", m),
+                SobaMetricUtils.getFloat("avgy", m),
+                SobaMetricUtils.getFloat("stddev", m),
+                SobaMetricUtils.getFloat("diff", m),
+                SobaMetricUtils.getFloat("min", m),
+                SobaMetricUtils.getFloat("max", m));
     }
 
     public ObjectId getId() {
