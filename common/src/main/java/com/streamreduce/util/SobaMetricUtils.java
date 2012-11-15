@@ -25,9 +25,9 @@ import java.util.Map;
  * <p>Author: Nick Heudecker</p>
  * <p>Created: 8/28/12 13:54</p>
  */
-public class NodeableMetricUtils {
+public class SobaMetricUtils {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(NodeableMetricUtils.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(SobaMetricUtils.class);
 
     public static Boolean getBoolean(String key, Map m, Boolean defaultValue) {
         return get(key, m, defaultValue);

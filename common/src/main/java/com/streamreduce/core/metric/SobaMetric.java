@@ -27,7 +27,7 @@ import java.util.Map;
  * <p>Author: Nick Heudecker</p>
  * <p>Created: 8/27/12 14:14</p>
  */
-public class NodeableMetric implements Serializable {
+public class SobaMetric implements Serializable {
 
     private ObjectId id;
     private MetricStream stream;
@@ -38,9 +38,9 @@ public class NodeableMetric implements Serializable {
     private boolean anomaly;
     private MetricType type;
 
-    public NodeableMetric() {}
+    public SobaMetric() {}
 
-    public NodeableMetric(Map m) {
+    public SobaMetric(Map m) {
         this.anomaly = NodeableMetricUtils.getBoolean("anomaly", m, false);
         this.granularity = MetricGranularity.fromValue(NodeableMetricUtils.getLong("granularity", m, MetricGranularity.MINUTE.getMillis()));
         this.stream = new MetricStream(
