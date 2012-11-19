@@ -13,10 +13,6 @@
     <name>Nodeable Server :: REST API</name>
     <description>All JAX-RS annotated resources that comprise the Nodeable Server REST API.</description>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
-
     <profiles>
         <profile>
             <id>generate-rest-documentation-private</id>

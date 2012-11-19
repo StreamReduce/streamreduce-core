@@ -13,10 +13,6 @@
     <name>Nodeable Server :: System Tests</name>
     <description>Module used to contain system tests ran in Nodeable</description>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
-
     <modules>
         <module>system-tests-external</module>
     </modules>
