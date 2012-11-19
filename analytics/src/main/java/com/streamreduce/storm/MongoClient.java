@@ -18,7 +18,7 @@ package com.streamreduce.storm;
 
 import com.mongodb.*;
 import com.streamreduce.Constants;
-import com.streamreduce.core.metric.NodeableMetric;
+import com.streamreduce.core.metric.SobaMetric;
 import com.streamreduce.util.PropertiesOverrideLoader;
 import org.apache.log4j.Logger;
 import org.bson.BSONObject;
@@ -315,7 +315,7 @@ public class MongoClient {
      * @param metric persisted metric object
      * @return Map containing the collection name as the key and the BasicDBObject representation of the metric as the value
      */
-    public Map<String, BasicDBObject> writeMetric(NodeableMetric metric) {
+    public Map<String, BasicDBObject> writeMetric(SobaMetric metric) {
         DB metricsDB = getDB("nodeablemsgdb");
         String collectionName = Constants.METRIC_COLLECTION_PREFIX + metric.getStream().getAccountId();
         DBCollection metricsCollection = metricsDB.getCollection(collectionName);
