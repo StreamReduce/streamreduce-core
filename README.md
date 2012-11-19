@@ -1,6 +1,6 @@
-# Getting Started With Nodeable Core #
+# Getting Started With StreamReduce Core #
 
-You can interact with your Nodeable instance by taking advantage of its REST API. We're using `curl` to illustrate how the API works.
+You can interact with your StreamReduce instance by taking advantage of its REST API. We're using `curl` to illustrate how the API works.
 
 # Login #
 
@@ -8,7 +8,7 @@ Before you can do anything meaningful with the API, you have to authenticate. On
 
 ## Request ##
 
-    > curl -XPOST -D - --user "[Your Nodeable Username]:[Your Nodeable Password]" --basic http://localhost:8080/webapp/authentication/login 
+    > curl -XPOST -D - --user "[Your StreamReduce Username]:[Your StreamReduce Password]" --basic http://localhost:8080/webapp/authentication/login 
 
 ## Response ##
 
@@ -60,7 +60,7 @@ Once you have an account to work with, you can create a user account. The user a
 
 # Connection Management #
 
-Connections allow you to get data into Nodeable for real-time processing. Connections can either be polled or, which means the Nodeable application will periodically query the connection for data, or push. Push connections simply accept data on a dedicated REST endpoint, which we'll describe later.
+Connections allow you to get data into StreamReduce for real-time processing. Connections can either be polled or, which means the StreamReduce application will periodically query the connection for data, or push. Push connections simply accept data on a dedicated REST endpoint, which we'll describe later.
 
 ## Listing Connections ##
 
