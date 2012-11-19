@@ -91,12 +91,10 @@
                 <version>2.12</version>
                 <configuration>
                     <systemPropertyVariables>
-                        <mule.home>${project.basedir}/target</mule.home>
-                        <mule.test.timeoutSecs>240</mule.test.timeoutSecs>
-                        <mule.verbose.exceptions>true</mule.verbose.exceptions>
                         <quartz.store.type>local</quartz.store.type>
                     </systemPropertyVariables>
                     <forkMode>never</forkMode>
+                    <useSystemClassLoader>false</useSystemClassLoader>
                 </configuration>
                 <executions>
                     <execution>

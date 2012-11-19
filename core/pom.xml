@@ -58,11 +58,7 @@
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>2.12</version>
                 <configuration>
-                    <systemPropertyVariables>
-                        <mule.home>${project.basedir}/target</mule.home>
-                        <mule.test.timeoutSecs>240</mule.test.timeoutSecs>
-                        <mule.verbose.exceptions>true</mule.verbose.exceptions>
-                    </systemPropertyVariables>
+                    <useSystemClassLoader>false</useSystemClassLoader>
                     <forkMode>never</forkMode>
                 </configuration>
                 <executions>

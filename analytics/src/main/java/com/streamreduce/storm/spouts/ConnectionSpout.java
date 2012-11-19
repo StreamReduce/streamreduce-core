@@ -36,7 +36,7 @@ public class ConnectionSpout extends AbstractScheduledDBCollectionSpout {
 
     private static final long serialVersionUID = 2126467278030837837L;
     private static MongoClient mongoClient = new MongoClient(MongoClient.BUSINESSDB_CONFIG_ID);
-    private static final Logger logger = Logger.getLogger(EventSpout.class);
+    private static Logger logger = Logger.getLogger(EventSpout.class);
 
     /**
      * Constructor.  (Calls super constructor with a sleep duration of 120s for now.)
