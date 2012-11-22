@@ -37,7 +37,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class EventSpout extends AbstractScheduledDBCollectionSpout {
 
-    private static final Logger logger = Logger.getLogger(EventSpout.class);
+    private static Logger logger = Logger.getLogger(EventSpout.class);
     private static final long serialVersionUID = -3339407048421810230L;
     // Not final like all others due to EventSpoutTest needing to set mock/set the MongoClient
     private static MongoClient mongoClient = new MongoClient(MongoClient.MESSAGEDB_CONFIG_ID);
