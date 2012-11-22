@@ -30,6 +30,7 @@ import java.util.List;
 import com.google.common.collect.Lists;
 import com.mongodb.BasicDBObject;
 import com.streamreduce.storm.MongoClient;
+import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.springframework.test.util.ReflectionTestUtils;
 
@@ -45,8 +46,11 @@ public class EventSpoutTest {
         MongoClient mockMongoClient = mock(MongoClient.class);
         when(mockMongoClient.getEvents(any(Date.class), any(Date.class))).thenReturn(Lists.newArrayList(latest, earliest, middle));
 
+        Logger mockLogger = mock(Logger.class);
+
         EventSpout spout = new EventSpout();
         ReflectionTestUtils.setField(spout, "mongoClient", mockMongoClient);
+        ReflectionTestUtils.setField(spout, "logger", mockLogger);
         spout.getDBEntries();
 
         assertEquals(new Date(latest.getLong("timestamp")), spout.getLastProcessedEventDate());

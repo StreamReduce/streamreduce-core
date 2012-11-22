@@ -18,6 +18,7 @@ package com.streamreduce.storm.spouts;
 
 import com.mongodb.BasicDBObject;
 import com.streamreduce.storm.MongoClient;
+import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.test.util.ReflectionTestUtils;
@@ -41,8 +42,11 @@ public class ConnectionSpoutTest {
         when(mockMongoClient.getConnections()).thenThrow(new RuntimeException("mongo failure"));
         when(mockMongoClient.getConnection(anyString())).thenThrow(new RuntimeException("mongo failure"));
 
+        Logger mockLogger = mock(Logger.class);
+
         connectionSpout = new ConnectionSpout();
         ReflectionTestUtils.setField(connectionSpout, "mongoClient", mockMongoClient);
+        ReflectionTestUtils.setField(connectionSpout, "logger", mockLogger);
     }
 
     @Test

@@ -55,11 +55,11 @@ public class MongoClient {
     }
 
     private static void loadProperties() {
-        databaseProperties = PropertiesOverrideLoader.loadProperties("database.properties");
+        databaseProperties = PropertiesOverrideLoader.loadProperties("override.properties");
     }
 
     /**
-     * Connect to the Nodeable MongoDB instance using a properties file (<b>TEST-database.properties</b>)
+     * Connect to the Nodeable MongoDB instance using a properties file (<b>TEST-override.properties</b>)
      * that uses the following naming convention for specifying the MongoDB host, port,
      * username and password:
      * <p/>
