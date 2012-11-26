@@ -38,7 +38,7 @@ public class SqsQueueNameFormatter {
      * prepended to original queue name.
      *
      * This method accepts a non-blank queue name and environment as parameters.  Once these two values are joined
-     * with a "-" any characters thare are invalid for use in an SQS queue name are replaced transformed with dashes
+     * with a "-" any characters that are invalid for use in an SQS queue name are replaced transformed with dashes
      * (only alphanumerics, dashes, and underscores are allowed).
      *
      * Additionally, if the passed in environment prefix is "dev" then the prefix will also include the hostname

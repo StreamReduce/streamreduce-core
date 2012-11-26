@@ -25,9 +25,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 
-public abstract class NodeableRouteBuilder extends SpringRouteBuilder implements InitializingBean {
+public abstract class StreamReduceRouteBuilder extends SpringRouteBuilder implements InitializingBean {
 
-    private static final Logger logger = LoggerFactory.getLogger(NodeableRouteBuilder.class);
+    private static final Logger logger = LoggerFactory.getLogger(StreamReduceRouteBuilder.class);
     public static final long SQS_MESSAGE_RETENTION_PERIOD = TimeUnit.DAYS.toSeconds(14);
 
     protected String queueName;
@@ -57,21 +57,26 @@ public abstract class NodeableRouteBuilder extends SpringRouteBuilder implements
      * {@inheritDoc}
      */
     @Override
-    public void configure() throws Exception {
+    final public void configure() throws Exception {
         if ("sqs".equals(brokerType)) {
             // AmazonSQSClient is looked up from registry
             endpointUrl = String.format("aws-sqs://%s?amazonSQSClient=#amazonSQSClient&messageRetentionPeriod=%d",
                                         queueName, SQS_MESSAGE_RETENTION_PERIOD);
         } else if ("file".equals(brokerType)) {
-            endpointUrl = String.format("file://%s/.nodeable/%s/?delete=true&exclude=^tmp.*",
+            endpointUrl = String.format("file://%s/.streamreduce/%s/?delete=true&exclude=^tmp.*",
                                         System.getProperty("user.home"), queueName);
         } else if ("amq".equals(brokerType)) {
             endpointUrl = String.format("amq:queue:%s?concurrentConsumers=10&acknowledgementModeName=" +
                                                 "CLIENT_ACKNOWLEDGE", queueName);
         } else {
             logger.warn("brokerType property was not one of sqs, file, or amq.  No Camel routes were started.");
+            return;
         }
+
+        configureRoutes();
     }
+
+    protected abstract void configureRoutes() throws Exception;
 
     public void setQueueName(String queueName) {
         this.queueName = queueName;

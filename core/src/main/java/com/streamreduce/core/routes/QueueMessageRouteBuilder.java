@@ -16,15 +16,13 @@
 
 package com.streamreduce.core.routes;
 
-public class QueueMessageRouteBuilder extends NodeableRouteBuilder {
+public class QueueMessageRouteBuilder extends StreamReduceRouteBuilder {
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void configure() throws Exception {
-        super.configure();
-
+    public void configureRoutes() throws Exception {
         from(this.endpointUrl).to("bean:queueMessageProcessor");
     }
 

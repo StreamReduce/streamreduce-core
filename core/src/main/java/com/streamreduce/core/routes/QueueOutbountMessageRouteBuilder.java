@@ -20,7 +20,7 @@ package com.streamreduce.core.routes;
 import com.streamreduce.core.component.OutboundMessageProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class QueueOutbountMessageRouteBuilder extends NodeableRouteBuilder {
+public class QueueOutbountMessageRouteBuilder extends StreamReduceRouteBuilder {
 
     @Autowired
     OutboundMessageProcessor outboundMessageProcessor;
@@ -29,7 +29,7 @@ public class QueueOutbountMessageRouteBuilder extends NodeableRouteBuilder {
      * {@inheritDoc}
      */
     @Override
-    public void configure() throws Exception {
+    public void configureRoutes() throws Exception {
         super.configure();
 
         // Async Handling of OutboundMessages
