@@ -10,7 +10,7 @@
 
     <artifactId>webapp</artifactId>
     <packaging>war</packaging>
-    <name>Nodeable Server :: Webapp</name>
+    <name>StreamReduce :: Webapp</name>
     <url>http://www.nodeable.com</url>
 
     <dependencies>

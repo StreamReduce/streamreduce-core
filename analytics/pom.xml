@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>analytics</artifactId>
-    <name>Nodeable Server :: Analytics</name>
+    <name>StreamReduce :: Analytics</name>
 
     <dependencies>
         <dependency>

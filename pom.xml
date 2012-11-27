@@ -5,7 +5,7 @@
     <groupId>com.streamreduce</groupId>
     <artifactId>server</artifactId>
     <packaging>pom</packaging>
-    <name>Nodeable Server :: Parent</name>
+    <name>StreamReduce :: Parent</name>
     <version>1.0.1-SNAPSHOT</version>
     <description>Parent Module for all Nodeable Server-Side Java Components.</description>
 

@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>system-tests-external</artifactId>
-    <name>Nodeable Server :: External System Tests</name>
+    <name>StreamReduce :: External System Tests</name>
     <description>Module used to contain automated tests for exercising external systems. If a test actually
         needs to hit an external provider (e.g. s3, github) it should be contained here.
     </description>

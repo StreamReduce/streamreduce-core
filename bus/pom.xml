@@ -11,7 +11,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>bus</artifactId>
-    <name>Nodeable Server :: Bus</name>
+    <name>StreamReduce :: Bus</name>
 
     <dependencies>
         <dependency>

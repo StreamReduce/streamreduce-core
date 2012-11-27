@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>common</artifactId>
-    <name>Nodeable Server :: Common</name>
+    <name>StreamReduce :: Common</name>
     <description>
         Common resources, properties files, and classes that are used between both the analytics and core modules.
     </description>

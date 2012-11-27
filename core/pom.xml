@@ -12,7 +12,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>server-core</artifactId>
     <packaging>jar</packaging>
-    <name>Nodeable Server :: Core</name>
+    <name>StreamReduce :: Core</name>
     <description>Core library of the Nodeable Server middle-tier. Includes integration to external providers, and
         services for client access.
     </description>
