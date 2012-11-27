@@ -15,7 +15,6 @@
         needs to hit an external provider (e.g. s3, github) it should be contained here.
     </description>
 
-    <url>http://maven.apache.org</url>
 
     <dependencies>
 

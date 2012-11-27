@@ -17,11 +17,6 @@
         services for client access.
     </description>
 
-    <scm>
-        <connection>scm:svn:https://nodeable.jira.com/svn</connection>
-    </scm>
-
-
     <build>
         <finalName>nodeable-core</finalName>
 
