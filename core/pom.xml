@@ -18,7 +18,7 @@
     </description>
 
     <build>
-        <finalName>nodeable-core</finalName>
+        <finalName>streamreduce-core</finalName>
 
         <plugins>
             <plugin>

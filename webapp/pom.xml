@@ -71,7 +71,7 @@
                 <filtering>true</filtering>
             </resource>
         </resources>
-        <finalName>nodeable-app</finalName>
+        <finalName>streamreduce-app</finalName>
         <plugins>
             <plugin>
                 <groupId>org.mortbay.jetty</groupId>
