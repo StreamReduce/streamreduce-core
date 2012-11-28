@@ -16,16 +16,6 @@
 
 package com.streamreduce.core.service;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import javax.annotation.Nullable;
-
 import com.streamreduce.ConnectionNotFoundException;
 import com.streamreduce.ProviderIdConstants;
 import com.streamreduce.connections.AuthType;
@@ -52,6 +42,17 @@ import com.streamreduce.util.HashtagUtil;
 import com.streamreduce.util.InvalidOutboundConfigurationException;
 import com.streamreduce.util.SecurityUtil;
 import com.streamreduce.util.WebHDFSClient;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import javax.annotation.Nullable;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.bson.types.ObjectId;
@@ -485,5 +486,17 @@ public class ConnectionServiceImpl implements ConnectionService {
     public void clearBrokenFlag(Connection connection) {
         connection.setAsUnbroke();
         connectionDAO.save(connection);
+    }
+
+    @Override
+    public Connection getConnectionByAPPID(String appId) throws ConnectionNotFoundException{
+        // TODO:
+        return null;
+    }
+
+    @Override
+    public Connection getConnectionByGUID(String guid) throws ConnectionNotFoundException{
+        // TODO:
+        return null;
     }
 }

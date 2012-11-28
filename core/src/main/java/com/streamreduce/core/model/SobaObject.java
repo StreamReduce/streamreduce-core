@@ -66,6 +66,8 @@ public abstract class SobaObject extends ObjectWithId implements Taggable {
     @Embedded
     @NotNull
     protected Set<String> hashtags = new TreeSet<String>(String.CASE_INSENSITIVE_ORDER);
+    // an optional external primary key, guid, etc..
+    protected String externalId;
 
     public enum Visibility {
         SELF,
@@ -193,6 +195,14 @@ public abstract class SobaObject extends ObjectWithId implements Taggable {
         this.user = user;
     }
 
+    public String getExternalId() {
+        return externalId;
+    }
+
+    public void setExternalId(String externalId) {
+        this.externalId = externalId;
+    }
+
     @SuppressWarnings("rawtypes")
     public static abstract class Builder<T extends SobaObject, S extends Builder> {
         protected T theObject;
@@ -295,6 +305,14 @@ public abstract class SobaObject extends ObjectWithId implements Taggable {
             if (visibility != null) {
                 theObject.setVisibility(visibility);
             }
+            return getRealBuilder();
+        }
+
+        public S externalId(String externalId) {
+            if (isBuilt) {
+                throw new IllegalStateException("The object cannot be modified after built.");
+            }
+            theObject.setExternalId(externalId);
             return getRealBuilder();
         }
     }
