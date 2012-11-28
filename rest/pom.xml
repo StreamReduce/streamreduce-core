@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>rest</artifactId>
-    <name>Nodeable Server :: REST API</name>
+    <name>StreamReduce :: REST API</name>
     <description>All JAX-RS annotated resources that comprise the Nodeable Server REST API.</description>
 
     <profiles>

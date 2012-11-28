@@ -6,9 +6,10 @@
     <groupId>com.streamreduce</groupId>
     <artifactId>server</artifactId>
     <packaging>pom</packaging>
-    <name>Nodeable Server :: Parent</name>
+    <name>StreamReduce :: Parent</name>
     <version>1.0.1-SNAPSHOT</version>
     <description>Parent Module for all Nodeable Server-Side Java Components.</description>
+    <url>http://www.streamreduce.com</url>
 
     <modules>
         <module>core</module>
@@ -17,7 +18,13 @@
         <module>system-tests</module>
         <module>rest</module>
         <module>webapp</module>
+        <module>bus</module>
     </modules>
+
+    <scm>
+        <connection>scm:git:git://github.com/StreamReduce/streamreduce-core.git</connection>
+        <url>https://github.com/StreamReduce/streamreduce-core</url>
+    </scm>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -355,13 +362,18 @@
                         <id>start</id>
                         <phase>pre-integration-test</phase>
                         <goals>
-                            <goal>start</goal> <!-- use the 'run' goal instead to start mongodb and wait -->
+                            <goal>start</goal>
+                            <!-- use the 'run' goal instead to start mongodb and wait -->
                         </goals>
                         <configuration>
-                            <port>37017</port> <!-- optional, default 27017 -->
-                            <version>2.0.2</version>  <!-- optional, default 2.1.1 --> <!-- 2.0.2 is current Nodeable production version -->
-                            <logging>none</logging> <!-- optional (file|console|none), default console -->
-                            <bindIp>127.0.0.1</bindIp> <!-- optional, default is to listen on all interfaces -->
+                            <port>37017</port>
+                            <!-- optional, default 27017 -->
+                            <version>2.0.2</version>
+                            <!-- optional, default 2.1.1 --> <!-- 2.0.2 is current Nodeable production version -->
+                            <logging>none</logging>
+                            <!-- optional (file|console|none), default console -->
+                            <bindIp>127.0.0.1</bindIp>
+                            <!-- optional, default is to listen on all interfaces -->
                         </configuration>
                     </execution>
                     <execution>

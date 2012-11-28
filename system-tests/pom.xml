@@ -10,7 +10,7 @@
 
     <artifactId>system-tests</artifactId>
     <packaging>pom</packaging>
-    <name>Nodeable Server :: System Tests</name>
+    <name>StreamReduce :: System Tests</name>
     <description>Module used to contain system tests ran in Nodeable</description>
 
     <modules>

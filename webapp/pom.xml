@@ -10,8 +10,8 @@
 
     <artifactId>webapp</artifactId>
     <packaging>war</packaging>
-    <name>Nodeable Server :: Webapp</name>
-    <url>http://www.nodeable.com</url>
+    <name>StreamReduce :: Webapp</name>
+
 
     <dependencies>
 
@@ -71,7 +71,7 @@
                 <filtering>true</filtering>
             </resource>
         </resources>
-        <finalName>nodeable-app</finalName>
+        <finalName>streamreduce-app</finalName>
         <plugins>
             <plugin>
                 <groupId>org.mortbay.jetty</groupId>
