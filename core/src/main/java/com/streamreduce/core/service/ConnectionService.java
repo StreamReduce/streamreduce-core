@@ -16,10 +16,6 @@
 
 package com.streamreduce.core.service;
 
-import java.io.IOException;
-import java.util.List;
-import javax.annotation.Nullable;
-
 import com.streamreduce.ConnectionNotFoundException;
 import com.streamreduce.core.model.Account;
 import com.streamreduce.core.model.Connection;
@@ -27,6 +23,12 @@ import com.streamreduce.core.model.TaggableService;
 import com.streamreduce.core.model.User;
 import com.streamreduce.core.service.exception.ConnectionExistsException;
 import com.streamreduce.core.service.exception.InvalidCredentialsException;
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.annotation.Nullable;
+
 import org.bson.types.ObjectId;
 
 public interface ConnectionService extends TaggableService<Connection> {
@@ -156,4 +158,19 @@ public interface ConnectionService extends TaggableService<Connection> {
      * @param connection the connection that will have the broken status cleared
      */
     void clearBrokenFlag(Connection connection);
+
+    /**
+     * The appId should be a meta attr on the connection.
+     * @param appId
+     * @return
+     */
+    Connection getConnectionByAPPID(String appId) throws ConnectionNotFoundException;
+
+    /**
+     * The guid should be a meta attr on the inventory item.
+     * @param guid
+     * @return
+     */
+    Connection getConnectionByGUID(String guid) throws ConnectionNotFoundException;
+
 }

@@ -57,13 +57,13 @@ import org.springframework.util.StringUtils;
 public class GatewayResource extends AbstractResource {
 
     @Autowired
-    MessageService messageService;
+    protected MessageService messageService;
     @Autowired
-    OutboundStorageService outboundService;
+    protected OutboundStorageService outboundService;
     @Autowired
-    InventoryService inventoryService;
+    protected InventoryService inventoryService;
     @Autowired
-    EventService eventService;
+    protected EventService eventService;
 
 
     final Set<String> validMetricTypes = ImmutableSet.of(
@@ -92,7 +92,6 @@ public class GatewayResource extends AbstractResource {
      * @resource.representation.201 Returned when the create is successful
      * @resource.representation.403 Returned when the account the connection is in does not allow IMG messages
      * @resource.representation.405 Returned whenever the payload is invalid
-     *
      * @deprecated @see #createCustomConnectionMessage(JSONObject)
      */
     @POST
@@ -142,7 +141,6 @@ public class GatewayResource extends AbstractResource {
                     return error("Every object in the 'data' array should be an object.",
                             Response.status(Response.Status.BAD_REQUEST));
                 }
-
                 entries.add(rawEntry);
             }
         } else {
