@@ -31,7 +31,7 @@ import java.util.Date;
 /**
  * Test class for {@link FeedClient}.
  */
-public class FeedClientTest {
+public class FeedClientIT {
 
     @Test
     public void testValidateFeedConnection() throws Exception {

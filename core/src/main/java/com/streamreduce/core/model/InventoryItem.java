@@ -22,6 +22,7 @@ import com.mongodb.DBObject;
 
 import javax.validation.constraints.NotNull;
 
+import org.apache.commons.lang.StringUtils;
 import org.bson.types.ObjectId;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -33,8 +34,6 @@ public class InventoryItem extends SobaObject {
     @NotNull
     private Connection connection;
     private boolean deleted;
-    @NotNull
-    private String externalId;
     @NotEmpty
     private String type;
     @NotNull
@@ -46,14 +45,6 @@ public class InventoryItem extends SobaObject {
 
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
-    }
-
-    public String getExternalId() {
-        return externalId;
-    }
-
-    public void setExternalId(String externalId) {
-        this.externalId = externalId;
     }
 
     public Connection getConnection() {
@@ -87,6 +78,22 @@ public class InventoryItem extends SobaObject {
             super(new InventoryItem());
         }
 
+        @Override
+        public InventoryItem build() {
+            if (theObject.connection == null) {
+                throw new IllegalStateException("Connection cannot be null");
+            }
+            if (StringUtils.isBlank(theObject.getType())) {
+                throw new IllegalStateException("type must not be empty");
+            }
+            if (theObject.getMetadataId() == null) {
+                throw new IllegalStateException("metadataId cannot be null");
+            }
+
+            return super.build();
+
+        }
+
         public Builder connection(Connection connection) {
             if (isBuilt) {
                 throw new IllegalStateException("The object cannot be modified after built.");
@@ -102,14 +109,6 @@ public class InventoryItem extends SobaObject {
                 throw new IllegalStateException("The object cannot be modified after built.");
             }
             theObject.setDeleted(deleted);
-            return getRealBuilder();
-        }
-
-        public Builder externalId(String externalId) {
-            if (isBuilt) {
-                throw new IllegalStateException("The object cannot be modified after built.");
-            }
-            theObject.setExternalId(externalId);
             return getRealBuilder();
         }
 
