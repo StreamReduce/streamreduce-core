@@ -1,3 +1,10 @@
+# Prerequisites #
+
+You will need the following installed and available on your PATH:
+
+- JDK 7
+- Maven 3.x
+
 # Getting Started With StreamReduce Core #
 
 You can interact with your StreamReduce instance by taking advantage of its REST API. We're using `curl` to illustrate how the API works.
