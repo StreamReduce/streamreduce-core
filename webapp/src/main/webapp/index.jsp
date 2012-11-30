@@ -17,6 +17,6 @@
 <html>
 <body>
 <!-- TODO: default splash screen -->
-Nodeable.
+StreamReduce.
 </body>
 </html>
