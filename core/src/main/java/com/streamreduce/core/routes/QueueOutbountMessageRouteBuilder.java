@@ -30,8 +30,6 @@ public class QueueOutbountMessageRouteBuilder extends StreamReduceRouteBuilder {
      */
     @Override
     public void configureRoutes() throws Exception {
-        super.configure();
-
         // Async Handling of OutboundMessages
         from("direct:outbound-messages").to(endpointUrl);
         from(endpointUrl).process(outboundMessageProcessor);
