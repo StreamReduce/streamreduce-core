@@ -49,7 +49,7 @@ public class TestService {
 
 
     private static final String SAMPLE_FEED_FILE_PATH = TestService.class.getResource(
-            "/com/nodeable/rss/sample_EC2.rss").toString();
+            "/com/streamreduce/rss/sample_EC2.rss").toString();
 
     /**
      * Creates a test RSS connection, saves it for the passed in User, and refreshesFeedMessages on it.

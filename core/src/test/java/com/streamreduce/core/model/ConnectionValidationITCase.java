@@ -33,7 +33,7 @@ import javax.validation.ConstraintViolationException;
 public class ConnectionValidationITCase extends AbstractServiceTestCase {
 
     private static final String SAMPLE_FEED_FILE_PATH = ConnectionValidationITCase.class.getResource(
-            "/com/nodeable/rss/sample_EC2.rss").toString();
+            "/com/streamreduce/rss/sample_EC2.rss").toString();
 
     @Autowired
     ConnectionDAO connectionDAO;
