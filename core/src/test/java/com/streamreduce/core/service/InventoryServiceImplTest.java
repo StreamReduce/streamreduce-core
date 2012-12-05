@@ -43,18 +43,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.streamreduce.test.service.TestUtils.SAMPLE_FEED_FILE_PATH;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.anyLong;
-import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class InventoryServiceImplTest {
-
-    private static final String SAMPLE_FEED_FILE_PATH = InventoryServiceImplTest.class.getResource(
-            "/com/streamreduce/rss/sample_EC2.rss").toString();
 
     Connection sampleFeedConnection;
     InventoryServiceImpl inventoryService;
@@ -146,14 +140,14 @@ public class InventoryServiceImplTest {
 
         inventoryService.pullInventoryItemActivity(sampleFeedConnection);
 
-        assertEquals(2,feedEntryDetailList.size());
+        assertEquals(2, feedEntryDetailList.size());
 
         FeedEntryDetails degradedPerformanceDetails = feedEntryDetailList.get(0);
-        assertEquals("Informational message: Investigating degraded performance of EBS volumes",degradedPerformanceDetails.getTitle());
+        assertEquals("Informational message: Investigating degraded performance of EBS volumes", degradedPerformanceDetails.getTitle());
         assertEquals("http://status.aws.amazon.com/#EC2_1330560778", degradedPerformanceDetails.getUrl());
 
         SimpleDateFormat sdf = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz");
-        assertEquals(sdf.parse("Wed, 29 Feb 2012 16:12:58 PST"),degradedPerformanceDetails.getPublishedDate());
+        assertEquals(sdf.parse("Wed, 29 Feb 2012 16:12:58 PST"), degradedPerformanceDetails.getPublishedDate());
         assertTrue(degradedPerformanceDetails.getDescription().startsWith("We are investigating"));
     }
 

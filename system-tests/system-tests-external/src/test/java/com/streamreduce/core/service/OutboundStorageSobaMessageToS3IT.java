@@ -227,7 +227,7 @@ public class OutboundStorageSobaMessageToS3IT extends AbstractServiceTestCase {
     @Test
     public void testEndToEndForProcessedMessages() throws Exception {
         Connection feedConnection =
-                TestUtils.createFeedConnectionWithSpecificOutboundDatatypes(OutboundDataType.PROCESSED);
+                TestUtils.createTestFeedConnection(OutboundDataType.PROCESSED);
 
         //Let ConnectionService take care of creating the Id
         feedConnection.setId(null);

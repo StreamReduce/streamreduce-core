@@ -38,7 +38,7 @@ public class ObjectWithIdITCase extends AbstractServiceTestCase {
     @Test
     @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
     public void testObjectVersioning() throws Exception {
-        Connection testConnection = TestUtils.createFeedConnectionWithSpecificOutboundDatatypes();
+        Connection testConnection = TestUtils.createTestFeedConnection();
         testConnection.setAccount(testAccount);
         testConnection.setUser(testUser);
 

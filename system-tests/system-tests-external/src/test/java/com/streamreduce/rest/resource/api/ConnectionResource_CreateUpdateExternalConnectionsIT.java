@@ -27,6 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.ws.rs.core.Response;
 
+import static com.streamreduce.test.service.TestUtils.SAMPLE_FEED_FILE_PATH;
 
 /**
  * Integration test exercising the creation and updating of connections in {@link ConnectionResource} that hit
@@ -90,7 +91,7 @@ public class ConnectionResource_CreateUpdateExternalConnectionsIT extends BaseCo
                 .add("providerId", "rss")
                 .add("alias", "Test Bad RSS Feed 1")
                 .add("type", "feed")
-                .add("url", ConnectionResourceITCase.class.getResource("/com/nodeable/rss/sample_EC2.rss").toString())
+                .add("url", SAMPLE_FEED_FILE_PATH)
                 .add("visibility", "ACCOUNT")
                 .add("credentials", new JSONObjectBuilder().build())
                 .add("authType", "USERNAME_PASSWORD")
@@ -134,7 +135,7 @@ public class ConnectionResource_CreateUpdateExternalConnectionsIT extends BaseCo
                 .add("providerId", "rss")
                 .add("type", "feed")
                 .add("authType", "NONE")
-                .add("url", ConnectionResourceITCase.class.getResource("/com/nodeable/rss/sample_EC2.rss").toString())
+                .add("url", SAMPLE_FEED_FILE_PATH)
                 .add("inbound", true)
                 .array("outboundConfigurations", new JSONObjectBuilder()
                         .add("protocol", "s3")
@@ -170,7 +171,7 @@ public class ConnectionResource_CreateUpdateExternalConnectionsIT extends BaseCo
                 .add("providerId", "rss")
                 .add("type", "feed")
                 .add("authType", "NONE")
-                .add("url", ConnectionResourceITCase.class.getResource("/com/nodeable/rss/sample_EC2.rss").toString())
+                .add("url", SAMPLE_FEED_FILE_PATH)
                 .add("inbound", true)
                 .build();
 

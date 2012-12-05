@@ -36,7 +36,7 @@ public class OutboundStorageServiceImplTest {
     @Test
     public void testSendRawMessageNullPayload() throws Exception {
         //Tests that sending a Null payload as a raw message does not write to any outbound connections.
-        Connection connection = TestUtils.createFeedConnectionWithSpecificOutboundDatatypes(OutboundDataType.RAW);
+        Connection connection = TestUtils.createTestFeedConnection(OutboundDataType.RAW);
         OutboundStorageServiceImpl outboundStorageService = new OutboundStorageServiceImpl();
         Assert.assertEquals(0,outboundStorageService.sendRawMessage(null, connection));
     }
@@ -58,7 +58,7 @@ public class OutboundStorageServiceImplTest {
     @Test
     public void testSendRawMessage_toConnectionWithNoOutboundConfigs() throws Exception {
         //sendRawMessage should return 0 for the number of messages that were actually sent.
-        Connection connection = TestUtils.createFeedConnectionWithSpecificOutboundDatatypes();
+        Connection connection = TestUtils.createTestFeedConnection();
         OutboundStorageServiceImpl outboundStorageService = new OutboundStorageServiceImpl();
         Assert.assertEquals(0,outboundStorageService.sendRawMessage(TestUtils.createValidSampleIMGPayload(), connection));
     }
@@ -66,7 +66,7 @@ public class OutboundStorageServiceImplTest {
     @Test
     public void testSendRawMessageConnectionRawNotInOutbounds() throws Exception {
         //Tests that sending a Null payload as a raw message does not write to any outbound connections.
-        Connection connection = TestUtils.createFeedConnectionWithSpecificOutboundDatatypes(OutboundDataType.PROCESSED);
+        Connection connection = TestUtils.createTestFeedConnection(OutboundDataType.PROCESSED);
         OutboundStorageServiceImpl outboundStorageService = new OutboundStorageServiceImpl();
         Assert.assertEquals(0,outboundStorageService.sendRawMessage(TestUtils.createValidSampleIMGPayload(), connection));
     }

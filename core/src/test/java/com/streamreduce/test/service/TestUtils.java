@@ -37,7 +37,7 @@ import java.util.ResourceBundle;
  */
 public class TestUtils {
 
-    private static final String SAMPLE_FEED_FILE_PATH = TestUtils.class.getResource(
+    public static final String SAMPLE_FEED_FILE_PATH = TestUtils.class.getResource(
             "/com/streamreduce/rss/sample_EC2.rss").toString();
 
 
@@ -78,7 +78,7 @@ public class TestUtils {
         return json;
     }
 
-    public static Connection createFeedConnectionWithSpecificOutboundDatatypes(OutboundDataType... outboundDataTypes) {
+    public static Connection createTestFeedConnection(OutboundDataType... outboundDataTypes) {
         Connection.Builder cb = new Connection.Builder()
                 .authType(AuthType.NONE)
                 .alias("testFeedConnection")

@@ -37,6 +37,7 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
+import static com.streamreduce.test.service.TestUtils.SAMPLE_FEED_FILE_PATH;
 
 /**
  * Tests behavior of ConnectionResource without going through the REST layer.
@@ -101,7 +102,7 @@ public class ConnectionResourceITCase extends BaseConnectionResourceITCase {
                 .add("providerId", "rss")
                 .add("type", "feed")
                 .add("authType", "NONE")
-                .add("url", ConnectionResourceITCase.class.getResource("/com/nodeable/rss/sample_EC2.rss").toString())
+                .add("url", SAMPLE_FEED_FILE_PATH)
                 .add("inbound", true)
                 .build();
 

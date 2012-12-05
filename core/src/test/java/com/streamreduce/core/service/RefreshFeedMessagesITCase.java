@@ -35,9 +35,6 @@ import java.util.List;
 
 public class RefreshFeedMessagesITCase extends AbstractServiceTestCase{
 
-    private static final String SAMPLE_FEED_FILE_PATH = InventoryServiceImplTest.class.getResource(
-            "/com/nodeable/rss/sample_EC2.rss").toString();
-
     @Autowired
     MessageService messageService;
 

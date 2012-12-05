@@ -42,7 +42,7 @@ public class OutboundStorageSobaMessageToWebHDFSIT extends AbstractServiceTestCa
     public void testEndToEndForProcessedMessages() throws Exception {
         /*
         Connection feedConnection =
-                TestUtils.createFeedConnectionWithSpecificOutboundDatatypes();
+                TestUtils.createTestFeedConnection();
         Connection webHDFSConection = TestUtils.createOutboundWebHDFSConnection();
 
         //Let ConnectionService take care of creating the Id

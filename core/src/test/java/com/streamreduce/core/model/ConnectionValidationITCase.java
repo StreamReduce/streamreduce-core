@@ -27,13 +27,12 @@ import org.springframework.test.util.ReflectionTestUtils;
 
 import javax.validation.ConstraintViolationException;
 
+import static com.streamreduce.test.service.TestUtils.SAMPLE_FEED_FILE_PATH;
+
 /**
  * Integration Test that verifies validation works on saving Connections with ConnectionDAO.
  */
 public class ConnectionValidationITCase extends AbstractServiceTestCase {
-
-    private static final String SAMPLE_FEED_FILE_PATH = ConnectionValidationITCase.class.getResource(
-            "/com/streamreduce/rss/sample_EC2.rss").toString();
 
     @Autowired
     ConnectionDAO connectionDAO;

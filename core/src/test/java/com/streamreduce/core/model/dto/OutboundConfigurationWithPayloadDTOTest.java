@@ -54,7 +54,7 @@ public class OutboundConfigurationWithPayloadDTOTest {
 
     @Test
     public void testValidInstantiation() {
-        Connection c = TestUtils.createFeedConnectionWithSpecificOutboundDatatypes(OutboundDataType.PROCESSED);
+        Connection c = TestUtils.createTestFeedConnection(OutboundDataType.PROCESSED);
         ObjectId testObjectId = new ObjectId();
         c.setId(testObjectId);
         OutboundConfiguration outboundConfiguration = Lists.newArrayList(c.getOutboundConfigurations()).get(0);
@@ -68,7 +68,7 @@ public class OutboundConfigurationWithPayloadDTOTest {
 
     @Test
     public void testSerializeDeserialize() throws Exception{
-        Connection c = TestUtils.createFeedConnectionWithSpecificOutboundDatatypes(OutboundDataType.PROCESSED);
+        Connection c = TestUtils.createTestFeedConnection(OutboundDataType.PROCESSED);
         ObjectId testObjectId = new ObjectId();
         c.setId(testObjectId);
         OutboundConfiguration outboundConfiguration = Lists.newArrayList(c.getOutboundConfigurations()).get(0);

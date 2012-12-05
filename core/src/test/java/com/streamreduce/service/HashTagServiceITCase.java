@@ -48,7 +48,7 @@ public class HashTagServiceITCase extends AbstractServiceTestCase {
     public void setUp() throws Exception {
         super.setUp();
 
-        connection = TestUtils.createFeedConnectionWithSpecificOutboundDatatypes();
+        connection = TestUtils.createTestFeedConnection();
         connection.setUser(testUser);
         connection.setAccount(testAccount);
         connection.setHashtags(ImmutableSet.of("#RSS", "#jclouds", "#GitHub"));

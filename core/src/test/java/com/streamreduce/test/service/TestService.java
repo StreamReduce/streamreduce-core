@@ -34,6 +34,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import static com.streamreduce.test.service.TestUtils.SAMPLE_FEED_FILE_PATH;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -47,9 +48,6 @@ public class TestService {
     @Autowired
     MessageService messageService;
 
-
-    private static final String SAMPLE_FEED_FILE_PATH = TestService.class.getResource(
-            "/com/streamreduce/rss/sample_EC2.rss").toString();
 
     /**
      * Creates a test RSS connection, saves it for the passed in User, and refreshesFeedMessages on it.
