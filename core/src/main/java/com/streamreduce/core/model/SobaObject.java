@@ -66,8 +66,8 @@ public abstract class SobaObject extends ObjectWithId implements Taggable {
     @Embedded
     @NotNull
     protected Set<String> hashtags = new TreeSet<String>(String.CASE_INSENSITIVE_ORDER);
-    // an optional external primary key, guid, etc..
-    protected String externalId;
+    @Indexed
+    protected String externalId;     // an optional external primary key, guid, etc..
 
     public enum Visibility {
         SELF,
