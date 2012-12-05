@@ -24,25 +24,6 @@ public class AdminConnectionResource extends AbstractAdminResource {
     private ConnectionService connectionService;
 
     /**
-     * @param appId - find the API Key for the Connection (App) so we can
-     *              make an IMG request
-     * @return - the API Key stored on the Connection Object
-     */
-    @GET
-    @Path("/appId/{appId}")
-    public Response getConnectionAPIKey(@PathParam("appId") String appId) {
-
-        String apiKey;
-        try {
-            Connection connection = connectionService.getConnectionByAPPID(appId);
-            apiKey = connection.getCredentials().getApiKey();
-        } catch (ConnectionNotFoundException e) {
-            return error(e.getMessage(), Response.status(Response.Status.NOT_FOUND));
-        }
-        return Response.ok(apiKey).build();
-    }
-
-    /**
      * @param guid - find the API Key for the Inventory Item (Device) so we can
      *             make an IMG request
      * @return - the API Key stored on the Connection Object

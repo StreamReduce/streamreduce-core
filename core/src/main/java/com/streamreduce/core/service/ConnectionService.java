@@ -160,13 +160,6 @@ public interface ConnectionService extends TaggableService<Connection> {
     void clearBrokenFlag(Connection connection);
 
     /**
-     * The appId should be a meta attr on the connection.
-     * @param appId
-     * @return
-     */
-    Connection getConnectionByAPPID(String appId) throws ConnectionNotFoundException;
-
-    /**
      * The guid should be a meta attr on the inventory item.
      * @param guid
      * @return

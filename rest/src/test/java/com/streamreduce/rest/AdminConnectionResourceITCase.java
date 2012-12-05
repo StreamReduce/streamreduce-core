@@ -30,10 +30,6 @@ public class AdminConnectionResourceITCase extends AbstractInContainerTestCase {
     }
 
     @Test
-    public void testGetAPIKeyByAppId() throws Exception {
-    }
-
-    @Test
     public void testGetAPIKeyByGuid() throws Exception {
     }
 }

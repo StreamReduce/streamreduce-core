@@ -489,12 +489,6 @@ public class ConnectionServiceImpl implements ConnectionService {
     }
 
     @Override
-    public Connection getConnectionByAPPID(String appId) throws ConnectionNotFoundException{
-        // TODO:
-        return null;
-    }
-
-    @Override
     public Connection getConnectionByGUID(String guid) throws ConnectionNotFoundException{
         // TODO:
         return null;
