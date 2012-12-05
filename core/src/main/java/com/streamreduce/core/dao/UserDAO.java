@@ -34,7 +34,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 
 @Repository("userDAO")
-public class UserDAO extends ValidatingDAO<User> {
+public class UserDAO extends SobaObjectDAO<User> {
 
     @Autowired
     protected UserDAO(@Qualifier(value = "businessDBDatastore") Datastore datastore) {
@@ -71,10 +71,6 @@ public class UserDAO extends ValidatingDAO<User> {
             }
         }
         return null;
-    }
-
-    public List<User> allUsersForAccount(Account account) {
-        return ds.find(entityClazz, "account", account).asList();
     }
 
     public List<User> allEnabledUsersForAccount(Account account) {
@@ -131,7 +127,7 @@ public class UserDAO extends ValidatingDAO<User> {
         Query<User> q = createQuery();
         q.field("account").equal(account);
         q.field("lastActivity").greaterThanOrEq(System.currentTimeMillis() - maxInactivity);
-        return new HashSet<User>(q.asList());
+        return new HashSet<>(q.asList());
     }
 
 }

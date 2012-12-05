@@ -35,26 +35,20 @@ import static org.junit.Assert.assertEquals;
  */
 public class AccountDAOIT extends AbstractDAOTest {
 
-    @Resource(name="businessDBDatastore")
-    private Datastore businessDBDatastore;
-
     @Autowired
     private AccountDAO accountDAO;
 
-    private Account testAccount = testAccount = new Account.Builder()
+    private Account testAccount = new Account.Builder()
             .name("AccountDAOTest-testAccount")
             .url("http://trunk.nodeable.com")
             .build();
 
     @Before
     public void setUp() throws Exception {
-
-
         accountDAO.save(testAccount);
     }
 
     @Test
-    @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
     public void testFindByName() {
         Account returnedAccount = accountDAO.findByName("AccountDAOTest-testAccount");
         assertEquals(returnedAccount,testAccount);

@@ -45,11 +45,11 @@
          =================================================================== -->
     <bean id="businessDBMongo" class="com.streamreduce.datasource.MongoFactoryBean">
         <property name="hostname" value="${business.database.host}"/>
-        <property name="port" value="37017"/>
+        <property name="port" value="27017"/>
     </bean>
     <bean id="messageDBMongo" class="com.streamreduce.datasource.MongoFactoryBean">
         <property name="hostname" value="${message.database.host}"/>
-        <property name="port" value="37017"/>
+        <property name="port" value="27017"/>
     </bean>
 
     <bean id="businessDBMorphia" class="com.streamreduce.datasource.MorphiaFactoryBean">

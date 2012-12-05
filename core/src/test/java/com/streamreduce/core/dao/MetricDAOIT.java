@@ -16,7 +16,6 @@
 
 package com.streamreduce.core.dao;
 
-import com.google.code.morphia.Datastore;
 import com.google.code.morphia.Key;
 import com.streamreduce.AbstractDAOTest;
 import com.streamreduce.analytics.MetricName;
@@ -25,19 +24,13 @@ import com.streamreduce.core.model.Metric;
 import org.bson.types.ObjectId;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
-
-import javax.annotation.Resource;
 
 /**
  * <p>Author: Nick Heudecker</p>
  * <p>Created: 9/12/12 11:06</p>
  */
 public class MetricDAOIT extends AbstractDAOTest {
-
-    @Resource(name = "messageDBDatastore")
-    private Datastore messageDBDatastore;
 
     public static final String ACCOUNT_ID = "MetricDAOITtestSave";
     public ObjectId objectId;
@@ -65,7 +58,6 @@ public class MetricDAOIT extends AbstractDAOTest {
     }
 
     @Test
-    @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
     public void testGet() throws Exception {
         Assert.assertNotNull(objectId);
         MetricDAO metricDao = new MetricDAO(messageDBDatastore);

@@ -38,7 +38,10 @@ import javax.annotation.Resource;
 public abstract class AbstractDAOTest {
 
     @Resource(name="businessDBDatastore")
-    private Datastore businessDBDatastore;
+    protected Datastore businessDBDatastore;
+
+    @Resource(name = "messageDBDatastore")
+    protected Datastore messageDBDatastore;
 
     @After
     public void tearDown() throws Exception {

@@ -357,7 +357,7 @@ public class UserServiceImpl extends AbstractService implements UserService {
 
     @Override
     public List<User> allUsersForAccount(Account account) {
-        return userDAO.allUsersForAccount(account);
+        return userDAO.forAccount(account);
     }
 
     @Override

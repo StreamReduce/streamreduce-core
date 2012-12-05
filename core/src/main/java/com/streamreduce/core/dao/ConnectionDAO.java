@@ -33,7 +33,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 
 @Repository("connectionDAO")
-public class ConnectionDAO extends ValidatingDAO<Connection> {
+public class ConnectionDAO extends SobaObjectDAO<Connection> {
 
     @Autowired
     protected ConnectionDAO(@Qualifier(value = "businessDBDatastore") Datastore datastore) {
@@ -61,13 +61,6 @@ public class ConnectionDAO extends ValidatingDAO<Connection> {
                 ),
                 q.criteria("visibility").equal(Visibility.PUBLIC) // Return all public connections
         );
-        return q.asList();
-    }
-
-    public List<Connection> forAccount(Account account) {
-        Assert.notNull(account);
-        Query<Connection> q = ds.createQuery(entityClazz);
-        q.criteria("account").equal(account);
         return q.asList();
     }
 
