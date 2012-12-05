@@ -16,14 +16,9 @@
 
 package com.streamreduce.core.dao;
 
-import com.google.code.morphia.Datastore;
 import com.streamreduce.AbstractDAOTest;
 import com.streamreduce.core.model.Account;
-
-import javax.annotation.Resource;
-
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

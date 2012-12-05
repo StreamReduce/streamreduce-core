@@ -14,6 +14,8 @@ import static org.junit.Assert.assertEquals;
 
 public class UserDAOIT extends AbstractDAOTest {
 
+    static final String SAMPLE_EXTERNAL_ID = "ABC-DEF-123456789";
+
     @Autowired
     private AccountDAO accountDAO;
     @Autowired
@@ -24,6 +26,7 @@ public class UserDAOIT extends AbstractDAOTest {
     @Before
     public void setUp() {
         User user = TestUtils.createTestUser();
+        user.setExternalId(SAMPLE_EXTERNAL_ID);
         User otherUser = TestUtils.createTestUser();
         otherUser.setUsername("danny@toolband.com");
 
@@ -39,6 +42,21 @@ public class UserDAOIT extends AbstractDAOTest {
     @Test
     public void testForAccount() {
         List<User> users = userDAO.forAccount(testAccount);
-        assertEquals(1,users.size());
+        assertEquals(1, users.size());
+    }
+
+    @Test
+    public void testGetByExternalId() {
+        assertEquals(1, userDAO.getByExternalId(SAMPLE_EXTERNAL_ID).size());
+    }
+
+    @Test
+    public void testGetByExternalId_EmptyExternalId() {
+        assertEquals(0, userDAO.getByExternalId(" ").size());
+    }
+
+    @Test
+    public void testGetByExternalId_NullExternalId() {
+        assertEquals(0, userDAO.getByExternalId(null).size());
     }
 }

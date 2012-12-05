@@ -13,6 +13,8 @@ import static org.junit.Assert.assertEquals;
 
 public class ConnectionDAOIT extends AbstractDAOTest {
 
+    static final String SAMPLE_EXTERNAL_ID = "ABC-DEF-123456789";
+
     @Autowired
     private ConnectionDAO connectionDAO;
     @Autowired
@@ -25,6 +27,7 @@ public class ConnectionDAOIT extends AbstractDAOTest {
     @Before
     public void setUp() {
         Connection c = TestUtils.createTestFeedConnection();
+        c.setExternalId("ABC-DEF-123456789");
         testAccount = c.getAccount();
         accountDAO.save(testAccount);
         userDAO.save(c.getUser());
@@ -35,4 +38,20 @@ public class ConnectionDAOIT extends AbstractDAOTest {
     public void testForAccount() {
         assertEquals(1, connectionDAO.forAccount(testAccount).size());
     }
+
+    @Test
+    public void testGetByExternalId() {
+        assertEquals(1, connectionDAO.getByExternalId(SAMPLE_EXTERNAL_ID).size());
+    }
+
+    @Test
+    public void testGetByExternalId_EmptyExternalId() {
+        assertEquals(0, connectionDAO.getByExternalId(" ").size());
+    }
+
+    @Test
+    public void testGetByExternalId_NullExternalId() {
+        assertEquals(0, connectionDAO.getByExternalId(null).size());
+    }
+
 }
