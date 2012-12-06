@@ -56,19 +56,13 @@ public class FeedClient extends ExternalIntegrationClient {
     public void validateConnection() throws InvalidCredentialsException, IOException {
         URL url = new URL(feedUrl);
 
-        XmlReader xmlReader = null;
-        try {
-            xmlReader = new XmlReader(url);
+        try (XmlReader xmlReader = new XmlReader(url)) {
             SyndFeed rssFeed = new SyndFeedInput().build(xmlReader);
             rssFeed.getEntries();
         } catch (FeedException e) {
             throw new RuntimeException("Unable to read syndication from " + url.toString(), e);
         } catch (Exception e) {
             throw new RuntimeException("Encountered exception reading feed from " + url.toString(), e);
-        } finally {
-            if (xmlReader != null) {
-                xmlReader.close();
-            }
         }
 
     }

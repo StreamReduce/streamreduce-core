@@ -1180,9 +1180,7 @@ public class InventoryServiceImpl implements InventoryService {
             ec2CloudWatchMetricNames.put(EC2Constants.MetricName.NETWORK_OUT, Unit.BYTES);
         }
 
-        RestContext<CloudWatchApi,CloudWatchAsyncApi> context = null;
-        try {
-            context = new AWSClient(connection).getCloudWatchServiceContext();
+        try (RestContext<CloudWatchApi, CloudWatchAsyncApi> context = new AWSClient(connection).getCloudWatchServiceContext()) {
             CloudWatchApi cloudWatchClient = context.getApi();
             List<InventoryItem> inventoryItems = getInventoryItems(connection);
             String metricNamespace = Namespaces.EC2;
@@ -1215,15 +1213,15 @@ public class InventoryServiceImpl implements InventoryService {
                     Unit metricUnit = ec2MetricEntry.getValue();
                     MetricApi metricClient = cloudWatchClient.getMetricApiForRegion(regionId);
                     GetMetricStatistics requestOptions = GetMetricStatistics.builder()
-                                                                            .namespace(metricNamespace)
-                                                                            .metricName(metricName)
-                                                                            .dimension(dimension)
-                                                                            .period(60)
-                                                                            .statistics(ec2CloudWatchStatisticsSet)
-                                                                            .startTime(startTime)
-                                                                            .endTime(endTime)
-                                                                            .unit(metricUnit)
-                                                                            .build();
+                            .namespace(metricNamespace)
+                            .metricName(metricName)
+                            .dimension(dimension)
+                            .period(60)
+                            .statistics(ec2CloudWatchStatisticsSet)
+                            .startTime(startTime)
+                            .endTime(endTime)
+                            .unit(metricUnit)
+                            .build();
                     GetMetricStatisticsResponse response = metricClient.getMetricStatistics(requestOptions);
 
                     // Per Gustavo's code, we're only adding the last metric
@@ -1239,12 +1237,8 @@ public class InventoryServiceImpl implements InventoryService {
                     eventContext.put("isAgentActivity", false);
 
                     eventService.createEvent(EventId.ACTIVITY,
-                                             inventoryItem, eventContext);
+                            inventoryItem, eventContext);
                 }
-            }
-        } finally {
-            if (context != null) {
-                context.close();
             }
         }
     }
@@ -1515,7 +1509,6 @@ public class InventoryServiceImpl implements InventoryService {
             throws ConnectionNotFoundException, InvalidCredentialsException, IOException {
         Date lastActivityPoll = connection.getLastActivityPollDate();
         Date lastActivity = lastActivityPoll;
-        XmlReader xmlReader = null;
 
         if (lastActivityPoll != null) {
             logger.debug("Creating feed messages for messages newer than (" + lastActivityPoll + ") for [" +
@@ -1525,8 +1518,7 @@ public class InventoryServiceImpl implements InventoryService {
                                  + connection.getAlias());
         }
 
-        try {
-            xmlReader = new XmlReader(URI.create(connection.getUrl()).toURL());
+        try (XmlReader xmlReader = new XmlReader(URI.create(connection.getUrl()).toURL())) {
             SyndFeed rssFeed = new SyndFeedInput().build(xmlReader);
             List feedEntries = rssFeed.getEntries();
 
@@ -1565,8 +1557,8 @@ public class InventoryServiceImpl implements InventoryService {
                 eventContext.put("payload", messageBodyAsJson);
 
                 Event event = eventService.createEvent(EventId.ACTIVITY,
-                                                       connection,
-                                                       eventContext);
+                        connection,
+                        eventContext);
 
                 FeedEntryDetails details = new FeedEntryDetails.Builder()
                         .url(entry.getUri())
@@ -1585,11 +1577,7 @@ public class InventoryServiceImpl implements InventoryService {
             logger.error(String.format("Unable to process messages for connection %s with feed %s. Returned error: %s",
                     connection.getId(), connection.getUrl(), e.getMessage()));
         } finally {
-            if (xmlReader != null) {
-                xmlReader.close();
-            }
-            // Update the connection's last polling time
-            connection.setLastActivityPollDate(new Date(lastActivity.getTime() + 1));
+            // Update the connection's last polling timeconnection.setLastActivityPollDate(new Date(lastActivity.getTime() + 1));
             try {
                 connectionService.updateConnection(connection, true);
             } catch (Exception e) {

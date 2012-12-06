@@ -105,15 +105,12 @@ public class CustomWADLResource {
     }
 
     private String readFileFromClasspathURL(URL url) throws Exception {
-        BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
         StringBuilder sb = new StringBuilder();
         String line;
 
-        try {
+        try (BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()))) {
             while ((line = in.readLine()) != null)
                 sb.append(line);
-        } finally {
-            in.close();
         }
 
         return sb.toString();
