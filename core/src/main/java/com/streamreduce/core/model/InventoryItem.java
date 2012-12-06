@@ -17,14 +17,14 @@
 package com.streamreduce.core.model;
 
 import com.google.code.morphia.annotations.Entity;
+import com.google.code.morphia.annotations.Indexed;
 import com.google.code.morphia.annotations.Reference;
 import com.mongodb.DBObject;
-
-import javax.validation.constraints.NotNull;
-
 import org.apache.commons.lang.StringUtils;
 import org.bson.types.ObjectId;
 import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.constraints.NotNull;
 
 @Entity(value = "inventoryItems", noClassnameStored = true)
 public class InventoryItem extends SobaObject {
@@ -32,6 +32,7 @@ public class InventoryItem extends SobaObject {
     private static final long serialVersionUID = 6833894297362799580L;
     @Reference(ignoreMissing = true)
     @NotNull
+    @Indexed(dropDups = false, unique = false)
     private Connection connection;
     private boolean deleted;
     @NotEmpty
