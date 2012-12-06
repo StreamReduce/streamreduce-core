@@ -16,24 +16,23 @@
 
 package com.streamreduce.core.service;
 
+import com.streamreduce.ConnectionNotFoundException;
 import com.streamreduce.ConnectionTypeConstants;
 import com.streamreduce.connections.AuthType;
 import com.streamreduce.connections.ConnectionProvidersForTests;
 import com.streamreduce.core.dao.ConnectionDAO;
-import com.streamreduce.core.model.Account;
-import com.streamreduce.core.model.Connection;
-import com.streamreduce.core.model.ConnectionCredentials;
-import com.streamreduce.core.model.SobaObject;
-import com.streamreduce.core.model.User;
+import com.streamreduce.core.model.*;
 import com.streamreduce.core.service.exception.ConnectionExistsException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.test.util.ReflectionTestUtils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
@@ -41,9 +40,13 @@ import static org.mockito.Mockito.when;
 
 public class ConnectionServiceImplTest {
 
+    private static final String SAMPLE_EXTERNAL_ID = "ABCD-EF-123456789";
+    private static final String OTHER_EXTERNAL_ID = "134234234235234";
+
     User sampleUser;
     ConnectionServiceImpl connectionServiceImpl = new ConnectionServiceImpl();
     ConnectionDAO connectionDAO;
+
      
     
     @Before
@@ -118,6 +121,10 @@ public class ConnectionServiceImplTest {
         when(connectionDAO.forTypeAndUser(ConnectionTypeConstants.FEED_TYPE, sampleUser)).thenReturn(feedConnections);
         when(connectionDAO.forTypeAndUser(ConnectionTypeConstants.CLOUD_TYPE, sampleUser)).thenReturn(cloudConnections);
         when(connectionDAO.forTypeAndUser(eq(ConnectionTypeConstants.PROJECT_HOSTING_TYPE), any(User.class))).thenReturn(projHostingConnections);
+
+        when(connectionDAO.getByExternalId(SAMPLE_EXTERNAL_ID)).thenReturn(cloudConnections);
+        when(connectionDAO.getByExternalId(OTHER_EXTERNAL_ID)).thenReturn(new ArrayList<Connection>());
+
         ReflectionTestUtils.setField(connectionServiceImpl, "connectionDAO", connectionDAO);
     }
 
@@ -311,5 +318,17 @@ public class ConnectionServiceImplTest {
                 .provider(ConnectionProvidersForTests.GITHUB_PROVIDER).build();
 
         connectionServiceImpl.checkForDuplicate(conn);
+    }
+
+    @Test
+    public void testGetConnectionByExternalId() throws ConnectionNotFoundException {
+        List<Connection> connectionsByExternalId = connectionServiceImpl.getConnectionsByExternalId(SAMPLE_EXTERNAL_ID,sampleUser);
+        assertEquals(1,connectionsByExternalId.size());
+    }
+
+    @Test
+    public void testGetConnectionByExternalIdNoMatches() throws ConnectionNotFoundException {
+        List<Connection> connectionsByExternalId = connectionServiceImpl.getConnectionsByExternalId(OTHER_EXTERNAL_ID,sampleUser);
+        assertEquals(0,connectionsByExternalId.size());
     }
 }

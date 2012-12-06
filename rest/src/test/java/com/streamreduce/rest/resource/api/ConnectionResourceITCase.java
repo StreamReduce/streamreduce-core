@@ -23,6 +23,7 @@ import com.streamreduce.connections.ConnectionProvider;
 import com.streamreduce.core.model.Connection;
 import com.streamreduce.core.model.InventoryItem;
 import com.streamreduce.core.model.SobaObject;
+import com.streamreduce.rest.dto.response.ConnectionResponseDTO;
 import com.streamreduce.util.JSONObjectBuilder;
 import net.sf.json.JSONObject;
 import org.bson.types.ObjectId;
@@ -107,8 +108,37 @@ public class ConnectionResourceITCase extends BaseConnectionResourceITCase {
                 .build();
 
         Response response = connectionResource.createConnection(connectionObject);
-
         Assert.assertEquals(200, response.getStatus());
+    }
+
+
+    @Test
+    public void testGetConnectionsByExternalId() {
+        String externalId = "abcdef123456789";
+
+        JSONObject connectionObject = new JSONObjectBuilder()
+                .add("alias", "Feed Connection, Ya'll")
+                .add("description", "Feed Connection, Ya'll")
+                .add("visibility", "ACCOUNT")
+                .add("providerId", "rss")
+                .add("type", "feed")
+                .add("authType", "NONE")
+                .add("url", SAMPLE_FEED_FILE_PATH)
+                .add("inbound", true)
+                .add("externalId", "abcdef123456789")
+                .build();
+
+        connectionResource.createConnection(connectionObject);
+
+        Response response = connectionResource.getConnectionsByExternalId(externalId);
+        Assert.assertEquals(200, response.getStatus());
+
+        @SuppressWarnings("unchecked")
+        List<ConnectionResponseDTO> connectionResponseDTOs = (List<ConnectionResponseDTO>) response.getEntity();
+        assertEquals(1,connectionResponseDTOs.size());
+
+
+
     }
 
 

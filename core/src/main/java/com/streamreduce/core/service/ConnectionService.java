@@ -44,7 +44,7 @@ public interface ConnectionService extends TaggableService<Connection> {
      * @throws IOException if there is connectivity issue
      * @throws ConnectionExistsException if there is already a cloud object for provider/user/credentials combination
      */
-    public Connection createConnection(Connection connection) throws ConnectionExistsException,
+    Connection createConnection(Connection connection) throws ConnectionExistsException,
             InvalidCredentialsException, IOException;
 
     /**
@@ -54,7 +54,7 @@ public interface ConnectionService extends TaggableService<Connection> {
      *
      * @return the connections
      */
-    public List<Connection> getConnections(@Nullable String type);
+    List<Connection> getConnections(@Nullable String type);
 
     /**
      * Returns all connections of a particular type that are public
@@ -63,7 +63,7 @@ public interface ConnectionService extends TaggableService<Connection> {
      *
      * @return the connections
      */
-    public List<Connection> getPublicConnections(@Nullable String type);
+    List<Connection> getPublicConnections(@Nullable String type);
 
     /**
      * Returns all connections of a particular type for the given user.
@@ -73,9 +73,9 @@ public interface ConnectionService extends TaggableService<Connection> {
      *
      * @return the connections
      */
-    public List<Connection> getConnections(String type, User user);
+    List<Connection> getConnections(String type, User user);
 
-    public List<Connection> getAccountConnections(Account account);
+    List<Connection> getAccountConnections(Account account);
 
     /**
      * Returns the connection with the given id.
@@ -84,7 +84,7 @@ public interface ConnectionService extends TaggableService<Connection> {
      *
      * @return the connection
      */
-    public Connection getConnection(ObjectId id) throws ConnectionNotFoundException;
+    Connection getConnection(ObjectId id) throws ConnectionNotFoundException;
 
     /**
      * Updates the connection.
@@ -97,7 +97,7 @@ public interface ConnectionService extends TaggableService<Connection> {
      * @throws IOException if there is connectivity issue
      * @throws ConnectionExistsException if there is already a cloud object for provider/user/credentials combination
      */
-    public Connection updateConnection(Connection connection) throws ConnectionExistsException,
+    Connection updateConnection(Connection connection) throws ConnectionExistsException,
             InvalidCredentialsException, IOException;
 
     /**
@@ -112,7 +112,7 @@ public interface ConnectionService extends TaggableService<Connection> {
      * @throws IOException if there is connectivity issue
      * @throws ConnectionExistsException if there is already a cloud object for provider/user/credentials combination
      */
-    public Connection updateConnection(Connection connection, boolean silentUpdate) throws ConnectionExistsException,
+    Connection updateConnection(Connection connection, boolean silentUpdate) throws ConnectionExistsException,
             InvalidCredentialsException, IOException;
 
 
@@ -121,7 +121,7 @@ public interface ConnectionService extends TaggableService<Connection> {
      *
      * @param connection the connection to delete
      */
-    public void deleteConnection(Connection connection);
+    void deleteConnection(Connection connection);
 
     /**
      * Deletes the associated inventory of the connection.
@@ -139,7 +139,7 @@ public interface ConnectionService extends TaggableService<Connection> {
      * @throws IOException if there is connectivity issue
      * @throws ConnectionExistsException if there is already a cloud object for provider/user/credentials combination
      */
-    public void fireOneTimeHighPriorityJobForConnection(Connection connection) throws ConnectionNotFoundException,
+    void fireOneTimeHighPriorityJobForConnection(Connection connection) throws ConnectionNotFoundException,
             InvalidCredentialsException, IOException;
 
     /**
@@ -160,10 +160,10 @@ public interface ConnectionService extends TaggableService<Connection> {
     void clearBrokenFlag(Connection connection);
 
     /**
-     * The guid should be a meta attr on the inventory item.
-     * @param guid
+     * Returns all Connections whose externalId matches the passed in externalId
+     * @param externalId
      * @return
      */
-    Connection getConnectionByGUID(String guid) throws ConnectionNotFoundException;
+    List<Connection> getConnectionsByExternalId(String externalId, User user);
 
 }

@@ -19,6 +19,9 @@ package com.streamreduce.core.dao;
 import com.google.code.morphia.Datastore;
 import com.google.code.morphia.query.Query;
 import com.google.common.base.Preconditions;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
@@ -38,7 +41,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 @Repository("inventoryItemDAO")
-public class InventoryItemDAO extends ValidatingDAO<InventoryItem> {
+public class InventoryItemDAO extends SobaObjectDAO<InventoryItem> {
 
     @Autowired
     protected InventoryItemDAO(@Qualifier(value = "businessDBDatastore") Datastore ds) {
@@ -137,15 +140,14 @@ public class InventoryItemDAO extends ValidatingDAO<InventoryItem> {
      * @return list of inventory items or am empty list if there are none
      * @throws IllegalArgumentException if externalId is null
      */
-    public List<InventoryItem> getInventoryItemsForExternalId(String externalId) {
-        Preconditions.checkNotNull(externalId, "externalId cannot be null.");
-
-        Query<InventoryItem> query = createQuery();
-
-        query.field("externalId").equal(externalId);
-        query.field("deleted").equal(false);
-
-        return query.asList();
+    public List<InventoryItem> getByExternalIdNotDeleted(String externalId) {
+        List<InventoryItem> inventoryItems = getByExternalId(externalId);
+        return Lists.newArrayList(Iterables.filter(inventoryItems,new Predicate<InventoryItem>() {
+            @Override
+            public boolean apply(@Nullable InventoryItem input) {
+                return input != null && !input.isDeleted();
+            }
+        }));
     }
 
 }

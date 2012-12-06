@@ -16,6 +16,9 @@
 
 package com.streamreduce.core.service;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.streamreduce.ConnectionNotFoundException;
 import com.streamreduce.ProviderIdConstants;
 import com.streamreduce.connections.AuthType;
@@ -46,11 +49,7 @@ import com.streamreduce.util.WebHDFSClient;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import javax.annotation.Nullable;
 
@@ -481,8 +480,13 @@ public class ConnectionServiceImpl implements ConnectionService {
     }
 
     @Override
-    public Connection getConnectionByGUID(String guid) throws ConnectionNotFoundException{
-        // TODO:
-        return null;
+    public List<Connection> getConnectionsByExternalId(String externalId, final User user) {
+        List<Connection> connections = connectionDAO.getByExternalId(externalId);
+        return Lists.newArrayList(Iterables.filter(connections, new Predicate<Connection>() {
+            @Override
+            public boolean apply(@Nullable Connection connection) {
+                return (connection != null && connection.getUser().equals(user));
+            }
+        }));
     }
 }

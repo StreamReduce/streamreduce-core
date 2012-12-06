@@ -204,6 +204,21 @@ public class ConnectionResource extends AbstractOwnableResource {
         return Response.ok(connectionsDTO).build();
     }
 
+
+    @GET
+    @Path("externalId/{externalId}")
+    public Response getConnectionsByExternalId(@PathParam("externalId") String externalId) {
+        List<ConnectionResponseDTO> connectionsDTO = new ArrayList<>();
+
+        User user = securityService.getCurrentUser();
+        List<Connection> connections = connectionService.getConnectionsByExternalId(externalId,user);
+        for (Connection connection : connections) {
+            connectionsDTO.add(toFullDTO(connection));
+        }
+
+        return Response.ok(connectionsDTO).build();
+    }
+
     /**
      * Returns the connection with the given id.
      *

@@ -181,7 +181,7 @@ public class InventoryServiceImpl implements InventoryService {
         // Default to visibility of the connection (Should be overridden below if required)
         inventoryItem.setVisibility(connection.getVisibility());
 
-        // No other way...
+        // No other way...  polymorphism is Hard...
         if (providerId.equals(ProviderIdConstants.AWS_PROVIDER_ID)) {
             extendAWSInventoryItem(inventoryItem, json);
         } else if (providerId.equals(ProviderIdConstants.GITHUB_PROVIDER_ID)) {
@@ -394,7 +394,7 @@ public class InventoryServiceImpl implements InventoryService {
      */
     @Override
     public List<InventoryItem> getInventoryItemsForExternalId(String externalId) {
-        List<InventoryItem> inventoryItems = inventoryItemDAO.getInventoryItemsForExternalId(externalId);
+        List<InventoryItem> inventoryItems = inventoryItemDAO.getByExternalIdNotDeleted(externalId);
 
         for (InventoryItem inventoryItem : inventoryItems) {
             // Create the event

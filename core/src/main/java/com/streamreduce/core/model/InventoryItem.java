@@ -30,6 +30,7 @@ import javax.validation.constraints.NotNull;
 public class InventoryItem extends SobaObject {
 
     private static final long serialVersionUID = 6833894297362799580L;
+
     @Reference(ignoreMissing = true)
     @NotNull
     @Indexed(dropDups = false, unique = false)

@@ -15,7 +15,7 @@ public abstract class SobaObjectDAO<T extends SobaObject> extends ValidatingDAO<
         super(datastore);
     }
 
-    final public List<T> forAccount(Account account) {
+    public List<T> forAccount(Account account) {
         Assert.notNull(account);
         Query<T> q = ds.createQuery(entityClazz);
         q.criteria("account").equal(account);
@@ -29,7 +29,7 @@ public abstract class SobaObjectDAO<T extends SobaObject> extends ValidatingDAO<
      * @param externalId the externalId the SobaObject is mapped to in an external system.
      * @return List of all matching objects.  An empty list is returned if the passed in externalId was null.
      */
-    final public List<T> getByExternalId(String externalId) {
+    public List<T> getByExternalId(String externalId) {
         if (externalId == null) {
             return Collections.emptyList();
         }
