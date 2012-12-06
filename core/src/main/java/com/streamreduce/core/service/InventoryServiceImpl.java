@@ -523,11 +523,7 @@ public class InventoryServiceImpl implements InventoryService {
                 externalId = json.getString("key");
                 try {
                     externalInventoryItemAsJSON = ((JiraClient)client).getProjectDetails(externalId);
-                } catch (InvalidCredentialsException e) {
-                    // This should never happen as we've already validated the connection by this point
-                    logger.warn("Unable to get the Jira project details for " + externalId + ": " + e.getMessage());
-                    return;
-                } catch (IOException e) {
+                } catch (InvalidCredentialsException | IOException e) {
                     // This should never happen as we've already validated the connection by this point
                     logger.warn("Unable to get the Jira project details for " + externalId + ": " + e.getMessage());
                     return;
@@ -1744,9 +1740,6 @@ public class InventoryServiceImpl implements InventoryService {
                     .build();
 
             messageService.sendActivityMessage(event, connection, new Date().getTime(), details);
-        } catch (IOException e) {
-            logger.error(String.format("Error getting the user's profile for Twitter connection %s. Returned error: %s",
-                                       connection.getId(), e.getMessage()));
         } catch (Exception e) {
             logger.error(String.format("Error getting the user's profile for Twitter connection %s. Returned error: %s",
                                        connection.getId(), e.getMessage()));

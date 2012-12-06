@@ -70,9 +70,7 @@ public class RunStorm {
             config.setNumAckers(5);
             try {
                 StormSubmitter.submitTopology(TOPOLOGY_NAME, config, juggaloaderTopology.createJuggaloaderTopology());
-            } catch (AlreadyAliveException e) {
-                logger.error(e.getMessage(), e);
-            } catch (InvalidTopologyException e) {
+            } catch (AlreadyAliveException | InvalidTopologyException e) {
                 logger.error(e.getMessage(), e);
             }
             logger.info("Start Storm Production Cluster");

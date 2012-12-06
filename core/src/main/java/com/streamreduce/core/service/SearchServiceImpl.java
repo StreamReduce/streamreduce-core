@@ -169,9 +169,7 @@ public class SearchServiceImpl extends AbstractService implements  SearchService
                     .setPath("/" + messageDatabaseName.toLowerCase() + "_" + account.getId().toString() + "/")
                     .build()
                     .toURL();
-        } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
-        } catch (MalformedURLException e) {
+        } catch (URISyntaxException | MalformedURLException e) {
             throw new RuntimeException(e);
         }
     }

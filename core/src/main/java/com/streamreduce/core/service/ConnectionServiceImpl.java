@@ -431,11 +431,7 @@ public class ConnectionServiceImpl implements ConnectionService {
 
         try {
             updateConnection(target, true);
-        } catch (ConnectionExistsException e) {
-            logger.error(e.getMessage());
-        } catch (InvalidCredentialsException e) {
-            logger.error(e.getMessage());
-        } catch (IOException e) {
+        } catch (ConnectionExistsException | IOException | InvalidCredentialsException e) {
             logger.error(e.getMessage());
         }
     }
@@ -449,11 +445,7 @@ public class ConnectionServiceImpl implements ConnectionService {
 
         try {
             updateConnection(target, true);
-        } catch (ConnectionExistsException e) {
-            logger.error(e.getMessage());
-        } catch (InvalidCredentialsException e) {
-            logger.error(e.getMessage());
-        } catch (IOException e) {
+        } catch (ConnectionExistsException | IOException | InvalidCredentialsException e) {
             logger.error(e.getMessage());
         }
     }
