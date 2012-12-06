@@ -141,7 +141,7 @@ public class ConnectionServiceGithubEndToEndIT extends AbstractServiceTestCase {
                         connection.getProviderId()).getClient(connection);
 
         final List<JSONObject> rawGitHubProjects = gitHubClient.getRepositories();
-        final Map<String, JSONObject> rawGitHubProjectsMap = new HashMap<String, JSONObject>();
+        final Map<String, JSONObject> rawGitHubProjectsMap = new HashMap<>();
 
         /* Create a map for easier project retrieval */
         for (JSONObject project : rawGitHubProjects) {

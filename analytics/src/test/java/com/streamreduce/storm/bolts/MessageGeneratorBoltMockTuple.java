@@ -31,9 +31,9 @@ public class MessageGeneratorBoltMockTuple {
 
         Random random = new Random();
 
-        tuples = new ArrayList<List<Object>>();
+        tuples = new ArrayList<>();
         for (int i = 0; i < NROWS; i++) {
-            List<Object> row = new ArrayList<Object>();
+            List<Object> row = new ArrayList<>();
 
             row.add("account12" + (i % 3)); // accountId
             row.add("metric34" + (i % 4)); // metricName

@@ -29,7 +29,7 @@ public abstract class AbstractActivityPollingSobaObject extends SobaObject {
     private static final long serialVersionUID = -5301159528986967143L;
     @Embedded
     @NotNull
-    private Map<String, String> metadata = new HashMap<String, String>();
+    private Map<String, String> metadata = new HashMap<>();
 
     public Map<String, String> getMetadata() {
         return metadata;

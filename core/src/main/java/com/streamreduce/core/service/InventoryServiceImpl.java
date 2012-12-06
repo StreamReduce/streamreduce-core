@@ -460,7 +460,7 @@ public class InventoryServiceImpl implements InventoryService {
         logger.debug("Updating inventory item cache for connection [" + connection.getId() + "]: " +
                              connection.getAlias());
 
-        List<String> processedKeys = new ArrayList<String>();
+        List<String> processedKeys = new ArrayList<>();
         List<JSONObject> externalInventoryItems;
         ExternalIntegrationClient client = getClient(connection);
 
@@ -849,8 +849,8 @@ public class InventoryServiceImpl implements InventoryService {
      */
     private Location buildLocationFromJSON(JSONObject json) {
         LocationBuilder builder = new LocationBuilder();
-        Set<String> iso3166Codes = new HashSet<String>();
-        Map<String, Object> metadata = new HashMap<String, Object>();
+        Set<String> iso3166Codes = new HashSet<>();
+        Map<String, Object> metadata = new HashMap<>();
 
         if (json.containsKey("iso3166Codes")) {
             for (Object rawCode : json.getJSONArray("iso3166Codes")) {
@@ -1140,7 +1140,7 @@ public class InventoryServiceImpl implements InventoryService {
      */
     private void handleHashtagEvent(EventId eventId, InventoryItem inventoryItem, SobaObject tagger, String tag) {
         // Create the event
-        Map<String, Object> eventContext = new HashMap<String, Object>();
+        Map<String, Object> eventContext = new HashMap<>();
 
         if (eventId == EventId.HASHTAG_ADD) {
             eventContext.put("addedHashtag", tag);
@@ -1158,7 +1158,7 @@ public class InventoryServiceImpl implements InventoryService {
 
     private Map<String, InventoryItem> getInventoryItemMap(Connection connection) {
         List<InventoryItem> inventoryItems = getInventoryItems(connection);
-        Map<String, InventoryItem> inventoryItemMap = new HashMap<String, InventoryItem>();
+        Map<String, InventoryItem> inventoryItemMap = new HashMap<>();
 
         for (InventoryItem inventoryItem : inventoryItems) {
             inventoryItemMap.put(inventoryItem.getExternalId(), inventoryItem);
@@ -1173,7 +1173,7 @@ public class InventoryServiceImpl implements InventoryService {
         // CloudWatch metrics and instead of relying on specific units for each metric name.  Eventually we could/should
         // just pull down everything available and go from there.
         if (ec2CloudWatchMetricNames == null) {
-            ec2CloudWatchMetricNames = new HashMap<String, Unit>();
+            ec2CloudWatchMetricNames = new HashMap<>();
 
             ec2CloudWatchMetricNames.put(EC2Constants.MetricName.CPU_UTILIZATION, Unit.PERCENT);
             ec2CloudWatchMetricNames.put(EC2Constants.MetricName.DISK_READ_BYTES, Unit.BYTES);
@@ -1203,7 +1203,7 @@ public class InventoryServiceImpl implements InventoryService {
                     continue;
                 }
 
-                Map<String, JSONObject> metrics = new HashMap<String, JSONObject>();
+                Map<String, JSONObject> metrics = new HashMap<>();
                 String nodeId = inventoryItem.getExternalId();
                 Location region = getLocationByScope(inventoryItem, LocationScope.REGION);
 
@@ -1237,7 +1237,7 @@ public class InventoryServiceImpl implements InventoryService {
                 }
 
                 if (!metrics.isEmpty()) {
-                    Map<String, Object> eventContext = new HashMap<String, Object>();
+                    Map<String, Object> eventContext = new HashMap<>();
 
                     eventContext.put("payload", metrics);
                     eventContext.put("isAgentActivity", false);
@@ -1303,7 +1303,7 @@ public class InventoryServiceImpl implements InventoryService {
                     continue;
                 }
 
-                Map<String, Object> eventContext = new HashMap<String, Object>();
+                Map<String, Object> eventContext = new HashMap<>();
 
                 eventContext.put("activityPubDate", pubDate);
                 eventContext.put("activityTitle", MessageUtils.cleanEntry((String) activityParts.get("title")));
@@ -1365,7 +1365,7 @@ public class InventoryServiceImpl implements InventoryService {
                 for (Object obj : metrics) {
                     JSONObject metric = (JSONObject) obj;
 
-                    Map<String, Object> eventContext = new HashMap<String, Object>();
+                    Map<String, Object> eventContext = new HashMap<>();
                     eventContext.put("activityTitle", String.format("%s on %s is at %s", metric.getString("metric"), inventoryItem.getAlias(), metric.get("data")));
                     JSONArray jsonHashtags = metric.getJSONArray("hashtags");
                     Set<String> hashtags = new HashSet<String>(jsonHashtags);
@@ -1475,7 +1475,7 @@ public class InventoryServiceImpl implements InventoryService {
                     continue;
                 }
 
-                Map<String, Object> eventContext = new HashMap<String, Object>();
+                Map<String, Object> eventContext = new HashMap<>();
 
                 eventContext.put("activityPubDate", pubDate);
                 eventContext.put("activityTitle", MessageUtils.cleanEntry((String) activityParts.get("title")));
@@ -1560,7 +1560,7 @@ public class InventoryServiceImpl implements InventoryService {
 
                 lastActivity = pubDate.after(lastActivity) ? pubDate : lastActivity;
 
-                Map<String, Object> eventContext = new HashMap<String, Object>();
+                Map<String, Object> eventContext = new HashMap<>();
                 String messageBodyAsJson = determineMessageBodyAsJsonFromSyndEntry(entry);
 
 
@@ -1639,7 +1639,7 @@ public class InventoryServiceImpl implements InventoryService {
 
                 lastActivityPoll = lastTestTime.after(lastActivityPoll) ? lastTestTime : lastActivityPoll;
 
-                Map<String, Object> eventContext = new HashMap<String, Object>();
+                Map<String, Object> eventContext = new HashMap<>();
 
                 eventContext.put("activityPubDate", lastTestTime);
                 eventContext.put("activityTitle", String.format("Service check %s (%s) has a response time of %dms.",
@@ -1699,7 +1699,7 @@ public class InventoryServiceImpl implements InventoryService {
                 return;
             }
 
-            Map<String, Object> eventContext = new HashMap<String, Object>();
+            Map<String, Object> eventContext = new HashMap<>();
             int favoritesCount = profile.containsKey("favourites_count") ?
                     profile.getInt("favourites_count") :
                     0;

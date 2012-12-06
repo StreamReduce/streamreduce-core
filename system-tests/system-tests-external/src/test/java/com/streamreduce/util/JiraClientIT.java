@@ -58,7 +58,7 @@ public class JiraClientIT extends AbstractServiceTestCase {
     private String jiraPassword = jiraProperties.getString("nodeable.jira.password");
     private String jiraUrl = jiraProperties.getString("nodeable.jira.url");
     private String jiraUsername = jiraProperties.getString("nodeable.jira.username");
-    private Set<String> monitoredProjects = new HashSet<String>();
+    private Set<String> monitoredProjects = new HashSet<>();
     private Connection connection;
     private InventoryItem inventoryItem;
     private JiraClient jiraClient;

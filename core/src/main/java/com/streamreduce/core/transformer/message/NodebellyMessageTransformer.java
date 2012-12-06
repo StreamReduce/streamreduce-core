@@ -171,7 +171,7 @@ public class NodebellyMessageTransformer extends SobaMessageTransformer implemen
                         item.put("unit", pair.second);
                     }
 
-                    HashMap<String, Object> structure = new HashMap<String, Object>();
+                    HashMap<String, Object> structure = new HashMap<>();
                     structure.put("accountId", meta.get("account"));
                     structure.put("total", meta.get("total"));
                     structure.put("diff", meta.get("diff"));
@@ -241,7 +241,7 @@ public class NodebellyMessageTransformer extends SobaMessageTransformer implemen
                         numericDetails,
                         inventoryName);
 
-                HashMap<String, Object> structure = new HashMap<String, Object>();
+                HashMap<String, Object> structure = new HashMap<>();
                 structure.put("accountId", meta.get("account"));
                 structure.put("name", metricTypeNameReadable(metricName, topMetricCriteria));
                 structure.put("metricName", metricName);

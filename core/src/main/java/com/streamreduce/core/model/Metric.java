@@ -190,7 +190,7 @@ public class Metric implements Serializable {
 
     public Map<String, String> getCriteria() {
         if (criteria == null) {
-            criteria = new HashMap<String, String>();
+            criteria = new HashMap<>();
         }
         return criteria;
     }

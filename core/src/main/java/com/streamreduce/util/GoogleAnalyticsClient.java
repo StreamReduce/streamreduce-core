@@ -130,7 +130,7 @@ public class GoogleAnalyticsClient extends ExternalIntegrationClient {
             String metricName = normalizeMetricName(header.getName());
             metric.add("metric", metricName);
             metric.add("id", profileId);
-            Set<String> hashtags = new HashSet<String>();
+            Set<String> hashtags = new HashSet<>();
             hashtags.add(metricName.toLowerCase());
 
             for (List<String> row : data.getRows()) {

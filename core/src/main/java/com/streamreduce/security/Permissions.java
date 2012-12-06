@@ -26,7 +26,7 @@ public class Permissions {
     public static final String ITEM_MODIFY = "MODIFY_ITEM";
     public static final String ITEM_DELETE = "DELETE_ITEM";
 
-    public static final Set<String> ALL = new HashSet<String>();
+    public static final Set<String> ALL = new HashSet<>();
 
     static {
         ALL.add(APP_USER);

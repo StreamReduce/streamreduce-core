@@ -40,7 +40,7 @@ public class ConstraintViolationExceptionMapper implements ExceptionMapper<Const
 
     public Response validationError(Set<ConstraintViolation<?>> violations) {
         ConstraintViolationExceptionResponseDTO dto = new ConstraintViolationExceptionResponseDTO();
-        Map<String, String> violationsMap = new HashMap<String, String>();
+        Map<String, String> violationsMap = new HashMap<>();
 
         // Not sure if it's possible to have multiple messages per property but if so, testing should uncover
         // it and the fix is quick/simple.

@@ -160,13 +160,13 @@ public class Connection extends AbstractActivityPollingSobaObject {
      */
     public Set<OutboundConfiguration> getOutboundConfigurations() {
         if (outboundConfigurations == null) {
-            this.outboundConfigurations = new HashSet<OutboundConfiguration>();
+            this.outboundConfigurations = new HashSet<>();
         }
         return this.outboundConfigurations;
     }
 
     public void setOutboundConfigurations(Set<OutboundConfiguration> outboundConfigurations) {
-        HashSet<OutboundConfiguration> filteredOutboundConfigs = new HashSet<OutboundConfiguration>();
+        HashSet<OutboundConfiguration> filteredOutboundConfigs = new HashSet<>();
 
         if (!CollectionUtils.isEmpty(outboundConfigurations)) {
             for (OutboundConfiguration outboundConfiguration : outboundConfigurations) {

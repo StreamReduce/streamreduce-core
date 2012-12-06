@@ -124,7 +124,7 @@ public final class HashtagUtil {
 
 
     public static Set<String> getCriticalTags() {
-        Set<String> critical = new HashSet<String>();
+        Set<String> critical = new HashSet<>();
         critical.add("#critical");
         return critical;
     }

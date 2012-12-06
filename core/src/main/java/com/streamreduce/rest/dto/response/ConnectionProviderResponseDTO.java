@@ -57,7 +57,7 @@ public class ConnectionProviderResponseDTO {
 
     private static void addAuthTypesToConnectionProvidersResponseDTO(ConnectionProvider connectionProvider, ConnectionProviderResponseDTO providerDTO) {
         //TODO: (@W) This needs some serious refactoring
-        List<AuthTypeResponseDTO> authTypeResponseDTOList = new ArrayList<AuthTypeResponseDTO>();
+        List<AuthTypeResponseDTO> authTypeResponseDTOList = new ArrayList<>();
         for (AuthType supportedAuthType : connectionProvider.getSupportedAuthTypes()) {
             AuthTypeResponseDTO.Builder authTypeDTOBuilder = new AuthTypeResponseDTO.Builder();
             authTypeDTOBuilder.type(supportedAuthType.toString());

@@ -70,7 +70,7 @@ public class TestService {
                 .authType(AuthType.NONE)
                 .visibility(SobaObject.Visibility.SELF)
                 .build();
-        Map<String, String> metadata = new HashMap<String, String>();
+        Map<String, String> metadata = new HashMap<>();
         metadata.put("last_activity_poll", feb282012TimeStamp);
         sampleFeedConnection.setMetadata(metadata);
 

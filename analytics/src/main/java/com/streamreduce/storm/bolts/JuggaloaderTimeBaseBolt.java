@@ -36,7 +36,7 @@ public class JuggaloaderTimeBaseBolt extends NodeableUnreliableBolt {
     private static Logger logger = Logger.getLogger(JuggaloaderTimeBaseBolt.class);
 
     private long periodMillis = Constants.PERIOD_MINUTE;
-    private Map<String, JuggaloaderStreamState> states = new HashMap<String, JuggaloaderStreamState>();
+    private Map<String, JuggaloaderStreamState> states = new HashMap<>();
 
     public JuggaloaderTimeBaseBolt(int period) {
         this.setPeriodMillis((long) period);

@@ -44,7 +44,7 @@ public class ConnectionMessageTransformerTest {
             properties.put(key, messagesBundle.getString(key));
         }
 
-        metadata = new HashMap<String, Object>();
+        metadata = new HashMap<>();
         metadata.put("sourceAlias", "sourceAlias");
         metadata.put("targetProviderDisplayName", "targetProviderDisplayName");
         metadata.put("targetAlias", "targetAlias");

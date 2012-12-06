@@ -46,7 +46,7 @@ public class GitHubClientIT {
     private ResourceBundle gitHubProperties = ResourceBundle.getBundle("github");
     private String githubPassword = gitHubProperties.getString("nodeable.github.password");
     private String githubUsername = gitHubProperties.getString("nodeable.github.username");
-    private Set<String> monitoredProjects = new HashSet<String>();
+    private Set<String> monitoredProjects = new HashSet<>();
     private Connection connection;
     private InventoryItem inventoryItem;
     private GitHubClient gitHubClient;

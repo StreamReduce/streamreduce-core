@@ -114,7 +114,7 @@ public class MetricDAO extends ValidatingDAO<Metric> {
         DBObject dbObject = entity.toDBObject();
         collection.save(dbObject);
         entity.setId((ObjectId) dbObject.get("_id"));
-        return new Key<Metric>(Metric.class, entity.getId());
+        return new Key<>(Metric.class, entity.getId());
     }
 
     @Override
@@ -123,7 +123,7 @@ public class MetricDAO extends ValidatingDAO<Metric> {
         DBObject dbObject = entity.toDBObject();
         collection.save(dbObject, wc);
         entity.setId((ObjectId) dbObject.get("_id"));
-        return new Key<Metric>(Metric.class, entity.getId());
+        return new Key<>(Metric.class, entity.getId());
     }
 
     public Metric get(ObjectId id, String accountId) {

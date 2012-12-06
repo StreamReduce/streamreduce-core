@@ -86,7 +86,7 @@ public class OutboundStorageServiceRawToS3IT extends AbstractServiceTestCase {
         //Give enough time for this to trickle to SQS and back to server
         Thread.sleep(TimeUnit.SECONDS.toMillis(10));
 
-        ConnectionCredentials s3Creds = new ArrayList<OutboundConfiguration>(
+        ConnectionCredentials s3Creds = new ArrayList<>(
                 testIMGConnection.getOutboundConfigurations()).get(0).getCredentials();
         s3TestUtils = new S3TestUtils(s3Creds);
 
@@ -114,7 +114,7 @@ public class OutboundStorageServiceRawToS3IT extends AbstractServiceTestCase {
                     " and an error message of : " + e.getErrorMessage());
         }
 
-        ConnectionCredentials s3Creds = new ArrayList<OutboundConfiguration>(
+        ConnectionCredentials s3Creds = new ArrayList<>(
                 testIMGConnection.getOutboundConfigurations()).get(0).getCredentials();
         s3TestUtils = new S3TestUtils(s3Creds);
 

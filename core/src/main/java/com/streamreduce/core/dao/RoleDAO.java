@@ -44,6 +44,6 @@ public class RoleDAO extends ValidatingDAO<Role> {
     // remove super user!
     public Set<Role> findAccountRoles(ObjectId accountId) {
         Assert.notNull(accountId);
-        return new HashSet<Role>(ds.find(entityClazz).asList());
+        return new HashSet<>(ds.find(entityClazz).asList());
     }
 }

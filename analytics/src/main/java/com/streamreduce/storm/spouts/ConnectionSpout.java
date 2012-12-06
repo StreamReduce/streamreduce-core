@@ -78,7 +78,7 @@ public class ConnectionSpout extends AbstractScheduledDBCollectionSpout {
             return mongoClient.getConnections();
         } catch (Exception e) {
             logger.error("0 connections emmitted due to failure in getDBEntries", e);
-            return new ArrayList<BasicDBObject>();
+            return new ArrayList<>();
         }
     }
 

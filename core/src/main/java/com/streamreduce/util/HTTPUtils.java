@@ -101,7 +101,7 @@ public final class HTTPUtils {
         }
 
         if (requestHeaders == null) {
-            requestHeaders = new ArrayList<Header>();
+            requestHeaders = new ArrayList<>();
         }
 
         for (Header header : requestHeaders) {

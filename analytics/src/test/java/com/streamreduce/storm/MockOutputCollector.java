@@ -33,9 +33,9 @@ import backtype.storm.tuple.Values;
  */
 public class MockOutputCollector implements IOutputCollector, ISpoutOutputCollector {
 
-    private List<Tuple> ackedTuples = new ArrayList<Tuple>();
-    private Map<String, List<Values>> emittedValuesMap = new HashMap<String, List<Values>>();
-    private Map<String, List<Values>> emittedSpoutValuesMap = new HashMap<String, List<Values>>();
+    private List<Tuple> ackedTuples = new ArrayList<>();
+    private Map<String, List<Values>> emittedValuesMap = new HashMap<>();
+    private Map<String, List<Values>> emittedSpoutValuesMap = new HashMap<>();
     private Values lastEmmitedValues;
 
     public Map<String, List<Values>> getEmittedValuesMap() {
@@ -65,7 +65,7 @@ public class MockOutputCollector implements IOutputCollector, ISpoutOutputCollec
      * @return the list of values emitted to this collector from a non-spout
      */
     public List<Values> getEmittedValues() {
-        List<Values> allValues = new ArrayList<Values>();
+        List<Values> allValues = new ArrayList<>();
 
         for (Map.Entry<String, List<Values>> entry : emittedValuesMap.entrySet()) {
             allValues.addAll(entry.getValue());
@@ -87,7 +87,7 @@ public class MockOutputCollector implements IOutputCollector, ISpoutOutputCollec
      */
     public void clearEmittedValues() {
         emittedValuesMap.clear();
-        emittedValuesMap = new HashMap<String, List<Values>>();
+        emittedValuesMap = new HashMap<>();
     }
 
     /* Helper methods for spout output collection */
@@ -109,7 +109,7 @@ public class MockOutputCollector implements IOutputCollector, ISpoutOutputCollec
      * @return the list of values emitted to this collector from a spout
      */
     public List<Values> getEmittedSpoutValues() {
-        List<Values> allValues = new ArrayList<Values>();
+        List<Values> allValues = new ArrayList<>();
 
         for (Map.Entry<String, List<Values>> entry : emittedSpoutValuesMap.entrySet()) {
             allValues.addAll(entry.getValue());
@@ -132,7 +132,7 @@ public class MockOutputCollector implements IOutputCollector, ISpoutOutputCollec
      */
     public void clearEmittedSpoutValues() {
         emittedSpoutValuesMap.clear();
-        emittedSpoutValuesMap = new HashMap<String, List<Values>>();
+        emittedSpoutValuesMap = new HashMap<>();
     }
 
     /* IOutputCollector Methods */

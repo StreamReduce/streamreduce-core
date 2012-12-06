@@ -58,7 +58,7 @@ public class InventoryItemMetricsBolt extends AbstractMetricsBolt {
                 String targetType = metadata.get("targetType").toString();
                 String objectType = getExternalObjectType(metadata);
                 Float eventValue = getEventValue(eventId);
-                List<Values> metrics = new ArrayList<Values>();
+                List<Values> metrics = new ArrayList<>();
 
                 if (providerType.equals(ConnectionTypeConstants.CLOUD_TYPE)) {
                     String iso3166Code = (String) metadata.get("targetISO3166Code");

@@ -62,7 +62,7 @@ public class SobaMessageResponseDTO extends ObjectWithIdResponseDTO {
 
     public static SobaMessageResponseDTO fromSobaMessage(SobaMessage sobaMessage, boolean fullText) {
         SobaMessageResponseDTO dto = new SobaMessageResponseDTO();
-        List<MessageCommentResponseDTO> allComments = new ArrayList<MessageCommentResponseDTO>();
+        List<MessageCommentResponseDTO> allComments = new ArrayList<>();
 
         for (MessageComment comment : sobaMessage.getComments()) {
             MessageCommentResponseDTO mDTO = new MessageCommentResponseDTO();
@@ -93,7 +93,7 @@ public class SobaMessageResponseDTO extends ObjectWithIdResponseDTO {
     }
 
     public static List<SobaMessageResponseDTO> fromSobaMessages(List<SobaMessage> sobaMessages, boolean fullText) {
-        List<SobaMessageResponseDTO> sobaMessageDTOs = new ArrayList<SobaMessageResponseDTO>();
+        List<SobaMessageResponseDTO> sobaMessageDTOs = new ArrayList<>();
         for (SobaMessage sobaMessage : sobaMessages) {
             SobaMessageResponseDTO dto = fromSobaMessage(sobaMessage, fullText);
             sobaMessageDTOs.add(dto);

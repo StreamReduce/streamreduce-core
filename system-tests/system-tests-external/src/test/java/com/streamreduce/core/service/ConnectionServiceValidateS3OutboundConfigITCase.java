@@ -85,7 +85,7 @@ public class ConnectionServiceValidateS3OutboundConfigITCase extends AbstractSer
 
         AWSClient awsClient = new AWSClient(awsConnection);
         Set<? extends StorageMetadata> buckets = awsClient.getS3Buckets();
-        Set<String> bucketNames = new HashSet<String>();
+        Set<String> bucketNames = new HashSet<>();
         for (StorageMetadata bucket : buckets) {
             bucketNames.add(bucket.getName());
         }

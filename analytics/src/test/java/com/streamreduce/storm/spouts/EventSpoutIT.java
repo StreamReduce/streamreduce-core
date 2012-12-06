@@ -75,7 +75,7 @@ public class EventSpoutIT {
 //        List<Event> allEvents = new ArrayList<Event>();
         MockOutputCollector outputCollector = new MockOutputCollector();
         EventSpout spout = new EventSpout();
-        List<BasicDBObject> allRawEvents = new ArrayList<BasicDBObject>();
+        List<BasicDBObject> allRawEvents = new ArrayList<>();
 
         spout.open(null, null, new SpoutOutputCollector(outputCollector));
 

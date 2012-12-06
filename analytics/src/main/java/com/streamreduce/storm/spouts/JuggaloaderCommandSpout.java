@@ -113,7 +113,7 @@ public class JuggaloaderCommandSpout extends BaseRichSpout {
             }
         } else {
             Map<String, String> params = (Map<String, String>)queue.remove();
-            Map<String, String> nullCriteria = new HashMap<String, String>();
+            Map<String, String> nullCriteria = new HashMap<>();
 
             collector.emit(
                 new Values(
@@ -168,7 +168,7 @@ public class JuggaloaderCommandSpout extends BaseRichSpout {
                                    HttpServletResponse response, int dispatch)
                         throws IOException, ServletException {
 
-                    Map<String, String> params = new HashMap<String, String>();
+                    Map<String, String> params = new HashMap<>();
 
                     Enumeration names = request.getParameterNames();
                     while(names.hasMoreElements()) {

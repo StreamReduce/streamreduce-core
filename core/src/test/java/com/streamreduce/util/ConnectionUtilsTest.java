@@ -33,7 +33,7 @@ public class ConnectionUtilsTest {
                 Lists.newArrayList("aws", "github", "jira", "rss", "custom", "pingdom",
                                    "twitter", "nagios", "googleanalytics");
 
-        List<String> actualProviderIds = new ArrayList<String>();
+        List<String> actualProviderIds = new ArrayList<>();
         for (ConnectionProvider provider : ConnectionUtils.getAllProviders()) {
             actualProviderIds.add(provider.getId());
         }

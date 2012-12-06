@@ -326,7 +326,7 @@ public class EventServiceITCase extends AbstractServiceTestCase {
         // Validate metadata automatically generated at event creation
 
         // Validate user generated event metadata
-        Map<String, Object> expectedUserMetadata = new HashMap<String, Object>();
+        Map<String, Object> expectedUserMetadata = new HashMap<>();
 
         expectedUserMetadata.put("sourceAlias", expectedUser != null ? expectedUser.getAlias() : null);
         expectedUserMetadata.put("sourceFuid", expectedUser != null ? expectedUser.getFuid() : null);
@@ -337,7 +337,7 @@ public class EventServiceITCase extends AbstractServiceTestCase {
         validateEventMetadata(eventMetadata, expectedUserMetadata, expectedUser != null);
 
         // Validate account generated event metadata
-        Map<String, Object> expectedAccountMetadata = new HashMap<String, Object>();
+        Map<String, Object> expectedAccountMetadata = new HashMap<>();
 
         expectedAccountMetadata.put("accountFuid", expectedAccount != null ? expectedAccount.getFuid() : null);
         expectedAccountMetadata.put("accountName", expectedAccount != null ? expectedAccount.getName() : null);
@@ -356,7 +356,7 @@ public class EventServiceITCase extends AbstractServiceTestCase {
             // Validate SobaObject generated metadata
             if (expectedTarget instanceof SobaObject) {
                 SobaObject tSobaObject = (SobaObject) expectedTarget;
-                Map<String, Object> sExpectedMetadata = new HashMap<String, Object>();
+                Map<String, Object> sExpectedMetadata = new HashMap<>();
 
                 sExpectedMetadata.put("targetAlias", tSobaObject.getAlias());
                 sExpectedMetadata.put("targetHashtags", tSobaObject.getHashtags());
@@ -366,7 +366,7 @@ public class EventServiceITCase extends AbstractServiceTestCase {
 
             // Validate the generated metadata based on object type
 
-            Map<String, Object> expectedObjectMetadata = new HashMap<String, Object>();
+            Map<String, Object> expectedObjectMetadata = new HashMap<>();
 
             if (expectedTarget instanceof Account) {
                 Account tAccount = (Account) expectedTarget;
@@ -379,7 +379,7 @@ public class EventServiceITCase extends AbstractServiceTestCase {
                 ConnectionProvider tConnectionProvider =
                         applicationManager.getConnectionProviderFactory()
                                 .connectionProviderFromId(tConnection.getProviderId());
-                Map<String, Object> expectedInventoryItemMetadata = new HashMap<String, Object>();
+                Map<String, Object> expectedInventoryItemMetadata = new HashMap<>();
                 InventoryService inventoryService = applicationManager.getInventoryService();
 
                 expectedObjectMetadata.put("targetExternalId", tInventoryItem.getExternalId());

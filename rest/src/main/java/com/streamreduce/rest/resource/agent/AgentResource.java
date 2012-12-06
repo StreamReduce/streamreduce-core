@@ -130,7 +130,7 @@ public class AgentResource extends AbstractResource {
                         dateGenerated = new Date();
                     }
 
-                    Map<String, Object> eventContext = new HashMap<String, Object>();
+                    Map<String, Object> eventContext = new HashMap<>();
 
                     eventContext.put("activityGenerated", dateGenerated);
                     eventContext.put("activityPayload", metric);

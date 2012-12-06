@@ -92,7 +92,7 @@ public class EventServiceImpl extends AbstractService implements EventService {
         }
 
         if (extraMetadata == null) {
-            extraMetadata = new HashMap<String, Object>();
+            extraMetadata = new HashMap<>();
         }
 
         // TODO: Figure out a way to make these automatically-generated metadata keys constants somewhere
@@ -339,7 +339,7 @@ public class EventServiceImpl extends AbstractService implements EventService {
      */
     private Map<String, Object> getMetadataFromInventoryItem(InventoryItem inventoryItem) {
         // NOTE: We're not using CloudService methods here for performance reasons
-        Map<String, Object> civMetadata = new HashMap<String, Object>();
+        Map<String, Object> civMetadata = new HashMap<>();
 
         // Right now, we are only creating extended metadata for AWS EC2 instance items
         if (inventoryItem.getConnection().getProviderId().equals(ProviderIdConstants.AWS_PROVIDER_ID) &&

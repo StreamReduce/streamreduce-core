@@ -59,10 +59,10 @@ public final class SobaMessage extends ObjectWithId implements Taggable, Compara
     protected ObjectId connectionId; // ie, cloudId, projectId - may be null
     protected String providerId; // jira, github, aws, etc...  - may be null
     @Embedded
-    protected List<MessageComment> comments = new ArrayList<MessageComment>();
+    protected List<MessageComment> comments = new ArrayList<>();
     protected String transformedMessage;
     protected Long dateGenerated;
-    protected Set<String> hashtags = new TreeSet<String>(String.CASE_INSENSITIVE_ORDER);
+    protected Set<String> hashtags = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
     @Embedded
     protected SobaMessageDetails details;
 

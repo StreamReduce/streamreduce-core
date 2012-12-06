@@ -70,7 +70,7 @@ public class ConnectionServiceJiraEndToEndIT extends AbstractServiceTestCase {
         Connection connection = connectionService.createConnection(tmpConnection);
 
         // Set lastActivity
-        HashMap<String, String> metadata = new HashMap<String, String>();
+        HashMap<String, String> metadata = new HashMap<>();
         metadata.put("last_activity_poll", Long.toString(System.currentTimeMillis()));
         connection.setMetadata(metadata);
 
@@ -124,7 +124,7 @@ public class ConnectionServiceJiraEndToEndIT extends AbstractServiceTestCase {
         final JiraClient jiraClient = new JiraClient(connection);
         final List<JSONObject> rawJiraProjects = jiraClient.getProjects(false);
         final List<JSONObject> rawPublicJiraProjects = jiraClient.getProjects(true);
-        final Map<String, JSONObject> rawJiraProjectsMap = new HashMap<String, JSONObject>();
+        final Map<String, JSONObject> rawJiraProjectsMap = new HashMap<>();
 
         /* Create a simple set of project keys for all public projects */
         ImmutableSet<String> publicProjectKeys =

@@ -31,7 +31,7 @@ public class SobaObjectResponseDTO extends ObjectWithIdResponseDTO {
     private String description;
     private ObjectId accountId;
     private ObjectId userId;
-    private Set<String> hashtags = new TreeSet<String>(String.CASE_INSENSITIVE_ORDER);
+    private Set<String> hashtags = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
     private SobaObject.Visibility visibility;
 
     public SobaObject.Visibility getVisibility() {

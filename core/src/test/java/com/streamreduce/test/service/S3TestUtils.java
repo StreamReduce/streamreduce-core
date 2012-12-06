@@ -86,7 +86,7 @@ public class S3TestUtils {
         PageSet<? extends StorageMetadata> pageSet = s3BlobStore.list(expectedBucketName,
                 ListContainerOptions.Builder.afterMarker(prefix));
 
-        List<Blob> blobs = new ArrayList<Blob>();
+        List<Blob> blobs = new ArrayList<>();
         for (StorageMetadata metadata : pageSet) {
             blobs.add(
                     s3BlobStore.getBlob(expectedBucketName, metadata.getName())

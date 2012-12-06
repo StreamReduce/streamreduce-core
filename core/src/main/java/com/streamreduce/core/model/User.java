@@ -82,7 +82,7 @@ public class User extends SobaObject {
     private boolean accountOriginator;
     @Reference
     @NotNull
-    private Set<Role> roles = new HashSet<Role>();
+    private Set<Role> roles = new HashSet<>();
     private boolean userLocked = true;
     @NotNull
     @SuppressWarnings("unchecked")
@@ -201,7 +201,7 @@ public class User extends SobaObject {
     }
 
     public void addRoles(Role... role) {
-        Set<Role> set = new HashSet<Role>();
+        Set<Role> set = new HashSet<>();
         set.addAll(Arrays.asList(role));
         this.roles = set;
     }
@@ -461,7 +461,7 @@ public class User extends SobaObject {
             if (isBuilt) {
                 throw new IllegalStateException("The object cannot be modified after built");
             }
-            Set<Role> set = new HashSet<Role>();
+            Set<Role> set = new HashSet<>();
             set.addAll(Arrays.asList(role));
             theObject.roles = set;
             return this;

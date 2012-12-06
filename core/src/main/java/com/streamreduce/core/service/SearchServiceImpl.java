@@ -128,7 +128,7 @@ public class SearchServiceImpl extends AbstractService implements  SearchService
             return Lists.newArrayList(sobaMessage);
         } else {
             JSONArray hits = response.getJSONObject("hits").getJSONArray("hits");
-            List<SobaMessage> sobaMessages = new ArrayList<SobaMessage>();
+            List<SobaMessage> sobaMessages = new ArrayList<>();
             for (Object hit : hits) {
                 JSONObject hitAsJson = (JSONObject) hit;
                 JSONObject sobaMessageAsJson = hitAsJson.getJSONObject("_source");

@@ -95,7 +95,7 @@ public class TwitterClient extends ExternalIntegrationClient {
      * @return the JSONObject or null
      */
     private JSONObject makeSimpleRequest(String url) throws InvalidCredentialsException, IOException {
-        List<Header> responseHeaders = new ArrayList<Header>();
+        List<Header> responseHeaders = new ArrayList<>();
         String payload = HTTPUtils.openOAuthUrl(url, HttpMethod.GET, null, MediaType.APPLICATION_JSON, oAuthService,
                                                 getConnectionCredentials(), null, responseHeaders);
 

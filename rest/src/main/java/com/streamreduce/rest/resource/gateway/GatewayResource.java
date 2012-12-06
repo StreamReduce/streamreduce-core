@@ -277,7 +277,7 @@ public class GatewayResource extends AbstractResource {
             }
 
             // Create the event stream entry
-            Map<String, Object> eventContext = new HashMap<String, Object>();
+            Map<String, Object> eventContext = new HashMap<>();
             // Persist the full payload
             eventContext.put("message", message);
             eventContext.put("dateGenerated", dateGenerated);

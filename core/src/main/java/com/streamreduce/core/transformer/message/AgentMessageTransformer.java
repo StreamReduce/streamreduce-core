@@ -57,7 +57,7 @@ public class AgentMessageTransformer extends SobaMessageTransformer implements M
                   .append("Disk usage:\n");
 
                 BasicDBObject partitionsObj = (BasicDBObject) payload.get("partitions");
-                Set<String> partitions = new TreeSet<String>(partitionsObj.keySet());
+                Set<String> partitions = new TreeSet<>(partitionsObj.keySet());
 
                 for (String key : partitions) {
                     BasicDBObject partition = (BasicDBObject) partitionsObj.get(key);
@@ -86,7 +86,7 @@ public class AgentMessageTransformer extends SobaMessageTransformer implements M
                 sb.append("Disk I/O:\n");
 
                 BasicDBObject diskIO = (BasicDBObject) payload.get("disk_io");
-                Set<String> disks = new TreeSet<String>(diskIO.keySet());
+                Set<String> disks = new TreeSet<>(diskIO.keySet());
 
                 if (disks.size() == 0) {
                     sb.append("  Unavailable\n");
@@ -121,7 +121,7 @@ public class AgentMessageTransformer extends SobaMessageTransformer implements M
                 sb.append("Network I/O:\n");
 
                 BasicDBObject netIO = (BasicDBObject) payload.get("network_io");
-                Set<String> nics = new TreeSet<String>(netIO.keySet());
+                Set<String> nics = new TreeSet<>(netIO.keySet());
                 int nicsDisplayed = 0;
 
                 for (String key : nics) {

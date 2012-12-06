@@ -120,7 +120,7 @@ public class UserServiceImpl extends AbstractService implements UserService {
     }
 
     public List<User> getUsersById(Set<ObjectId> userIds) {
-        List<User> userList = new ArrayList<User>();
+        List<User> userList = new ArrayList<>();
         for (ObjectId id : userIds) {
             try {
                 userList.add(getUserById(id));
@@ -335,7 +335,7 @@ public class UserServiceImpl extends AbstractService implements UserService {
     }
 
     private void handleUserRequest(User user, boolean isRecreate) {
-        Map<String, Object> metadata = new HashMap<String, Object>();
+        Map<String, Object> metadata = new HashMap<>();
         metadata.put("userRequestIsNew", !isRecreate);
         // Create the event stream entry
         eventService.createEvent(EventId.CREATE_USER_REQUEST, user, metadata);
@@ -370,7 +370,7 @@ public class UserServiceImpl extends AbstractService implements UserService {
 
     @Override
     public Set<Role> getUserRoles() {
-        Set<Role> roles = new HashSet<Role>();
+        Set<Role> roles = new HashSet<>();
         Role r = roleDAO.findRole(Roles.USER_ROLE);
         roles.add(r);
         return roles;
@@ -378,7 +378,7 @@ public class UserServiceImpl extends AbstractService implements UserService {
 
     @Override
     public Set<Role> getAdminRoles() {
-        Set<Role> roles = new HashSet<Role>();
+        Set<Role> roles = new HashSet<>();
         Role r = roleDAO.findRole(Roles.ADMIN_ROLE);
         roles.add(r);
         r = roleDAO.findRole(Roles.USER_ROLE);
@@ -403,7 +403,7 @@ public class UserServiceImpl extends AbstractService implements UserService {
 
     @Override
     public void removeRole(User user, ObjectId roleId) throws UserNotFoundException {
-        Set<Role> newRoles = new HashSet<Role>();
+        Set<Role> newRoles = new HashSet<>();
         Set<Role> roleSet = user.getRoles();
         for (Role r : roleSet) {
             if (!(r.getId().equals(roleId))) {

@@ -57,7 +57,7 @@ public class AccountMetricsBoltTest extends AbstractMetricsBoltTest {
      * @return the list of mock events
      */
     public List<Map<String, Object>> getEventsForTesting() {
-        return new ArrayList<Map<String, Object>>(createCRUDEvents("Account").values());
+        return new ArrayList<>(createCRUDEvents("Account").values());
     }
 
 }

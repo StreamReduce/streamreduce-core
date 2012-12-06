@@ -106,8 +106,8 @@ public class GitHubClient extends AbstractProjectHostingClient {
 
         debugLog(LOGGER, "Getting repositories visible to " + getConnectionCredentials().getIdentity());
 
-        List<JSONObject> repositories = new ArrayList<JSONObject>();
-        Set<String> reposUrls = new HashSet<String>();
+        List<JSONObject> repositories = new ArrayList<>();
+        Set<String> reposUrls = new HashSet<>();
 
         reposUrls.add(GITHUB_API_BASE + "user/repos");
         reposUrls.add(GITHUB_API_BASE + "user/watched");
@@ -260,10 +260,10 @@ public class GitHubClient extends AbstractProjectHostingClient {
         projectKeys = (projectKeys != null ? projectKeys : new HashSet<String>());
         maxActivities = (maxActivities >= 1 ? maxActivities : 100);
 
-        List<JSONObject> allActivityItems = new ArrayList<JSONObject>();
-        Set<Integer> processedActivityHashes = new HashSet<Integer>();
+        List<JSONObject> allActivityItems = new ArrayList<>();
+        Set<Integer> processedActivityHashes = new HashSet<>();
         Date lastActivity = getLastActivityPollDate();
-        Set<String> eventsUrls = new HashSet<String>();
+        Set<String> eventsUrls = new HashSet<>();
         String username = getConnectionCredentials().getIdentity();
 
         // Generate the list of events URLs to process
@@ -367,10 +367,10 @@ public class GitHubClient extends AbstractProjectHostingClient {
         String activityType = entry.getString("type");
         JSONObject payload = entry.getJSONObject("payload");
         String repoName = entry.getJSONObject("repo").getString("name");
-        Map<String, Object> activityParts = new HashMap<String, Object>();
+        Map<String, Object> activityParts = new HashMap<>();
         StringBuilder title = new StringBuilder();
         StringBuilder content = new StringBuilder();
-        Set<String> hashtags = new HashSet<String>();
+        Set<String> hashtags = new HashSet<>();
 
         // Bring in the inventory item hashtags
         for (String hashtag : inventoryItem.getHashtags()) {
@@ -852,10 +852,10 @@ public class GitHubClient extends AbstractProjectHostingClient {
             debugLog(LOGGER, "  (From cache)");
             return response;
         } else {
-            response = new ArrayList<JSONObject>();
+            response = new ArrayList<>();
         }
 
-        List<Header> responseHeaders = new ArrayList<Header>();
+        List<Header> responseHeaders = new ArrayList<>();
         JSONArray rawResponse = new JSONArray();
 
 
@@ -888,7 +888,7 @@ public class GitHubClient extends AbstractProjectHostingClient {
         }
 
         int sizeOfArray = rawResponse.size();
-        List<Integer> processedObjectHashes = new ArrayList<Integer>();
+        List<Integer> processedObjectHashes = new ArrayList<>();
         int page = 1;
         boolean complete = false;
 

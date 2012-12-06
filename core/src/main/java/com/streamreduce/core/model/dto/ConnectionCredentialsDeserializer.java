@@ -32,7 +32,7 @@ public class ConnectionCredentialsDeserializer extends JsonDeserializer<Connecti
 
     @Override
     public ConnectionCredentials deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException {
-        Map<String,String> keyValues = new HashMap<String,String>();
+        Map<String,String> keyValues = new HashMap<>();
         while (jp.nextValue() != null && jp.getCurrentToken() != JsonToken.END_OBJECT) {
             String name = jp.getCurrentName();
             String value = jp.getText();

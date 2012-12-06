@@ -64,7 +64,7 @@ public class NodebellyMessageTransformerTest {
     }
     @Test
     public void testGetUnits() throws Exception {
-        Map<String, String> metricCriteria = new HashMap<String, String>();
+        Map<String, String> metricCriteria = new HashMap<>();
         metricCriteria.put("RESOURCE_ID", "DiskReadBytes");
         metricCriteria.put("METRIC_ID", "average");
 
@@ -82,12 +82,12 @@ public class NodebellyMessageTransformerTest {
     }
 
     private void testMessageTransFormationOf(String mtype, float fvalue) throws Exception {
-        ArrayList<Map<String, Object>> items = new ArrayList<Map<String, Object>>();
-        Map<String, Object> map = new HashMap<String, Object>();
-        Map<String, Object> criteria = new HashMap<String, Object>();
+        ArrayList<Map<String, Object>> items = new ArrayList<>();
+        Map<String, Object> map = new HashMap<>();
+        Map<String, Object> criteria = new HashMap<>();
         
         for(int i = 0; i < 3; i++) {
-            Map<String, Object> row = new HashMap<String, Object>();
+            Map<String, Object> row = new HashMap<>();
             row.put("name", "INVENTORY_ITEM_RESOURCE_USAGE");
             criteria.put("RESOURCE_ID", "CPUUtilization");
             criteria.put("METRIC_ID", "average");

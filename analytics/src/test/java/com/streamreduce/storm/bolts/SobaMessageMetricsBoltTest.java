@@ -72,9 +72,9 @@ public class SobaMessageMetricsBoltTest extends AbstractMetricsBoltTest {
      * @return the list of mock events
      */
     public List<Map<String, Object>> getEventsForTesting() {
-        List<Map<String, Object>> allEvents = new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> allEvents = new ArrayList<>();
 
-        Map<String, Object> connectionMessageMetadata = new HashMap<String, Object>();
+        Map<String, Object> connectionMessageMetadata = new HashMap<>();
 
         connectionMessageMetadata.put("messageConnectionId", new ObjectId().toString());
         connectionMessageMetadata.put("messageEventTargetId", new ObjectId().toString());

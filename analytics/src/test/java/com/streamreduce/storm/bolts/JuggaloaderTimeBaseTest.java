@@ -99,7 +99,7 @@ public class JuggaloaderTimeBaseTest {
     private void testProcess(String testFunction) throws Exception {
         BasicDBList testData = getTestData(testFunction);
         Iterator<Object> iter = testData.iterator();
-        Map<String, JuggaloaderStreamState> states = new HashMap<String, JuggaloaderStreamState>();
+        Map<String, JuggaloaderStreamState> states = new HashMap<>();
         Values previousValues = null;
         for (int i = 0; iter.hasNext(); i++) {
             BasicDBObject dbObject = (BasicDBObject) iter.next();
@@ -139,7 +139,7 @@ public class JuggaloaderTimeBaseTest {
     }
 
     private Tuple createTuple(BasicDBObject dbObject) {
-        Map<String,String> metricCriteria = new HashMap<String,String>();
+        Map<String,String> metricCriteria = new HashMap<>();
         metricCriteria.put("one", "1");
         metricCriteria.put("two", "2");
 

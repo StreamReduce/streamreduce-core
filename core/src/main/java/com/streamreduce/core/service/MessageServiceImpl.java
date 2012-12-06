@@ -317,7 +317,7 @@ public class MessageServiceImpl extends AbstractService implements MessageServic
         saveMessage(sender, message);
 
         // Fire the event that a message has been created
-        Map<String, Object> eventMetadata = new HashMap<String, Object>();
+        Map<String, Object> eventMetadata = new HashMap<>();
 
         // Message event metadata
         eventMetadata.put("messageEventId", event.getId());

@@ -99,7 +99,7 @@ public class OutboundStorageSobaMessageToS3IT extends AbstractServiceTestCase {
         String expectedBucketName = "com.streamreduce." + testIMGConnection.getAccount().getId();
         String key = "processed/" + sobaMessage.getConnectionId() + "/" + sobaMessage.getId();
 
-        ConnectionCredentials creds = new ArrayList<OutboundConfiguration>(
+        ConnectionCredentials creds = new ArrayList<>(
                 testIMGConnection.getOutboundConfigurations()).get(0).getCredentials();
         s3TestUtils = new S3TestUtils(creds);
 
@@ -136,7 +136,7 @@ public class OutboundStorageSobaMessageToS3IT extends AbstractServiceTestCase {
 
         outboundStorageService.sendSobaMessage(sobaMessage, testIMGConnection);
 
-        ConnectionCredentials creds = new ArrayList<OutboundConfiguration>(
+        ConnectionCredentials creds = new ArrayList<>(
                 testIMGConnection.getOutboundConfigurations()).get(0).getCredentials();
         s3TestUtils = new S3TestUtils(creds);
 
@@ -174,7 +174,7 @@ public class OutboundStorageSobaMessageToS3IT extends AbstractServiceTestCase {
         outboundStorageService.sendSobaMessage(sobaMessage, testIMGConnection);
         Thread.sleep(TimeUnit.SECONDS.toMillis(10));     //give this some time to go through the queue
 
-        ConnectionCredentials creds = new ArrayList<OutboundConfiguration>(
+        ConnectionCredentials creds = new ArrayList<>(
                 testIMGConnection.getOutboundConfigurations()).get(0).getCredentials();
         s3TestUtils = new S3TestUtils(creds);
 
@@ -213,7 +213,7 @@ public class OutboundStorageSobaMessageToS3IT extends AbstractServiceTestCase {
 
         outboundStorageService.sendSobaMessage(sobaMessage, testIMGConnection);
 
-        ConnectionCredentials creds = new ArrayList<OutboundConfiguration>(
+        ConnectionCredentials creds = new ArrayList<>(
                 testIMGConnection.getOutboundConfigurations()).get(0).getCredentials();
         s3TestUtils = new S3TestUtils(creds);
 
@@ -238,7 +238,7 @@ public class OutboundStorageSobaMessageToS3IT extends AbstractServiceTestCase {
         //Make the feed connection have a last_activity_poll from before the feed messages
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String feb282012TimeStamp = Long.toString(sdf.parse("2012-02-28").getTime());
-        Map<String, String> metadata = new HashMap<String, String>();
+        Map<String, String> metadata = new HashMap<>();
         metadata.put("last_activity_poll", feb282012TimeStamp);
         feedConnection.setMetadata(metadata);
 
@@ -293,7 +293,7 @@ public class OutboundStorageSobaMessageToS3IT extends AbstractServiceTestCase {
         String expectedBucketName = "com.streamreduce." + testIMGConnection.getAccount().getId();
         String key = "processed/" + sobaMessage.getConnectionId() + "/" + sobaMessage.getId();
 
-        ConnectionCredentials credentials = new ArrayList<OutboundConfiguration>(
+        ConnectionCredentials credentials = new ArrayList<>(
                 testIMGConnection.getOutboundConfigurations()).get(0).getCredentials();
         s3TestUtils = new S3TestUtils(credentials);
 

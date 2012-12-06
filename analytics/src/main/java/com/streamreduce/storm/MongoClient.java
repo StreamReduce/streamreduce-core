@@ -42,7 +42,7 @@ public class MongoClient {
     public static final String MESSAGEDB_CONFIG_ID = "message";
     public static final Logger logger = Logger.getLogger(MongoClient.class);
 
-    private final Map<String, DB> dbMap = new HashMap<String, DB>();
+    private final Map<String, DB> dbMap = new HashMap<>();
     private String host;
     private int port;
     private String username;
@@ -302,7 +302,7 @@ public class MongoClient {
 
         metricsCollection.insert(metric);
 
-        Map<String, BasicDBObject> result = new HashMap<String, BasicDBObject>();
+        Map<String, BasicDBObject> result = new HashMap<>();
 
         result.put(collectionName, metric);
 
@@ -344,7 +344,7 @@ public class MongoClient {
 
         metricsCollection.insert(persistedMetric);
 
-        Map<String, BasicDBObject> result = new HashMap<String, BasicDBObject>();
+        Map<String, BasicDBObject> result = new HashMap<>();
         result.put(collectionName, persistedMetric);
         return result;
     }
@@ -381,7 +381,7 @@ public class MongoClient {
         query.put("metricName", metricName);
         query.put("metricGranularity", metricGranularity);
 
-        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> list = new ArrayList<>();
         DBCursor cursor = metricsCollection.find(query).sort(new BasicDBObject("metricTimestamp", -1)).limit(2);
         while (cursor.hasNext()) {
             DBObject obj = cursor.next();
@@ -398,7 +398,7 @@ public class MongoClient {
      * @return the list of items or an empty list of the query returned zero results
      */
     private List<BasicDBObject> asList(DBCursor cursor) {
-        List<BasicDBObject> list = new ArrayList<BasicDBObject>();
+        List<BasicDBObject> list = new ArrayList<>();
 
         while (cursor.hasNext()) {
             list.add((BasicDBObject) cursor.next());

@@ -59,7 +59,7 @@ public class InternalConnectionInventoryBoltIT {
             InternalConnectionInventoryBolt bolt = new InternalConnectionInventoryBolt();
             MockOutputCollector outputCollector = new MockOutputCollector();
             Tuple tuple = mock(Tuple.class);
-            List<BasicDBObject> expectedInventoryItems = new ArrayList<BasicDBObject>();
+            List<BasicDBObject> expectedInventoryItems = new ArrayList<>();
             String connectionId = connection.getString("_id");
             final String connectionType = connection.getString("type");
 
@@ -110,7 +110,7 @@ public class InternalConnectionInventoryBoltIT {
                     }
                 }
             });
-            Set<String> actualKeys = new HashSet<String>();
+            Set<String> actualKeys = new HashSet<>();
 
             for (Values value : emittedTuples) {
                 String tType = (String)value.get(0);

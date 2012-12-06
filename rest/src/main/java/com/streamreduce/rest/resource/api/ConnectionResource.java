@@ -116,7 +116,7 @@ public class ConnectionResource extends AbstractOwnableResource {
     @Path("providers")
     public Response getProviderList(@QueryParam("showAuthTypes") boolean showAuthTypes) {
         ConnectionProvidersResponseDTO responseDTO = new ConnectionProvidersResponseDTO();
-        List<ConnectionProviderResponseDTO> providers = new ArrayList<ConnectionProviderResponseDTO>();
+        List<ConnectionProviderResponseDTO> providers = new ArrayList<>();
 
         for (ConnectionProvider provider : ConnectionUtils.getAllProviders()) {
             providers.add(ConnectionProviderResponseDTO.toDTO(provider, showAuthTypes));
@@ -148,7 +148,7 @@ public class ConnectionResource extends AbstractOwnableResource {
         }
 
         ConnectionProvidersResponseDTO responseDTO = new ConnectionProvidersResponseDTO();
-        List<ConnectionProviderResponseDTO> providers = new ArrayList<ConnectionProviderResponseDTO>();
+        List<ConnectionProviderResponseDTO> providers = new ArrayList<>();
 
         for (ConnectionProvider provider : ConnectionUtils.getSupportedProviders(providerType)) {
             providers.add(ConnectionProviderResponseDTO.toDTO(provider, showAuthTypes));
@@ -167,7 +167,7 @@ public class ConnectionResource extends AbstractOwnableResource {
      */
     @GET
     public Response listAllConnections() {
-        List<ConnectionResponseDTO> connectionsDTO = new ArrayList<ConnectionResponseDTO>();
+        List<ConnectionResponseDTO> connectionsDTO = new ArrayList<>();
         User user = securityService.getCurrentUser();
 
         List<Connection> connections = connectionService.getConnections(null, user);
@@ -193,7 +193,7 @@ public class ConnectionResource extends AbstractOwnableResource {
     @GET
     @Path("types/{providerType}")
     public Response listConnectionsOfType(@PathParam("providerType") String providerType) {
-        List<ConnectionResponseDTO> connectionsDTO = new ArrayList<ConnectionResponseDTO>();
+        List<ConnectionResponseDTO> connectionsDTO = new ArrayList<>();
         User user = securityService.getCurrentUser();
         List<Connection> connections = connectionService.getConnections(providerType, user);
 
@@ -484,7 +484,7 @@ public class ConnectionResource extends AbstractOwnableResource {
             return Response.ok(inventoryItems.size()).build();
         } else {
             ConnectionInventoryResponseDTO dto = new ConnectionInventoryResponseDTO();
-            List<InventoryItemResponseDTO> inventoryItemDTOs = new ArrayList<InventoryItemResponseDTO>();
+            List<InventoryItemResponseDTO> inventoryItemDTOs = new ArrayList<>();
 
             for (InventoryItem inventoryItem : inventoryItems) {
                 inventoryItemDTOs.add(toFullDTO(inventoryItem));
@@ -690,7 +690,7 @@ public class ConnectionResource extends AbstractOwnableResource {
             return new OutboundConfiguration[0];
         }
 
-        List<OutboundConfiguration> outboundConfigurationList = new ArrayList<OutboundConfiguration>();
+        List<OutboundConfiguration> outboundConfigurationList = new ArrayList<>();
         for (Object o : jsonObject.getJSONArray("outboundConfigurations")) {
             OutboundConfiguration outboundConfiguration = extractOutboundConfigurationFromJSON((JSONObject) o);
             outboundConfigurationList.add(outboundConfiguration);
@@ -702,7 +702,7 @@ public class ConnectionResource extends AbstractOwnableResource {
         OutboundConfiguration.Builder outboundConfigurationBuilder = new OutboundConfiguration.Builder()
                 .protocol(outboundConfigurationAsJSONObject.getString("protocol"));
 
-        List<OutboundDataType> outboundDataTypes = new ArrayList<OutboundDataType>();
+        List<OutboundDataType> outboundDataTypes = new ArrayList<>();
         for (Object dataTypeObj : outboundConfigurationAsJSONObject.getJSONArray("dataTypes")) {
             String dataType = ((String) dataTypeObj).toUpperCase();
             outboundDataTypes.add(OutboundDataType.valueOf(dataType));
@@ -734,7 +734,7 @@ public class ConnectionResource extends AbstractOwnableResource {
         }
 
         // build a map of outbound configs keyed on the protocol + destination
-        Map<String, OutboundConfiguration> currentConfigs = new HashMap<String, OutboundConfiguration>();
+        Map<String, OutboundConfiguration> currentConfigs = new HashMap<>();
         if (!CollectionUtils.isEmpty(connection.getOutboundConfigurations())) {
             for (OutboundConfiguration outboundConfiguration : connection.getOutboundConfigurations()) {
                 String key = outboundConfiguration.getProtocol();

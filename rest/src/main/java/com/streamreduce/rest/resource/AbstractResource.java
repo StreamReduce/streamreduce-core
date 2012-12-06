@@ -185,7 +185,7 @@ public abstract class AbstractResource {
     }
 
     protected List<UserResponseDTO> toFullDTO(List<User> users) {
-        List<UserResponseDTO> allUsers = new ArrayList<UserResponseDTO>();
+        List<UserResponseDTO> allUsers = new ArrayList<>();
         for (User user : users) {
             allUsers.add(toFullDTO(user));
         }
@@ -199,7 +199,7 @@ public abstract class AbstractResource {
 
         dto.setAccountOriginator(user.isAccountOriginator());
         dto.setFullname(user.getFullname());
-        Set<RoleResponseDTO> rolesDTOs = new HashSet<RoleResponseDTO>();
+        Set<RoleResponseDTO> rolesDTOs = new HashSet<>();
         for (Role role : user.getRoles()) {
             rolesDTOs.add(toDTO(role));
         }

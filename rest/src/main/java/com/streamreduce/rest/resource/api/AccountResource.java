@@ -106,7 +106,7 @@ public class AccountResource extends AbstractResource {
         } catch (AccountNotFoundException e) {
             return error(e.getMessage(), Response.status(Response.Status.NOT_FOUND));
         }
-        List<User> users = new ArrayList<User>(theUsers);
+        List<User> users = new ArrayList<>(theUsers);
 
         return Response.ok(toFullDTO(users)).build();
 
@@ -139,7 +139,7 @@ public class AccountResource extends AbstractResource {
         }
 
         RolesResponseDTO dto = new RolesResponseDTO();
-        List<RoleResponseDTO> roleDTOs = new ArrayList<RoleResponseDTO>();
+        List<RoleResponseDTO> roleDTOs = new ArrayList<>();
 
         for (Role role : roles) {
             roleDTOs.add(toDTO(role));

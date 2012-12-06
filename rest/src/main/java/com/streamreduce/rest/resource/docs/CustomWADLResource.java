@@ -43,8 +43,8 @@ public class CustomWADLResource {
     private static final Logger LOGGER = LoggerFactory.getLogger(CustomWADLResource.class);
 
     private String indexDocument;
-    private Map<String, String> wadlDocuments = new HashMap<String, String>();
-    private Map<String, String> htmlDocuments = new HashMap<String, String>();
+    private Map<String, String> wadlDocuments = new HashMap<>();
+    private Map<String, String> htmlDocuments = new HashMap<>();
 
     @GET
     @Produces(MediaType.TEXT_HTML)

@@ -85,7 +85,7 @@ public class SobaMessageDAO extends ValidatingDAO<SobaMessage> {
         }
 
         //OR filter over hashtag and sender fields
-        List<Criteria> hashTagAndSenderCriteria = new ArrayList<Criteria>();
+        List<Criteria> hashTagAndSenderCriteria = new ArrayList<>();
         if (hashtags != null && hashtags.contains("#conversation")) {
             hashTagAndSenderCriteria.add(query.criteria("hashtags").hasAnyOf(hashtags));
         } else if (hashtags != null && hashtags.size() > 0) {

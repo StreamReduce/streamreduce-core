@@ -134,7 +134,7 @@ public abstract class AbstractMetricsBolt extends NodeableUnreliableBolt {
             return;
         }
 
-        List<Values> metrics = new ArrayList<Values>();
+        List<Values> metrics = new ArrayList<>();
         String providerId = metadata.get("targetProviderId") != null ?
                 metadata.get("targetProviderId").toString() :
                 null;
@@ -463,7 +463,7 @@ public abstract class AbstractMetricsBolt extends NodeableUnreliableBolt {
     protected Map<String, Float> getHashtagChanges(EventId eventId, String targetId, Map<String, Object> metadata,
                                                    String hashtagsKey) {
         Float eventValue = getEventValue(eventId);
-        Map<String, Float> hashtagChanges = new TreeMap<String, Float>();
+        Map<String, Float> hashtagChanges = new TreeMap<>();
         Set<String> hashtags = metadata.get(hashtagsKey) != null ?
                 (Set<String>)metadata.get(hashtagsKey) :
                 Collections.EMPTY_SET;
@@ -664,7 +664,7 @@ public abstract class AbstractMetricsBolt extends NodeableUnreliableBolt {
     private Values createMetric(String accountId, MetricName metricName, Map<MetricCriteria, String> metricCriteria,
                                 MetricModeType metricMode, Long timestamp, Float metricValue) {
         // Convert the map keys to string to avoid serialization/deserialization issues in Storm
-        Map<String, String> massagedCriteria = new LinkedHashMap<String, String>();
+        Map<String, String> massagedCriteria = new LinkedHashMap<>();
 
         for (Map.Entry<MetricCriteria, String> mapEntry : metricCriteria.entrySet()) {
             massagedCriteria.put(mapEntry.getKey().toString(), mapEntry.getValue());

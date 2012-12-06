@@ -73,9 +73,9 @@ public class UserMetricsBoltTest extends AbstractMetricsBoltTest {
      * @return the list of mock events
      */
     public List<Map<String, Object>> getEventsForTesting() {
-        List<Map<String, Object>> allEvents = new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> allEvents = new ArrayList<>();
 
-        Map<String, Object> pendingUserMetadata = new HashMap<String, Object>();
+        Map<String, Object> pendingUserMetadata = new HashMap<>();
 
         pendingUserMetadata.put("userRequestIsNew", true);
 

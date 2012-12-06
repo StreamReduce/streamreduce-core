@@ -57,7 +57,7 @@ public class Event {
 
         // Remove metadata entries with null values
         if (metadata != null) {
-            Set<String> badKeys = new HashSet<String>();
+            Set<String> badKeys = new HashSet<>();
 
             // Simple fix for SOBA-1281
             for (Map.Entry<String, Object> entry : metadata.entrySet()) {

@@ -103,7 +103,7 @@ public class SearchMessageResource extends AbstractResource {
      * @return
      */
     private Map<String, String> flattenValues(MultivaluedMap<String, String> map) {
-        HashMap<String, String> newMap = new HashMap<String, String>();
+        HashMap<String, String> newMap = new HashMap<>();
         for (String key : map.keySet()) {
             Collection<String> value = map.get(key);
             Optional<String> possibleFind = Iterables.tryFind(value, new Predicate<String>() {

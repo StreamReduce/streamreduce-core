@@ -481,7 +481,7 @@ public class GatewayResourceITCase extends AbstractInContainerTestCase {
         if (json.containsKey("hashtags")) {
             BasicDBList targetHashtags = (BasicDBList)eventMetadata.get("targetHashtags");
             JSONArray messageHashtags = json.getJSONArray("hashtags");
-            Set<String> expectedHashtags = new HashSet<String>();
+            Set<String> expectedHashtags = new HashSet<>();
 
             for (Object rawHashtag : targetHashtags) {
                 expectedHashtags.add(rawHashtag.toString());

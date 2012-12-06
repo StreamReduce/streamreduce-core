@@ -255,7 +255,7 @@ public class JiraClient extends AbstractProjectHostingClient {
         Date afterDate = getLastActivityPollDate();
         String requestUrl = baseRequestURL + "&streams=update-date+AFTER+" + afterDate.getTime();
 
-        List<Entry> allEntries = new ArrayList<Entry>();
+        List<Entry> allEntries = new ArrayList<>();
         List<Entry> feedEntries = FeedUtils.getFeedEntries(requestUrl, getConnectionCredentials().getIdentity(),
                 getConnectionCredentials().getCredential());
 
@@ -307,11 +307,11 @@ public class JiraClient extends AbstractProjectHostingClient {
         Assert.isTrue(getConnectionId().equals(inventoryItem.getConnection().getId()));
 
         String projectKey = inventoryItem.getExternalId();
-        Map<String, Object> activityParts = new HashMap<String, Object>();
+        Map<String, Object> activityParts = new HashMap<>();
         String title = entry.getTitle() != null ? MessageUtils.cleanEntry(entry.getTitle()) : null;
         String rawContent = concatRawTitleAndContent(entry);
         String content = entry.getContent() != null ? MessageUtils.cleanEntry(entry.getContent()) : null;
-        Set<String> hashtags = new HashSet<String>();
+        Set<String> hashtags = new HashSet<>();
         String applicationHashtag;
         String activityHashtag;
         String activityTargetHashtag = null;
@@ -477,7 +477,7 @@ public class JiraClient extends AbstractProjectHostingClient {
         sb.append("</soapenv:Body></soapenv:Envelope>");
 
         String rawResponse;
-        List<Header> requestHeaders = new ArrayList<Header>();
+        List<Header> requestHeaders = new ArrayList<>();
 
         requestHeaders.add(new BasicHeader("SOAPAction", ""));
 
@@ -506,7 +506,7 @@ public class JiraClient extends AbstractProjectHostingClient {
     }
 
     public List<Element> asList(NodeList nodeList) {
-        ArrayList<Element> elements = new ArrayList<Element>();
+        ArrayList<Element> elements = new ArrayList<>();
         for (int i = 0; i < nodeList.getLength(); i++) {
             elements.add((Element) nodeList.item(i));
         }
@@ -1076,7 +1076,7 @@ public class JiraClient extends AbstractProjectHostingClient {
             debugLog(LOGGER, "  (From cache)");
             return response;
         } else {
-            response = new ArrayList<JSONObject>();
+            response = new ArrayList<>();
         }
 
         JSONArray rawResponse = new JSONArray();

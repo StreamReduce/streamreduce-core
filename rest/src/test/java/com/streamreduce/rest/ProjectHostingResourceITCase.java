@@ -79,7 +79,7 @@ public class ProjectHostingResourceITCase extends AbstractInContainerTestCase {
         String response = makeRequest(projectHostingProvidersUrl, "GET", null, authnToken);
         ConnectionProvidersResponseDTO responseDTO = new ObjectMapper().readValue(response,
                 ConnectionProvidersResponseDTO.class);
-        List<String> expectedIds = new ArrayList<String>(Arrays.asList("github","jira"));
+        List<String> expectedIds = new ArrayList<>(Arrays.asList("github","jira"));
 
 
         for (ConnectionProviderResponseDTO cprd : responseDTO.getProviders()) {

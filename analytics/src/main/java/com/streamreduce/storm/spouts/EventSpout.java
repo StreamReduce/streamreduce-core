@@ -169,7 +169,7 @@ public class EventSpout extends AbstractScheduledDBCollectionSpout {
             return events;
         } catch (Exception e) {
             logger.error("0 events emmitted due to failure in getDBEntries",e);
-            return new ArrayList<BasicDBObject>();
+            return new ArrayList<>();
         }
     }
 

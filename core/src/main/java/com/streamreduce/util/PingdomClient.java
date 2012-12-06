@@ -89,7 +89,7 @@ public class PingdomClient extends ExternalIntegrationClient {
         }
 
         JSONArray checks = json.getJSONArray("checks");
-        List<JSONObject> inventory = new ArrayList<JSONObject>();
+        List<JSONObject> inventory = new ArrayList<>();
         for (Iterator<JSONObject> i = checks.iterator(); i.hasNext();) {
             inventory.add(i.next());
         }

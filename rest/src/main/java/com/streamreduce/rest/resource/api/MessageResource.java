@@ -83,7 +83,7 @@ public class MessageResource extends AbstractTagableSobaResource {
 
         SobaMessage sobaMessage;
         User sender = applicationManager.getSecurityService().getCurrentUser();
-        Map<String, Object> eventContext = new HashMap<String, Object>();
+        Map<String, Object> eventContext = new HashMap<>();
 
         eventContext.put("message", message);
         eventContext.put("payload", json);
@@ -250,7 +250,7 @@ public class MessageResource extends AbstractTagableSobaResource {
         }
 
         MessageCommentsResponseDTO dto = new MessageCommentsResponseDTO();
-        List<MessageCommentResponseDTO> allComments = new ArrayList<MessageCommentResponseDTO>();
+        List<MessageCommentResponseDTO> allComments = new ArrayList<>();
         for (MessageComment comment : sobaMessage.getComments()) {
             allComments.add(comment.toDTO());
         }

@@ -42,7 +42,7 @@ public class Role extends ObjectWithId {
     @Size(max = 256)
     private String description;
     @NotNull
-    private Set<String> permissions = new HashSet<String>();
+    private Set<String> permissions = new HashSet<>();
 
     protected Role() {
     }
@@ -87,7 +87,7 @@ public class Role extends ObjectWithId {
     }
 
     public void addPermissions(String... permission) {
-        Set<String> set = new HashSet<String>();
+        Set<String> set = new HashSet<>();
         set.addAll(Arrays.asList(permission));
         this.permissions = set;
     }

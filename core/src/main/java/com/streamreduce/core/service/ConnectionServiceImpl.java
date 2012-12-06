@@ -460,7 +460,7 @@ public class ConnectionServiceImpl implements ConnectionService {
 
     private void handleHashtagEvent(EventId eventId, Connection target, SobaObject tagger, String tag) {
         // Create the event
-        Map<String, Object> eventContext = new HashMap<String, Object>();
+        Map<String, Object> eventContext = new HashMap<>();
 
         if (eventId == EventId.HASHTAG_ADD) {
             eventContext.put("addedHashtag", tag);

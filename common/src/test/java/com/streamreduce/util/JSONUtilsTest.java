@@ -76,11 +76,11 @@ public class JSONUtilsTest {
         ObjectId a = new ObjectId();
         ObjectId b = new ObjectId();
 
-        Map<String,Object> map = new HashMap<String,Object>();
+        Map<String,Object> map = new HashMap<>();
         map.put("a",a);
         map.put("somethingElse",42);
 
-        Map<Object,Object> innerMap = new HashMap<Object,Object>();
+        Map<Object,Object> innerMap = new HashMap<>();
         innerMap.put("b", b);
 
         map.put("innerMap", innerMap);

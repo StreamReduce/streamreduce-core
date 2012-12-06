@@ -43,7 +43,7 @@ public class OutboundConfigurationResponseDTO extends BaseOutboundConfigurationD
     }
 
     public static List<OutboundConfigurationResponseDTO> toDTOs(Collection<OutboundConfiguration> outboundConfigurations) {
-        List<OutboundConfigurationResponseDTO> outboundDTOs = new ArrayList<OutboundConfigurationResponseDTO>();
+        List<OutboundConfigurationResponseDTO> outboundDTOs = new ArrayList<>();
         for (OutboundConfiguration outboundConfiguration : outboundConfigurations) {
             if (outboundConfiguration == null) { continue; }
                 outboundDTOs.add(toDTO(outboundConfiguration));

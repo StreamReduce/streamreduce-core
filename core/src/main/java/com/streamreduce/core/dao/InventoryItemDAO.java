@@ -115,7 +115,7 @@ public class InventoryItemDAO extends ValidatingDAO<InventoryItem> {
 
         cursor = collection.find(query);
 
-        List<InventoryItem> inventoryItems = new ArrayList<InventoryItem>();
+        List<InventoryItem> inventoryItems = new ArrayList<>();
 
         try {
             while (cursor.hasNext()) {

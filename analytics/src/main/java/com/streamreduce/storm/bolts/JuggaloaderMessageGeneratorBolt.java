@@ -51,17 +51,17 @@ public class JuggaloaderMessageGeneratorBolt extends NodeableUnreliableBolt {
     private static final long serialVersionUID = 476003176010598454L;
     private int count = 0;
 
-    private Map<String, Object> buckets = new ConcurrentHashMap<String, Object>();
-    private Map<String, Long> accountState = new ConcurrentHashMap<String, Long>();
+    private Map<String, Object> buckets = new ConcurrentHashMap<>();
+    private Map<String, Long> accountState = new ConcurrentHashMap<>();
 
     private Map<String, Object> aggregate(Map<String, Object> metric, MessageAggregationBucket bucket) {
-        ArrayList<Map<String, Object>> items = new ArrayList<Map<String, Object>>();
+        ArrayList<Map<String, Object>> items = new ArrayList<>();
 
         float total = 0.0f;
         float diff = 0.0f;
         for (Object object : bucket) {
             Map<String, Object> item = (Map<String, Object>) object;
-            Map<String, Object> row = new HashMap<String, Object>();
+            Map<String, Object> row = new HashMap<>();
             row.put("metricCriteria", item.get("metricCriteria"));
             row.put("name", item.get("name")); // ie, CONNECTION_ACTIVITY
             if (item.containsKey("targetConnectionAlias")) {

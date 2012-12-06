@@ -106,7 +106,7 @@ public class AWSClient extends ExternalIntegrationClient {
 
         NodeMetadata nodeMetadata = getEC2Instance(nodeId);
 
-        return new RetryablePredicate<NodeMetadata>(NodePredicates.RUNNING, 30, 5,
+        return new RetryablePredicate<>(NodePredicates.RUNNING, 30, 5,
                                                     TimeUnit.SECONDS).apply(nodeMetadata);
     }
 
@@ -124,7 +124,7 @@ public class AWSClient extends ExternalIntegrationClient {
 
         NodeMetadata nodeMetadata = getEC2Instance(nodeId);
 
-        return new RetryablePredicate<NodeMetadata>(NodePredicates.RUNNING, 30, 5,
+        return new RetryablePredicate<>(NodePredicates.RUNNING, 30, 5,
                                                     TimeUnit.SECONDS).apply(nodeMetadata);
     }
 
@@ -171,7 +171,7 @@ public class AWSClient extends ExternalIntegrationClient {
         ComputeService computeService = getComputeServiceContext().getComputeService();
         Set<? extends NodeMetadata> rawComputeNodes = filter(
                 computeService.listNodesDetailsMatching(all()), not(TERMINATED));
-        List<JSONObject> computeNodes = new ArrayList<JSONObject>();
+        List<JSONObject> computeNodes = new ArrayList<>();
 
         for (NodeMetadata computeNode : rawComputeNodes) {
             computeNodes.add(JSONObject.fromObject(computeNode));
@@ -196,7 +196,7 @@ public class AWSClient extends ExternalIntegrationClient {
      */
     public List<JSONObject> getS3BucketsAsJson() throws InvalidCredentialsException {
         Set<? extends StorageMetadata> rawBlobs = getS3Buckets();
-        List<JSONObject> blobs = new ArrayList<JSONObject>();
+        List<JSONObject> blobs = new ArrayList<>();
 
         for (StorageMetadata storageMetadata : rawBlobs) {
             blobs.add(JSONObject.fromObject(storageMetadata));
@@ -206,7 +206,7 @@ public class AWSClient extends ExternalIntegrationClient {
     }
 
     public List<JSONObject> describeRegions() throws IOException, InvalidCredentialsException {
-        Map<String, String> params = new HashMap<String, String>();
+        Map<String, String> params = new HashMap<>();
         params.put("Action", "DescribeRegions");
         params.put("Version", "2012-08-15");
         JSONObject rawResponse = makeRequest(EC2_API_BASE, params);
@@ -214,7 +214,7 @@ public class AWSClient extends ExternalIntegrationClient {
     }
 
     public List<JSONObject> describeImages(String endpoint, Set<String> imageIds) throws IOException, InvalidCredentialsException {
-        Map<String, String> params = new HashMap<String, String>();
+        Map<String, String> params = new HashMap<>();
         params.put("Action", "DescribeImages");
         params.put("Version", "2012-08-15");
         int count = 0;
@@ -227,8 +227,8 @@ public class AWSClient extends ExternalIntegrationClient {
     }
 
     public List<JSONObject> describeInstances(String endpoint) throws IOException, InvalidCredentialsException {
-        List<JSONObject> response = new ArrayList<JSONObject>();
-        HashMap<String, String> params = new HashMap<String, String>();
+        List<JSONObject> response = new ArrayList<>();
+        HashMap<String, String> params = new HashMap<>();
         params.put("Action", "DescribeInstances");
         params.put("Version", "2012-08-15");
         params.put("Filter.1.Name", "instance-state-name");
@@ -242,8 +242,8 @@ public class AWSClient extends ExternalIntegrationClient {
     }
 
     public List<JSONObject> describeInstanceStatus(String endpoint) throws IOException, InvalidCredentialsException {
-        List<JSONObject> response = new ArrayList<JSONObject>();
-        HashMap<String, String> params = new HashMap<String, String>();
+        List<JSONObject> response = new ArrayList<>();
+        HashMap<String, String> params = new HashMap<>();
         String nextToken = null;
         do {
             params.put("Action", "DescribeInstanceStatus");
@@ -260,10 +260,10 @@ public class AWSClient extends ExternalIntegrationClient {
     }
 
     public List<JSONObject> listMetrics(String endpoint) throws IOException, InvalidCredentialsException {
-        List<JSONObject> response = new ArrayList<JSONObject>();
+        List<JSONObject> response = new ArrayList<>();
         String nextToken = null;
         do {
-            HashMap<String, String> params = new HashMap<String, String>();
+            HashMap<String, String> params = new HashMap<>();
             params.put("Action", "ListMetrics");
             params.put("Version", "2010-08-01");
             if (nextToken != null) {
@@ -279,7 +279,7 @@ public class AWSClient extends ExternalIntegrationClient {
 
     public List<JSONObject> getMetricStatistics(String endpoint, String namespace, String metricName, String dimensionName, String dimensionValue)
             throws IOException, InvalidCredentialsException {
-        Map<String, String> params = new HashMap<String, String>();
+        Map<String, String> params = new HashMap<>();
         params.put("Action", "GetMetricStatistics");
         params.put("Version", "2010-08-01");
         params.put("Namespace", namespace);
@@ -296,9 +296,9 @@ public class AWSClient extends ExternalIntegrationClient {
     }
 
     public Map<String, JSONArray> describeInstanceAndImageForRunningAndStoppedInstances(String endpoint) throws IOException, InvalidCredentialsException {
-        Map<String, JSONArray> instanceAndImageByInstanceId = new HashMap<String, JSONArray>();
-        Map<String, JSONObject> instancesById = new HashMap<String, JSONObject>();
-        Map<String, JSONObject> imagesById = new HashMap<String, JSONObject>();
+        Map<String, JSONArray> instanceAndImageByInstanceId = new HashMap<>();
+        Map<String, JSONObject> instancesById = new HashMap<>();
+        Map<String, JSONObject> imagesById = new HashMap<>();
         List<JSONObject> instances = describeInstances(endpoint);
         for (JSONObject instance : instances) {
             String instanceId = instance.getString("instanceId");
@@ -323,7 +323,7 @@ public class AWSClient extends ExternalIntegrationClient {
     }
 
     public Map<String, JSONObject> getMetricsStatisticsForRunningInstances(String endpoint) throws IOException, InvalidCredentialsException {
-        Map<String, JSONObject> statisticsByInstance = new HashMap<String, JSONObject>();
+        Map<String, JSONObject> statisticsByInstance = new HashMap<>();
         List<JSONObject> instances = describeInstances(endpoint);
         List<JSONObject> metrics = listMetrics(endpoint.replace("ec2", "monitoring"));
         List<JSONObject> runningInstances = filterInstancesByInstanceState("running", instances);
@@ -343,7 +343,7 @@ public class AWSClient extends ExternalIntegrationClient {
     }
 
     private List<JSONObject> filterInstancesByInstanceState(String instanceState, List<JSONObject> instances) {
-        List<JSONObject> filtered = new ArrayList<JSONObject>();
+        List<JSONObject> filtered = new ArrayList<>();
         for (JSONObject instance : instances) {
             String stateName = instance.getJSONObject("instanceState").getString("name");
             if (stateName.equals(instanceState)) {
@@ -354,7 +354,7 @@ public class AWSClient extends ExternalIntegrationClient {
     }
 
     private List<JSONObject> filterMetricsByInstanceId(String instanceId, List<JSONObject> metrics) {
-        List<JSONObject> filtered = new ArrayList<JSONObject>();
+        List<JSONObject> filtered = new ArrayList<>();
         for (JSONObject metric : metrics) {
             JSONObject dimension = metric.getJSONObject("Dimensions").getJSONObject("member");
             String dimensionName = dimension.getString("Name");
@@ -395,7 +395,7 @@ public class AWSClient extends ExternalIntegrationClient {
     private JSONObject makeS3Request(String endpoint, String bucket, String path) throws IOException, InvalidCredentialsException {
         String date = getS3FormattedTimestamp(new Date());
         String signature = calculateS3Signature((bucket == null? "" : "/" + bucket) + path, getConnectionCredentials().getCredential(), date);
-        List<Header> requestHeader = new ArrayList<Header>();
+        List<Header> requestHeader = new ArrayList<>();
         requestHeader.add(new BasicHeader("Date", date));
         requestHeader.add(new BasicHeader("Authorization", "AWS " + getConnectionCredentials().getIdentity() + ":" + signature));
         String url = "https://" + (bucket == null ? "" : bucket + ".") + endpoint + path;
@@ -405,7 +405,7 @@ public class AWSClient extends ExternalIntegrationClient {
     }
 
     private List<JSONObject> getJSONChildren(String key, JSONObject json) {
-        List<JSONObject> array = new ArrayList<JSONObject>();
+        List<JSONObject> array = new ArrayList<>();
         Object obj = json.get(key);
         if (obj instanceof JSONObject) {
             array.add((JSONObject) obj);
@@ -417,7 +417,7 @@ public class AWSClient extends ExternalIntegrationClient {
 
     private String signUrl(String rawUrl, Map<String, String> params) {
         if (params == null) {
-            params = new HashMap<String, String>();
+            params = new HashMap<>();
         }
         // http://docs.amazonwebservices.com/general/latest/gr/signature-version-2.html
         params.put("AWSAccessKeyId", getConnectionCredentials().getIdentity());
@@ -458,7 +458,7 @@ public class AWSClient extends ExternalIntegrationClient {
             canonical.append("GET").append("\n");
             canonical.append(new URL(rawUrl).getHost()).append("\n");
             canonical.append("/").append("\n");
-            SortedMap<String, String> sorted = new TreeMap<String, String>(params);
+            SortedMap<String, String> sorted = new TreeMap<>(params);
             canonical.append(getQueryString(sorted));
             Mac mac = Mac.getInstance("HmacSHA256");
             mac.init(new SecretKeySpec(key.getBytes("UTF-8"), "HmacSHA256"));

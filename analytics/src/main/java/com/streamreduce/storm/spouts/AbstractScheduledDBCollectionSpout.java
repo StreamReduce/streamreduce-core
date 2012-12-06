@@ -106,7 +106,7 @@ public abstract class AbstractScheduledDBCollectionSpout extends BaseRichSpout {
     @Override
     public void fail(Object msgId) {
         if (failedQueue == null) {
-            failedQueue = new LinkedBlockingQueue<String>();
+            failedQueue = new LinkedBlockingQueue<>();
         }
         failedQueue.add(msgId.toString());
     }
@@ -116,7 +116,7 @@ public abstract class AbstractScheduledDBCollectionSpout extends BaseRichSpout {
      */
     private void buildDBCollectionQueue() {
         sleepStart = -1;
-        dbCollectionQueue = new LinkedBlockingQueue<BasicDBObject>();
+        dbCollectionQueue = new LinkedBlockingQueue<>();
 
         dbCollectionQueue.addAll(getDBEntries());
 

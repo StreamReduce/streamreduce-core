@@ -48,7 +48,7 @@ public abstract class AbstractAdminResource extends AbstractResource {
 
         dto.setAccountOriginator(user.isAccountOriginator());
         dto.setFullname(user.getFullname());
-        Set<RoleResponseDTO> rolesDTOs = new HashSet<RoleResponseDTO>();
+        Set<RoleResponseDTO> rolesDTOs = new HashSet<>();
         for (Role role : user.getRoles()) {
             rolesDTOs.add(toDTO(role));
         }

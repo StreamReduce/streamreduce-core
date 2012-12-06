@@ -424,7 +424,7 @@ public class EmailServiceImpl extends AbstractService implements EmailService, I
                 withSource(from).
                 withReplyToAddresses(replyTo);
 
-        List<String> toAddresses = new ArrayList<String>();
+        List<String> toAddresses = new ArrayList<>();
         toAddresses.add(to);
 
         Destination dest = new Destination().withToAddresses(toAddresses);

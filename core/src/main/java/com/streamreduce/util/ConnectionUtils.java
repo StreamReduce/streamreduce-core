@@ -35,7 +35,7 @@ import java.util.ServiceLoader;
 public final class ConnectionUtils {
 
     public static final Map<String, Class<? extends ConnectionProvider>> PROVIDER_MAP =
-            new HashMap<String, Class<? extends ConnectionProvider>>();
+            new HashMap<>();
 
     static {
         PROVIDER_MAP.put(CloudProvider.TYPE, CloudProvider.class);

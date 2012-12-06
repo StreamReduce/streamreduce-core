@@ -49,7 +49,7 @@ public class Account extends ObjectWithId {
     private Set<ObjectId> publicConnectionBlacklist; // SOBA-1885, ability to blacklist PUBLIC or bootstrapped connections
 
     // boolean flags for different config and notification settings
-    private Map<ConfigKey, Boolean> configMap = new HashMap<ConfigKey, Boolean>();
+    private Map<ConfigKey, Boolean> configMap = new HashMap<>();
 
     // all values will default to false if null, so make sure that's a logical when you add new ones
     public enum ConfigKey {
@@ -106,14 +106,14 @@ public class Account extends ObjectWithId {
         if (publicConnectionBlacklist == null) {
             // do this so we don't persist an empty list
             // not do we have stupid null checks.
-            return new HashSet<ObjectId>();
+            return new HashSet<>();
         }
         return publicConnectionBlacklist;
     }
 
     public void appendToPublicConnectionBlacklist(ObjectId connectionId) {
         if (publicConnectionBlacklist == null) {
-            publicConnectionBlacklist = new HashSet<ObjectId>();
+            publicConnectionBlacklist = new HashSet<>();
         }
         publicConnectionBlacklist.add(connectionId);
     }

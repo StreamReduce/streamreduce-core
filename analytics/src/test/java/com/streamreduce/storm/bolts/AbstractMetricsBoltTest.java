@@ -53,7 +53,7 @@ public abstract class AbstractMetricsBoltTest {
      * @return the map of calculated events
      */
     protected Map<String, Float> processEvents(List<Map<String, Object>> events) {
-        Map<String, Float> metricCounts = new HashMap<String, Float>();
+        Map<String, Float> metricCounts = new HashMap<>();
         AbstractMetricsBolt bolt = getBolt();
 
         outputCollector = new MockOutputCollector();
@@ -103,7 +103,7 @@ public abstract class AbstractMetricsBoltTest {
                                                               createEvent.get("userId").toString(),
                                                               createEvent.get("targetId").toString(), targetType, null);
 
-        Map<EventId, Map<String, Object>> crudEvents = new HashMap<EventId, Map<String, Object>>();
+        Map<EventId, Map<String, Object>> crudEvents = new HashMap<>();
 
         crudEvents.put(EventId.CREATE, createEvent);
         crudEvents.put(EventId.READ, readEvent);
@@ -143,7 +143,7 @@ public abstract class AbstractMetricsBoltTest {
     protected Map<String, Object> createBaseEventMock(EventId eventId, String accountId, String userId,
                                                       String targetId, String targetType,
                                                       Map<String, Object> metadata) {
-        Map<String, Object> baseEvent = new HashMap<String, Object>();
+        Map<String, Object> baseEvent = new HashMap<>();
 
         baseEvent.put("_id", new ObjectId().toString());
         baseEvent.put("timestamp", new Date().getTime());
@@ -153,7 +153,7 @@ public abstract class AbstractMetricsBoltTest {
         baseEvent.put("targetId", targetId != null ? targetId : new ObjectId().toString());
 
         if (metadata == null) {
-            metadata = new HashMap<String, Object>();
+            metadata = new HashMap<>();
         }
 
         if (targetType != null) {
@@ -180,7 +180,7 @@ public abstract class AbstractMetricsBoltTest {
                                                                                       String providerId,
                                                                                       Map<String, Object> payload) {
         Map<EventId, Map<String, Object>> allEvents = createCRUDEvents(targetType);
-        Map<String, Object> metadata = new HashMap<String, Object>();
+        Map<String, Object> metadata = new HashMap<>();
 
         metadata.put("targetProviderId", providerId);
         metadata.put("targetProviderType", providerType);

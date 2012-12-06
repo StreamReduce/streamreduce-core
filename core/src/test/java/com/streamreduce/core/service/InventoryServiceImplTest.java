@@ -67,7 +67,7 @@ public class InventoryServiceImplTest {
                 .user(sampleUser)
                 .authType(AuthType.NONE)
                 .build();
-        Map<String, String> metadata = new HashMap<String, String>();
+        Map<String, String> metadata = new HashMap<>();
 
         metadata.put("last_activity_poll", feb282012TimeStamp);
 
@@ -96,7 +96,7 @@ public class InventoryServiceImplTest {
 
     @Test
     public void testRefreshFeedMessagesProperOrder() throws Exception {
-        final List<Long> pubDates = new ArrayList<Long>();
+        final List<Long> pubDates = new ArrayList<>();
         doAnswer(new Answer() {
             @Override
             public Object answer(InvocationOnMock invocation) throws Throwable {

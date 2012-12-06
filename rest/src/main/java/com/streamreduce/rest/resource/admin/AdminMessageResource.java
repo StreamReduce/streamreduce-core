@@ -91,7 +91,7 @@ public class AdminMessageResource extends AbstractAdminResource {
                 hashtags.add((String) rawHashtag);
             }
 
-            Map<String, Object> eventMetadata = new HashMap<String, Object>();
+            Map<String, Object> eventMetadata = new HashMap<>();
 
             eventMetadata.put("message", parsedMessage);
             eventMetadata.put("messageHashtags", hashtags);
@@ -149,7 +149,7 @@ public class AdminMessageResource extends AbstractAdminResource {
                 hashtags.add((String) rawHashtag);
             }
 
-            Map<String, Object> eventMetadata = new HashMap<String, Object>();
+            Map<String, Object> eventMetadata = new HashMap<>();
             eventMetadata.put("message", message);
             eventMetadata.put("payload", json);
 

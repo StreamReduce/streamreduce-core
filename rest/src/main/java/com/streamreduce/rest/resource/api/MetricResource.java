@@ -64,7 +64,7 @@ public class MetricResource extends AbstractResource {
     @GET
     public Response getMetrics(@Context UriInfo context) {
         MultivaluedMap<String, String> queryParams = context.getQueryParameters();
-        Map<String, List<String>> criteria = new HashMap<String, List<String>>();
+        Map<String, List<String>> criteria = new HashMap<>();
         String accountId;
         String metricName;
         String granularity;

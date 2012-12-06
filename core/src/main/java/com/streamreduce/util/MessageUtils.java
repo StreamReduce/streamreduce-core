@@ -96,8 +96,8 @@ public final class MessageUtils {
         boolean justTags = true;
 
         public ParsedMessage() {
-            target = new TreeSet<String>(String.CASE_INSENSITIVE_ORDER);
-            tags = new TreeSet<String>(String.CASE_INSENSITIVE_ORDER);
+            target = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
+            tags = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
         }
 
         public Set<String> getTarget() {

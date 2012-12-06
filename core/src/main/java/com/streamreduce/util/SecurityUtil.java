@@ -65,7 +65,7 @@ public final class SecurityUtil {
         //char specialChars[] = "~!@#$%^&*()-_=+[{]}|;:<>/?".toCharArray();
         char specialChars[] = "!$-_+".toCharArray(); // limited subset
 
-        List<Character> pwdLst = new ArrayList<Character>();
+        List<Character> pwdLst = new ArrayList<>();
         for (int g = 0; g <= n; g++) {
             for (int z = 0; z < 1; z++) {
                 if (g == 0) {

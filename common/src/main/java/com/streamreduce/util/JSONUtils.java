@@ -141,7 +141,7 @@ public final class JSONUtils {
     public static <T> Map<T,Object> replaceJSONNullsFromMap(Map<T,Object> oldMap) {
         if (oldMap == null) { return null;}
 
-        Map<T,Object> map = new HashMap<T,Object>(oldMap);
+        Map<T,Object> map = new HashMap<>(oldMap);
 
         //Iterate over old keyset since we modify the new map
         for (T key : oldMap.keySet()) {
@@ -161,7 +161,7 @@ public final class JSONUtils {
     public static List<Object> replaceJSONNullsFromList(List<Object> list) {
         if (list == null) { return null; }
 
-        List<Object> newList = new ArrayList<Object>(list);
+        List<Object> newList = new ArrayList<>(list);
 
         for (int i = 0; i < newList.size() ; i++) {
             Object o = newList.get(i);
@@ -179,7 +179,7 @@ public final class JSONUtils {
     public static Map<String,Object> convertJSONObjectToMap(JSONObject jsonObject) {
         if (jsonObject == null) { return null;}
 
-        Map<String,Object> map = new HashMap<String,Object>();
+        Map<String,Object> map = new HashMap<>();
         for (Object key : jsonObject.keySet()) {
             map.put(key.toString(),jsonObject.get(key));
         }

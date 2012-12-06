@@ -62,7 +62,7 @@ public class InternalConnectionInventoryBolt extends BaseRichBolt {
             BasicDBObject connection = (BasicDBObject) tuple.getValue(0);
             String id = connection.getString("_id");
             String type = connection.getString("type");
-            List<BasicDBObject> inventoryItems = new ArrayList<BasicDBObject>();
+            List<BasicDBObject> inventoryItems = new ArrayList<>();
 
             if (type.equals(ConnectionTypeConstants.FEED_TYPE)) {
                 // Do nothing, just here for posterity

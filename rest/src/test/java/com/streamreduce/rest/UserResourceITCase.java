@@ -438,7 +438,7 @@ public class UserResourceITCase extends AbstractInContainerTestCase {
     @Ignore
     public void testUserEventLog() throws Exception {
 
-        List<JSONObject> jsonObjectList = new ArrayList<JSONObject>();
+        List<JSONObject> jsonObjectList = new ArrayList<>();
 
         JSONObject json = new JSONObject();
         json.put("tag", "user-click-tab");
