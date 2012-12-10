@@ -55,7 +55,7 @@ public class MongoClient {
     }
 
     private static void loadProperties() {
-        databaseProperties = PropertiesOverrideLoader.loadProperties("override.properties");
+        databaseProperties = PropertiesOverrideLoader.loadProperties("database.properties");
     }
 
     /**

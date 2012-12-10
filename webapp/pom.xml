@@ -56,15 +56,25 @@
         </dependency>
 
         <dependency>
-            <groupId>javax.servlet</groupId>
+            <groupId>org.mortbay.jetty</groupId>
             <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
 
     <build>
         <finalName>streamreduce-app</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <configuration>
+                    <webAppSourceDirectory>${project.basedir}/src/main/webapp</webAppSourceDirectory>
+                    <classesDirectory>${project.build.directory}/classes</classesDirectory>
+                </configuration>
+            </plugin>
+        </plugins>
+
     </build>
 
     <profiles>
@@ -76,15 +86,22 @@
                     <value>true</value>
                 </property>
             </activation>
+
+            <dependencies>
+                <dependency>
+                    <groupId>com.streamreduce</groupId>
+                    <artifactId>analytics</artifactId>
+                    <version>${project.version}</version>
+                </dependency>
+            </dependencies>
+
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>org.mortbay.jetty</groupId>
-                        <artifactId>maven-jetty-plugin</artifactId>
-                        <version>6.1.26</version>
+                        <groupId>org.eclipse.jetty</groupId>
+                        <artifactId>jetty-maven-plugin</artifactId>
                         <configuration>
                             <webAppSourceDirectory>${project.basedir}/src/main/webapp</webAppSourceDirectory>
-                            <webXml>${project.basedir}/src/main/webapp/WEB-INF/web.xml</webXml>
                             <classesDirectory>${project.build.directory}/classes</classesDirectory>
                         </configuration>
                         <executions>

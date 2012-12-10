@@ -44,7 +44,7 @@ public class PropertiesOverrideLoader {
         try {
             InputStream propsInputStream = PropertiesOverrideLoader.class.getResourceAsStream(propertiesPath);
             actualProperties.load(propsInputStream);
-        } catch (IOException e) {
+        } catch (Exception e) {
             LOGGER.error("Unable to load " + propertiesPath + " from classpath.", e);
         }
 

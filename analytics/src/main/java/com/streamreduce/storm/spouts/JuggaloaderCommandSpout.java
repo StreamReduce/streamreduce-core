@@ -83,13 +83,6 @@ public class JuggaloaderCommandSpout extends BaseRichSpout {
     private static ConcurrentLinkedQueue queue;
     private SpoutOutputCollector collector;
 
-    /**
-     * Only one instance of the Jetty HTTP server will be created per JVM
-     */
-    static {
-        startEmbeddedHttpServer();
-    }
-
     public JuggaloaderCommandSpout() {}
 
     /**
@@ -153,6 +146,7 @@ public class JuggaloaderCommandSpout extends BaseRichSpout {
      * This is synchronized and statically called so only 1 worker
      * per node running this spout will create the Server.
      */
+    @SuppressWarnings("unused") //Presently not used because we may be running inside of an external jetty instance.
     public static synchronized void startEmbeddedHttpServer() {
         try {
             // Only the first thread that gets here will create the server and queue.

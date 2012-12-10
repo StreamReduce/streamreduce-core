@@ -75,11 +75,9 @@ public class RunStorm {
             }
             logger.info("Start Storm Production Cluster");
         }
-
-        // use for all profiles
-        startEmbeddedHttpServer();
     }
 
+    @SuppressWarnings("unused") //Presently not used because we may be running inside of an external jetty instance.
     public static void startEmbeddedHttpServer() {
         try {
             Server server = new Server(8193);
