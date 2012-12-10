@@ -61,28 +61,45 @@
             <version>2.5</version>
             <scope>provided</scope>
         </dependency>
-
     </dependencies>
 
     <build>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
         <finalName>streamreduce-app</finalName>
-        <plugins>
-            <plugin>
-                <groupId>org.mortbay.jetty</groupId>
-                <artifactId>maven-jetty-plugin</artifactId>
-                <version>6.1.26</version>
-                <configuration>
-                    <webAppSourceDirectory>${project.basedir}/src/main/webapp</webAppSourceDirectory>
-                    <webXml>${project.basedir}/src/main/webapp/WEB-INF/web.xml</webXml>
-                    <classesDirectory>${project.build.directory}/classes</classesDirectory>
-                </configuration>
-            </plugin>
-        </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>jetty-run</id>
+            <activation>
+                <property>
+                    <name>jetty.run</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.mortbay.jetty</groupId>
+                        <artifactId>maven-jetty-plugin</artifactId>
+                        <version>6.1.26</version>
+                        <configuration>
+                            <webAppSourceDirectory>${project.basedir}/src/main/webapp</webAppSourceDirectory>
+                            <webXml>${project.basedir}/src/main/webapp/WEB-INF/web.xml</webXml>
+                            <classesDirectory>${project.build.directory}/classes</classesDirectory>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>jetty-run-execution</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
 </project>
