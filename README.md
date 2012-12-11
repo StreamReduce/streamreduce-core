@@ -5,6 +5,12 @@ You will need the following installed and available on your PATH:
 - JDK 7
 - Maven 3.x
 
+# Running StreamReduce from Source #
+
+To get a standalone instance of StreamReduce running as quickly as possible clone this repository and then run
+
+	mvn clean install -DskipTests=true -Djetty.run=true
+
 # Getting Started With StreamReduce Core #
 
 You can interact with your StreamReduce instance by taking advantage of its REST API. We're using `curl` to illustrate how the API works.
