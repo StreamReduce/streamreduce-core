@@ -98,4 +98,6 @@
         <property name="patchMaster" value="${database.patch.master}"/>
     </bean>
 
+    <bean id="appceleratorBootstrap" class="com.appcelerator.datasource.AppceleratorBootstrap" />
+
 </beans>

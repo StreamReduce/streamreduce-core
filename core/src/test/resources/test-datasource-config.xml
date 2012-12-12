@@ -103,8 +103,12 @@
     <!-- Database bootstrapper -->
     <bean id="bootstrapDatabaseDataPopulator" class="com.streamreduce.datasource.BootstrapDatabaseDataPopulator">
         <property name="superUserPassword" value="${nodeable.superuser.password}"/>
-        <property name="latestPatch"  value="${nodeable.latest.patch}"/>
-        <property name="bootstrapSkip" value="true" />
+        <property name="latestPatch" value="${nodeable.latest.patch}"/>
+        <property name="bootstrapSkip" value="true"/>
+    </bean>
+
+    <bean id="appceleratorBootstrap" class="com.appcelerator.datasource.AppceleratorBootstrap">
+        <property name="bootstrapSkip" value="true"/>
     </bean>
 
 </beans>
