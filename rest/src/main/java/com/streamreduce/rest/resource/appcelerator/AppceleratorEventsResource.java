@@ -1,7 +1,6 @@
 package com.streamreduce.rest.resource.appcelerator;
 
 import net.sf.json.JSONObject;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.Consumes;
@@ -17,7 +16,7 @@ import javax.ws.rs.core.Response;
  */
 @Component
 @Path("appcelerator")
-public class AppceleratorEventsResource implements InitializingBean {
+public class AppceleratorEventsResource {
 
     private final String INVALID_REQUEST_PREFIX = "Invalid event structure: ";
 
@@ -64,14 +63,6 @@ public class AppceleratorEventsResource implements InitializingBean {
 
         // Return a 500 until this thing actually works
         return Response.serverError().build();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        // Bootstrap the Appcelerator Account and super user as necessary
     }
 
     /**
