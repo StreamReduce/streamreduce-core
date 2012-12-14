@@ -75,7 +75,6 @@ public abstract class AbstractServiceTestCase {
     @Before
     public void setUp() throws Exception {
         searchServiceImpl.setEnabled(false);
-        bootstrapDatabaseDataPopulator.bootstrapMinimumData(); //Doing a fake DBUnit here.  tearDown() deletes the dbs
         createTestUser();
     }
 

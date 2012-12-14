@@ -32,9 +32,6 @@ import com.streamreduce.datasource.patch.PatchException;
 import com.streamreduce.security.Permissions;
 import com.streamreduce.security.Roles;
 import com.streamreduce.util.JSONObjectBuilder;
-
-import java.util.ResourceBundle;
-
 import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,6 +40,8 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+
+import java.util.ResourceBundle;
 
 /**
  * The BootstrapDatabaseDataPopulator class is a Spring @see org.springframework.beans.factory.InitializingBean that will
@@ -53,7 +52,6 @@ import org.springframework.context.ApplicationContextAware;
 public class BootstrapDatabaseDataPopulator implements InitializingBean, ApplicationContextAware {
 
     private String superUserPassword;
-    private boolean bootstrapSkip;
     private String latestPatch;
     private String patchMaster;
 
@@ -78,10 +76,6 @@ public class BootstrapDatabaseDataPopulator implements InitializingBean, Applica
      */
     @Override
     public void afterPropertiesSet() throws Exception {
-        if (bootstrapSkip) {
-            return;
-        }
-
         bootstrapSystemInfo();
         doPatch();
         bootstrapRoles();
@@ -237,12 +231,6 @@ public class BootstrapDatabaseDataPopulator implements InitializingBean, Applica
 
     }
 
-    public void bootstrapMinimumData() {
-        bootstrapSystemInfo();
-        bootstrapRoles();
-        bootstrapUsersAndAccounts();
-    }
-
     private User getUser(String username) {
         try {
             return userService.getUser(username);
@@ -278,10 +266,6 @@ public class BootstrapDatabaseDataPopulator implements InitializingBean, Applica
 
     public void setLatestPatch(String latestPatch) {
         this.latestPatch = latestPatch;
-    }
-
-    public void setBootstrapSkip(boolean bootstrapSkip) {
-        this.bootstrapSkip = bootstrapSkip;
     }
 
     @Override
