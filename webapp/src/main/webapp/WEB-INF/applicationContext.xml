@@ -57,6 +57,7 @@
                 /gateway/** = apiKey
                 /agent/** = apiKey
                 /admin/** = userToken, roles[Administrators]
+                /appcelerator/** = anon
                 /** = authc
             </value>
         </property>
