@@ -99,7 +99,7 @@ public class AppceleratorEventsResource implements InitializingBean {
         // The process for consuming Appcelerator events works like this:
         //
         //   1) Parse out the necessary pieces available in the payload:
-        //     * aguid: Application id
+        //     * aguid/guid: Application id for mobile/desktop
         //     * mid  : Machine/Device ID
         //   2) Lookup Nodeable objects based on the Appcelerator ids
         //   3) Create necessary objects to correspond with the Appcelerator ids (if necessary)
@@ -121,10 +121,10 @@ public class AppceleratorEventsResource implements InitializingBean {
             return createInvalidRequestError("Empty event structure");
         }
 
-        // Based on the wiki referenced in the class' javadocs, 'aguid' is guaranteed to always be in the payload and is
-        // used to map to a Connection object.
-        if (!eventPayload.containsKey("aguid")) {
-            return createInvalidRequestError("'aguid' is a required event property");
+        // Based on the wiki referenced in the class' javadocs, 'aguid'/'guid' is guaranteed to always be in the payload
+        // and is used to map to a Connection object.
+        if (!eventPayload.containsKey("aguid") && !eventPayload.containsKey("guid")) {
+            return createInvalidRequestError("'aguid' or 'guid' is a required mobile/desktop event property");
         }
 
         // Based on the wiki referenced in the class' javadocs, 'mid' is guaranteed to always be in the payload and is
@@ -135,8 +135,10 @@ public class AppceleratorEventsResource implements InitializingBean {
 
         String appceleratorEvent = eventPayload.containsKey("event") ? eventPayload.getString("event") : "unknown";
         String rawTimestamp = eventPayload.containsKey("ts") ? eventPayload.getString("ts") : null;
-        String aguid = eventPayload.getString("aguid");
-        List<Connection> connections = connectionService.getConnectionsByExternalId(aguid, appceleratorUser);
+        String app_guid = eventPayload.containsKey("aguid") ?
+                eventPayload.getString("aguid") : // For mobile events
+                eventPayload.getString("guid"); // For desktop events
+        List<Connection> connections = connectionService.getConnectionsByExternalId(app_guid, appceleratorUser);
         String mid = eventPayload.getString("mid");
         Connection connection = null;
         InventoryItem inventoryItem;
@@ -154,15 +156,15 @@ public class AppceleratorEventsResource implements InitializingBean {
                         )
                         .account(appceleratorAccount)
                         .user(appceleratorUser)
-                        .alias("Mobile Application (" + aguid + ")")
+                        .alias("Mobile Application (" + app_guid + ")")
                         .description("Mobile Appcelerator application.")
-                        .externalId(aguid)
+                        .externalId(app_guid)
                         .hashtags(ImmutableSet.of("#appcelerator", "#app"))
                         .build());
             } catch (ConnectionExistsException e) {
                 // Should never happen
                 return createError(Response.Status.INTERNAL_SERVER_ERROR,
-                        "Connection already exists for mobile application (" + aguid + ").");
+                        "Connection already exists for mobile application (" + app_guid + ").");
             } catch (InvalidCredentialsException e) {
                 // Should never happen
                 return createError(Response.Status.INTERNAL_SERVER_ERROR, "Invalid connection credentials.");
@@ -272,16 +274,16 @@ public class AppceleratorEventsResource implements InitializingBean {
         }
 
         if (appceleratorUser == null) {
-            User user = new User.Builder()
-                    .account(appceleratorAccount)
-                    .username(APPC_GENERIC_USERNAME)
-                    .alias(APPC_GENERIC_ALIAS)
-                    .fullname(APPC_GENERIC_FULLNAME)
-                    .roles(userService.getUserRoles())
-                    .userStatus(User.UserStatus.ACTIVATED)
-                    .build();
-
-            userService.createUser(user);
+            appceleratorUser = userService.createUser(
+                    new User.Builder()
+                            .account(appceleratorAccount)
+                            .username(APPC_GENERIC_USERNAME)
+                            .alias(APPC_GENERIC_ALIAS)
+                            .fullname(APPC_GENERIC_FULLNAME)
+                            .roles(userService.getUserRoles())
+                            .userStatus(User.UserStatus.ACTIVATED)
+                            .build()
+            );
         }
     }
 
