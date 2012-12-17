@@ -160,9 +160,17 @@ public interface ConnectionService extends TaggableService<Connection> {
     void clearBrokenFlag(Connection connection);
 
     /**
-     * Returns all Connections whose externalId matches the passed in externalId
-     * @param externalId
-     * @return
+     * Returns all Connections whose externalId property matches the passed in externalId owned by a given user.
+     * If a connection with a given externalId is not found, or if the passed externalId was null or empty, an empty
+     * List is returned.  Otherwise a List<Connection> of all connections whose externalId property is equal to the
+     * passed in externalId is returned.
+     *
+     * Since uniqueness isn't enforced on the externalId property of a Connection, the client must be responsible for
+     * handling the N number of possible connections that match.
+     *
+     * @param externalId the externalId expected on connection
+     * @param user - the user who owns the connection
+     * @return All connections whose externalId property matches the passed
      */
     List<Connection> getConnectionsByExternalId(String externalId, User user);
 
