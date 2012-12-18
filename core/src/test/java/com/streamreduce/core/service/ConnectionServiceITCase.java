@@ -24,7 +24,6 @@ import com.streamreduce.core.model.Connection;
 import org.bson.types.ObjectId;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -32,6 +31,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 
 public class ConnectionServiceITCase extends AbstractServiceTestCase {
@@ -53,12 +54,10 @@ public class ConnectionServiceITCase extends AbstractServiceTestCase {
     }
 
     @Test
-    @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
     public void testListAllConnections() throws Exception {
 
         Account nAccount = testUser.getAccount();
         List<Connection> nConnections = connectionService.getConnections(null, testUser);
-
 
         for (Connection connection : nConnections) {
             Assert.assertTrue(connection.getAccount().getId().equals(nAccount.getId()));
@@ -66,9 +65,18 @@ public class ConnectionServiceITCase extends AbstractServiceTestCase {
     }
 
     @Test(expected = ConnectionNotFoundException.class)
-    @Ignore("Integration Tests depended on sensitive account keys, ignoring until better harness is in place.")
     public void testGetConnectionThrowsConnectionNotFoundForNewObjectId() throws ConnectionNotFoundException {
         connectionService.getConnection(new ObjectId());
+    }
+
+    @Test
+    public void testGetConnectionsByExternalId_WhenExternalIdDoesntExist() {
+        assertEquals(0,connectionService.getConnectionsByExternalId("doesnotexist",testUser).size());
+    }
+
+    @Test
+    public void testGetConnectionsByExternalId_WhenExternalIdIsNull() {
+        assertEquals(0,connectionService.getConnectionsByExternalId(null,testUser).size());
     }
 
 

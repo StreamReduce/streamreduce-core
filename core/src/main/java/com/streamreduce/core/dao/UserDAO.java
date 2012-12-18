@@ -118,7 +118,7 @@ public class UserDAO extends SobaObjectDAO<User> {
         APIAuthenticationToken authToken = new APIAuthenticationToken(authenticationToken);
 
         return ds.createQuery(entityClazz)
-                .field("authenticationToken").hasThisElement(authToken)
+                .field("authenticationToken").equal(authToken)
                 .get();
     }
 
