@@ -53,11 +53,11 @@
                 /docs/** = anon
                 /authentication/login = authcBasic, roles[Users]
                 /logout = logout
-                /api/** = userToken
+                /api/** = anon
                 /gateway/** = apiKey
                 /agent/** = apiKey
                 /admin/** = userToken, roles[Administrators]
-                /** = authc
+                /** = anon
             </value>
         </property>
     </bean>

@@ -17,71 +17,51 @@
 package com.streamreduce.rest.resource.api;
 
 import com.google.common.collect.ImmutableMap;
+import com.streamreduce.ConnectionNotFoundException;
 import com.streamreduce.ConnectionTypeConstants;
 import com.streamreduce.ProviderIdConstants;
-import com.streamreduce.ConnectionNotFoundException;
 import com.streamreduce.connections.ConnectionProvider;
 import com.streamreduce.connections.ConnectionProviderFactory;
-import com.streamreduce.core.model.Account;
-import com.streamreduce.core.model.Connection;
-import com.streamreduce.core.model.ConnectionCredentials;
-import com.streamreduce.core.model.InventoryItem;
-import com.streamreduce.core.model.OutboundConfiguration;
-import com.streamreduce.core.model.OutboundDataType;
-import com.streamreduce.core.model.ProjectHostingIssue;
-import com.streamreduce.core.model.SobaObject;
-import com.streamreduce.core.model.User;
+import com.streamreduce.core.model.*;
 import com.streamreduce.core.service.ConnectionService;
 import com.streamreduce.core.service.InventoryService;
 import com.streamreduce.core.service.exception.ConnectionExistsException;
 import com.streamreduce.core.service.exception.InvalidCredentialsException;
-import com.streamreduce.rest.dto.response.ConnectionInventoryResponseDTO;
-import com.streamreduce.rest.dto.response.ConnectionProviderResponseDTO;
-import com.streamreduce.rest.dto.response.ConnectionProvidersResponseDTO;
-import com.streamreduce.rest.dto.response.ConnectionResponseDTO;
-import com.streamreduce.rest.dto.response.ConstraintViolationExceptionResponseDTO;
-import com.streamreduce.rest.dto.response.InventoryItemResponseDTO;
+import com.streamreduce.rest.dto.response.*;
 import com.streamreduce.rest.resource.ErrorMessages;
 import com.streamreduce.util.AbstractProjectHostingClient;
 import com.streamreduce.util.ConnectionUtils;
 import com.streamreduce.util.JiraClient;
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiParam;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import org.apache.commons.lang.StringUtils;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.DefaultValue;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.xml.soap.SOAPException;
 import java.io.IOException;
 import java.net.UnknownHostException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
- * A Connection is an abstraction that provides a top level description of how Nodeable will connect to external
- * resources on behalf of users.  A Connection includes: a globally unique identifier, a provider and type identifying the provider of an external
+ * A Connection includes: a globally unique identifier, a provider and type identifying the provider of an external
  * integration and the interaction model with that provider, an authentication type that determines how Nodeable will
  * authenticate to a connection on a user's behalf, an account unique alias, an optional description, hashtags associated
  * to the connection, and the visibility scope of all messages created from that account.
  */
 @Component
 @Path("api/connections")
+@Api(value = "/api/connections", description = "A Connection is an abstraction that provides a top level " +
+        "description of how Nodeable will connect to external providers on behalf of users."
+)
 public class ConnectionResource extends AbstractOwnableResource {
 
     @Autowired
@@ -89,32 +69,28 @@ public class ConnectionResource extends AbstractOwnableResource {
     @Autowired
     ConnectionService connectionService;
 
-    /**
-     * Returns an array of connection provider types.
-     * A connector provider type is a top level type for distinguishing what the type of a connection (e.g. cloud, projecthosting).
-     * Every connection has a type.
-     *
-     * @return the array of connection provider types
-     * @resource.representation.200.doc returned when all connection provider types are successfully returned
-     */
     @GET
-    @Path("types")
+    @Path("/types")
+    @ApiOperation(value = "Returns all connection types available.",
+            notes = "An array of string value is returned representing all possible connection types.  " +
+                    "A connector type is a top level identifier for distinguishing what the type of a connection " +
+                    "(e.g. cloud, projecthosting). Every connection has a top level type.")
     public Response getProviderTypes() {
         return Response.ok(ConnectionUtils.PROVIDER_MAP.keySet()).build();
     }
 
-    /**
-     * Returns a list of all connection providers.  Each individual connection  provider resource describes
-     * an identifier for a provider, canonical names for each provider, the type (e.g. cloud, projecthosting) that the provider belongs to, and
-     * optionally all possible methods of authentication for a given provider.  Every connection has a provider.
-     *
-     * @param showAuthTypes boolean value specifying whether supported authTypes for each provider are returned for each provider document.
-     * @return the object representing the collection of connection providers or an error if something goes wrong
-     * @resource.representation.200.doc returned when all providerTypes are successfully returned
-     */
     @GET
-    @Path("providers")
-    public Response getProviderList(@QueryParam("showAuthTypes") boolean showAuthTypes) {
+    @Path("/providers")
+    @ApiOperation(value = "Returns all connection providers available.",
+            notes = "Returns an array of strings listing of connection providers.  Each individual connection  " +
+                    "describes an identifier for a provider, canonical names for each provider, the type (e.g. cloud" +
+                    ", projecthosting) that the provider belongs to, and optionally all possible methods of " +
+                    "authentication for a given provider. Every connection has a provider.",
+            responseClass = "com.streamreduce.rest.dto.response.ConnectionProvidersResponseDTO")
+    public Response getProviderList(@QueryParam("showAuthTypes")
+                                    @ApiParam(name = "showAuthTypes", value = "false", defaultValue = "false")
+                                    boolean showAuthTypes) {
+
         ConnectionProvidersResponseDTO responseDTO = new ConnectionProvidersResponseDTO();
         List<ConnectionProviderResponseDTO> providers = new ArrayList<>();
 
@@ -128,7 +104,6 @@ public class ConnectionResource extends AbstractOwnableResource {
     }
 
     /**
-     * Returns a list of connection providers for only the specified type.
      * Supported connection provider types that can be specified are: cloud, projecthosting, feed, gateway
      *
      * @param providerType  the provider type to filter all connection providers by
@@ -139,8 +114,19 @@ public class ConnectionResource extends AbstractOwnableResource {
      */
     @GET
     @Path("providers/{providerType}")
-    public Response getProviderList(@PathParam("providerType") String providerType,
-                                    @QueryParam("showAuthTypes") boolean showAuthTypes) {
+    @ApiOperation(value = "Returns a list of connection providers for only the specified type.",
+            notes = "Using any possible value from /connections/types, an array of providers for that type will be " +
+                    "returned",
+            responseClass = "com.streamreduce.rest.dto.response.ConnectionProvidersResponseDTO"
+    )
+    public Response getProviderList(@ApiParam(name = "type", value = "cloud", required = true)
+                                    @PathParam("type")
+                                    String providerType,
+
+                                    @ApiParam(name = "showAuthTypes", value = "false", defaultValue = "false")
+                                    @QueryParam("showAuthTypes")
+                                    boolean showAuthTypes) {
+
         // We want our caller to know they requested an invalid connection type
         if (!ConnectionUtils.PROVIDER_MAP.containsKey(providerType)) {
             return error("'" + providerType + "' is an invalid connection provider type.",
@@ -159,13 +145,10 @@ public class ConnectionResource extends AbstractOwnableResource {
         return Response.ok(responseDTO).build();
     }
 
-    /**
-     * Returns a list of all existing and active connections the current user has access to.
-     *
-     * @return an array of connections or an error if something goes wrong
-     * @response.representation.200.doc Returned when a valid users requests this resource
-     */
     @GET
+    @ApiOperation(value = "Returns all connections that the current user hass access to.",
+            responseClass = "com.streamreduce.rest.dto.response.ConnectionResponseDTO"
+    )
     public Response listAllConnections() {
         List<ConnectionResponseDTO> connectionsDTO = new ArrayList<>();
         User user = securityService.getCurrentUser();
@@ -191,8 +174,14 @@ public class ConnectionResource extends AbstractOwnableResource {
      * @response.representation.200.doc Returned when a list of connections for a type is successfully rendered
      */
     @GET
-    @Path("types/{providerType}")
-    public Response listConnectionsOfType(@PathParam("providerType") String providerType) {
+    @Path("/types/{providerType}")
+    @ApiOperation(value = "Returns a list of connections for a given type that the current user has access to",
+            responseClass = "com.streamreduce.rest.dto.response.ConnectionResponseDTO"
+    )
+    public Response listConnectionsOfType(@ApiParam(name = "type", value = "cloud", required = true)
+                                          @PathParam("type")
+                                          String providerType) {
+
         List<ConnectionResponseDTO> connectionsDTO = new ArrayList<>();
         User user = securityService.getCurrentUser();
         List<Connection> connections = connectionService.getConnections(providerType, user);
@@ -206,12 +195,19 @@ public class ConnectionResource extends AbstractOwnableResource {
 
 
     @GET
-    @Path("externalId/{externalId}")
-    public Response getConnectionsByExternalId(@PathParam("externalId") String externalId) {
+    @Path("/externalId/{externalId}")
+    @ApiOperation(value = "Returns a list of connections with an externalId matching the externalId in the path that " +
+            "the user has access to.",
+            responseClass = "com.streamreduce.rest.dto.response.ConnectionResponseDTO"
+    )
+    public Response getConnectionsByExternalId(@PathParam("externalId")
+                                               @ApiParam(name = "externalId", required = true)
+                                               String externalId) {
+
         List<ConnectionResponseDTO> connectionsDTO = new ArrayList<>();
 
         User user = securityService.getCurrentUser();
-        List<Connection> connections = connectionService.getConnectionsByExternalId(externalId,user);
+        List<Connection> connections = connectionService.getConnectionsByExternalId(externalId, user);
         for (Connection connection : connections) {
             connectionsDTO.add(toFullDTO(connection));
         }
@@ -220,23 +216,26 @@ public class ConnectionResource extends AbstractOwnableResource {
     }
 
     /**
-     * Returns the connection with the given id.
-     *
-     * @param id the connection id
-     * @return the connection with the given id
      * @response.representation.200.doc Returned when a connection for the given id is successfully retrieved
      * @response.representation.400.doc Returned when the id is null when passed in
      * @response.representation.404.doc Returned when you request a connection whose id does not exist for the given user
      */
     @GET
     @Path("{id}")
-    public Response getConnectionWithId(@PathParam("id") ObjectId id) {
-        if (id == null) {
+    @ApiOperation(value = "Returns a connection with the given id.",
+            responseClass = "com.streamreduce.rest.dto.response.ConnectionResponseDTO"
+    )
+    public Response getConnectionWithId(@PathParam("id")
+                                        @ApiParam(name = "id", required = true)
+                                        String id) {
+        if (StringUtils.isBlank(id)) {
             return error(ErrorMessages.MISSING_REQUIRED_FIELD, Response.status(Response.Status.BAD_REQUEST));
         }
+        ObjectId objectId = new ObjectId(id);
+
         try {
             return Response
-                    .ok(toFullDTO(connectionService.getConnection(id)))
+                    .ok(toFullDTO(connectionService.getConnection(objectId)))
                     .build();
         } catch (ConnectionNotFoundException e) {
             return error(e.getMessage(), Response.status(Response.Status.NOT_FOUND));
@@ -244,18 +243,22 @@ public class ConnectionResource extends AbstractOwnableResource {
     }
 
     /**
-     * Creates a new connection.  The passed in connection will be checked to make sure it can connect to the specified
-     * provider with the optionally supplied url credentials.  A new connection must also have an account unique alias.
-     *
      * @param json the json payload describing the connection
-     * @return the created connection
      * @response.representation.200.doc Returned when a connection is successfully created
      * @response.representation.400.doc Returned when a duplicate connection (or alias) exists, if credentials are invalid, or if the json payload is missing necessary attributes.
      * @response.representation.500.doc Returned a host can't be found from a client supplied url or another unexpected network layer problem occurred connection to host.
      */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response createConnection(JSONObject json) {
+    @ApiOperation(value = "Creates a new connection.",
+            notes = "The passed in connection will be checked to make sure it can connect to the specified " +
+                    "provider with the optionally supplied url credentials.  A new connection must also have an account" +
+                    " unique alias.",
+            responseClass = "com.streamreduce.rest.dto.response.ConnectionResponseDTO"
+    )
+    public Response createConnection(@ApiParam(name = "connection", required = true, value = "A JSON object with " +
+            "all fields for a connection included with proper values") JSONObject json) {
+
         User currentUser = securityService.getCurrentUser();
         try {
             Connection connection = new Connection.Builder()
@@ -296,7 +299,7 @@ public class ConnectionResource extends AbstractOwnableResource {
      * <p/>
      * Presently only creation of new issues on connections with a provider type of "jira" is supported.
      *
-     * @param id   the id of the connection to create the external resource
+     * @param id the id of the connection to create the external resource
      * @param json the json payload describing the resource to be created
      * @return the newly assigned resource id.
      * @response.representation.200.doc Returned when an external resource on the connection is successfully created
@@ -305,17 +308,18 @@ public class ConnectionResource extends AbstractOwnableResource {
      * @resource.representation.500.doc Returned when the resource creation request to external provider failed
      */
     @POST
-    @Path("{id}")
+    @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response createExternalResource(@PathParam("id") ObjectId id, JSONObject json) {
-        if (isNullOrEmpty(id)) {
+    public Response createExternalResource(@PathParam("id") String id, JSONObject json) {
+        if (StringUtils.isBlank(id)) {
             return error(ErrorMessages.MISSING_REQUIRED_FIELD, Response.status(Response.Status.BAD_REQUEST));
         }
+        ObjectId objectId = new ObjectId(id);
 
         AbstractProjectHostingClient projectHostingClient = null;
 
         try {
-            Connection connection = connectionService.getConnection(id);
+            Connection connection = connectionService.getConnection(objectId);
 
             if (!isOwnerOrAdmin(connection.getUser(), connection.getAccount())) {
                 return error(ErrorMessages.APPLICATION_ACCESS_DENIED, Response.status(Response.Status.BAD_REQUEST));
@@ -353,12 +357,6 @@ public class ConnectionResource extends AbstractOwnableResource {
     }
 
     /**
-     * Updates the connection identified by the id in the path.
-     *
-     * @param id   the id of the connection to update
-     * @param json the json payload describing the connection's changes
-     * @return the updated connection
-     * @response.representation.200.doc Returned when a connection is successfully updated
      * @response.representation.400.doc If a client attempts to update a connection not accessible to the client, or if new credentials for the connection do not work.
      * @response.representation.404.doc Returned when a connection id is not found
      * @response.representation.409.doc If a connection being updated will have no attributes that make it a duplicate of another connection
@@ -367,13 +365,26 @@ public class ConnectionResource extends AbstractOwnableResource {
      */
     @PUT
     @Path("{id}")
-    public Response updateConnection(@PathParam("id") ObjectId id, JSONObject json) {
-        if (isNullOrEmpty(id)) {
+    @ApiOperation(value = "Update an existing connection.",
+            notes = "The response is the new representation of the connection.",
+            responseClass = "com.streamreduce.rest.dto.response.ConnectionResponseDTO"
+    )
+    public Response updateConnection(@ApiParam(name = "id", required = true)
+                                     @PathParam("id")
+                                     String id,
+
+                                     @ApiParam(name = "connection", required = true, value = "A JSON object with " +
+                                             "all connection fields to be updated")
+                                     JSONObject json) {
+
+        if (StringUtils.isBlank(id)) {
             return error(ErrorMessages.MISSING_REQUIRED_FIELD, Response.status(Response.Status.BAD_REQUEST));
         }
 
+        ObjectId objectId = new ObjectId(id);
+
         try {
-            Connection connection = connectionService.getConnection(id);
+            Connection connection = connectionService.getConnection(objectId);
 
             if (!isOwnerOrAdmin(connection.getUser(), connection.getAccount())) {
                 return error(ErrorMessages.APPLICATION_ACCESS_DENIED, Response.status(Response.Status.BAD_REQUEST));
@@ -403,9 +414,6 @@ public class ConnectionResource extends AbstractOwnableResource {
     }
 
     /**
-     * Deletes the connection identified by the id in the path.
-     *
-     * @param id the id of the connection to delete
      * @return the response indicating the result of the deletion
      * @response.representation.200.doc Returned when a connection is successfully deleted
      * @response.representation.400.doc Returned when the specified connection does not exist or is inaccessible to the client.
@@ -413,14 +421,19 @@ public class ConnectionResource extends AbstractOwnableResource {
      */
     @DELETE
     @Path("{id}")
-    public Response deleteConnection(@PathParam("id") ObjectId id) {
+    @ApiOperation(value = "Deletes a connection.")
+    public Response deleteConnection(@PathParam("id")
+                                     @ApiParam(name = "id", required = true)
+                                     String id) {
 
-        if (id == null) {
+        if (StringUtils.isBlank(id)) {
             return error(ErrorMessages.MISSING_REQUIRED_FIELD, Response.status(Response.Status.BAD_REQUEST));
         }
 
+        ObjectId objectId = new ObjectId(id);
+
         try {
-            Connection connection = connectionService.getConnection(id);
+            Connection connection = connectionService.getConnection(objectId);
             Account account = securityService.getCurrentUser().getAccount();
 
             // SOBA-1885 resource is PUBLIC and you are the admin.
@@ -457,29 +470,34 @@ public class ConnectionResource extends AbstractOwnableResource {
     }
 
     /**
-     * Returns the inventory items for the connection identified by the id in the path.  Inventory items represent
-     * assets created and managed by the external provider.  Supported connection provider types: cloud, projecthosting.
-     *
-     * @param id    the id of the connection whose inventory we're interested in
-     * @param count set to true if only a count of the number of inventory items is needed
-     * @return the connection's inventory
-     * @response.representation.200.doc Returned when the inventory of a connection is successfully rendered
      * @response.representation.400.doc Returned when the client does not specify a connection id or specifies a connection id the client does not have access to
      * @response.representation.404.doc Returned when the connection id cannot be found
      */
     @GET
     @Path("{id}/inventory")
-    public Response getInventory(@PathParam("id") ObjectId id, @DefaultValue("false") @QueryParam("count") boolean count) {
+    @ApiOperation(value = "Returns the inventory items for a given connection",
+            notes = "Inventory items represent assets created and managed by the external provider.",
+            responseClass = "com.streamreduce.rest.dto.response.ConnectionInventoryResponseDTO")
+    public Response getInventory(@ApiParam(name = "id", required = true)
+                                 @PathParam("id")
+                                 String id,
+
+                                 @ApiParam(name = "id", required = false, defaultValue = "false")
+                                 @DefaultValue("false")
+                                 @QueryParam("count")
+                                 boolean count) {
         if (id == null) {
             return error(ErrorMessages.MISSING_REQUIRED_FIELD, Response.status(Response.Status.BAD_REQUEST));
         }
+
+        ObjectId objectId = new ObjectId(id);
 
         User currentUser = securityService.getCurrentUser();
 
         Connection connection;
 
         try {
-            connection = connectionService.getConnection(id);
+            connection = connectionService.getConnection(objectId);
 
             // if it's public it's ok
             if (!isInAccount(connection.getAccount()) && !connection.getVisibility().equals(SobaObject.Visibility.PUBLIC)) {
@@ -512,8 +530,6 @@ public class ConnectionResource extends AbstractOwnableResource {
     }
 
     /**
-     * Adds the hashtag to a connection and also to all of its inventory items.
-     *
      * @response.representation.200.doc Returned when a tag is successfully applied to a connection and all of its inventory items
      * @response.representation.400.doc Returned if no hashtag is specified, or if the client does not have access to the given connection
      * @response.representation.404.doc If the connection with the supplied id does not exist
@@ -521,8 +537,15 @@ public class ConnectionResource extends AbstractOwnableResource {
     @POST
     @Path("{id}/hashtag")
     @Consumes(MediaType.APPLICATION_JSON)
+    @ApiOperation(value = "Adds the hashtag to a connection and also to all of its inventory items.")
     @Override
-    public Response addTag(@PathParam("id") ObjectId id, JSONObject json) {
+    public Response addTag(@ApiParam(name = "id", required = true)
+                           @PathParam("id")
+                           String id,
+
+                           @ApiParam(name = "hashtag", required = true, value = "A JSON object with a hashtag field " +
+                                   " property that contains the hashtag to be added")
+                           JSONObject json) {
 
         String hashtag = getJSON(json, HASHTAG);
 
@@ -531,7 +554,7 @@ public class ConnectionResource extends AbstractOwnableResource {
         }
 
         try {
-            Connection connection = connectionService.getConnection(id);
+            Connection connection = connectionService.getConnection(new ObjectId(id));
             User user = securityService.getCurrentUser();
 
             if (!isInAccount(connection.getAccount())) {
@@ -560,31 +583,34 @@ public class ConnectionResource extends AbstractOwnableResource {
     }
 
     /**
-     * Retrieves a list of all hashtags for a given connection.
-     *
      * @response.representation.200.doc Returned when a list of hashtags for a given connection is successfully rendered
      * @response.representation.400.doc Returned if a connection id isn't specified or the client does not have access to the connection.
      * @response.representation.404.doc If the connection with the supplied id does not exist
      */
     @GET
     @Path("{id}/hashtag")
+    @ApiOperation(value = "Retrieves a list of all hashtags for a given connection.")
     @Override
-    public Response getTags(@PathParam("id") ObjectId id) {
+    public Response getTags(@PathParam("id")
+                            @ApiParam(name = "id", required = true)
+                            String id) {
 
-        if (id == null) {
+        if (StringUtils.isBlank(id)) {
             return error(ErrorMessages.MISSING_REQUIRED_FIELD, Response.status(Response.Status.BAD_REQUEST));
         }
+
+        ObjectId objectId = new ObjectId(id);
         Set<String> tags;
         Connection connection;
         try {
-            connection = connectionService.getConnection(id);
+            connection = connectionService.getConnection(objectId);
 
             if (!isInAccount(connection.getAccount())) {
                 return error(ErrorMessages.APPLICATION_ACCESS_DENIED, Response.status(Response.Status.BAD_REQUEST));
             }
 
         } catch (ConnectionNotFoundException e) {
-            return error("No connection with the provided id (" + id.toString() + ") could be found.",
+            return error("No connection with the provided id (" + objectId.toString() + ") could be found.",
                     Response.status(Response.Status.NOT_FOUND));
         }
 
@@ -597,16 +623,21 @@ public class ConnectionResource extends AbstractOwnableResource {
     }
 
     /**
-     * Deletes a hashtag from a connection and all of its inventory items.
-     *
      * @response.representation.200.doc Returned when a hashtag is successfully removed from a connection and all of its inventory
      * @response.representation.400.doc Returned if a connection id isn't specified or the client does not have access to the connection.
      * @response.representation.404.doc If the connection with the supplied id does not exist
      */
     @DELETE
     @Path("{id}/hashtag/{tagname}")
+    @ApiOperation(value = "Deletes a hashtag from a connection and all of its inventory items.")
     @Override
-    public Response removeTag(@PathParam("id") ObjectId id, @PathParam("tagname") String hashtag) {
+    public Response removeTag(@ApiParam(name = "id", required = true)
+                              @PathParam("id")
+                              String id,
+
+                              @ApiParam(name = "tagname", required = true)
+                              @PathParam("tagname")
+                              String hashtag) {
 
         if (id == null) {
             return error(ErrorMessages.MISSING_REQUIRED_FIELD, Response.status(Response.Status.BAD_REQUEST));
@@ -617,7 +648,8 @@ public class ConnectionResource extends AbstractOwnableResource {
         }
 
         try {
-            Connection connection = connectionService.getConnection(id);
+            ObjectId objectId = new ObjectId(id);
+            Connection connection = connectionService.getConnection(objectId);
 
             if (!isInAccount(connection.getAccount())) {
                 return error(ErrorMessages.APPLICATION_ACCESS_DENIED, Response.status(Response.Status.BAD_REQUEST));
@@ -636,7 +668,7 @@ public class ConnectionResource extends AbstractOwnableResource {
             }
 
         } catch (ConnectionNotFoundException e) {
-            return error("No connection with the provided id (" + id.toString() + ") could be found.",
+            return error("No connection with the provided id (" + id + ") could be found.",
                     Response.status(Response.Status.NOT_FOUND));
         }
 
@@ -645,8 +677,6 @@ public class ConnectionResource extends AbstractOwnableResource {
 
 
     /**
-     * Immediately refreshes the inventory for the given connection
-     *
      * @response.representation.200.doc Returned if the request to refresh inventory immediately was granted.
      * @response.representation.400.doc Returned if a connection id isn't specified or the client does not have access to the connection.
      * @response.representation.404.doc If the connection with the supplied id does not exist
@@ -654,19 +684,24 @@ public class ConnectionResource extends AbstractOwnableResource {
      */
     @POST
     @Path("{id}/inventory/refresh")
-    public Response refreshInventory(@PathParam("id") ObjectId id) {
+    @ApiOperation(value = "Immediately refreshes the inventory for the given connection")
+    public Response refreshInventory(@PathParam("id")
+                                     @ApiParam(name = "id", required = true)
+                                     String id) {
 
         if (id == null) {
             return error(ErrorMessages.MISSING_REQUIRED_FIELD, Response.status(Response.Status.BAD_REQUEST));
         }
 
+        ObjectId objectId = new ObjectId(id);
+
         try {
             Connection connection;
             try {
-                connection = connectionService.getConnection(id);
+                connection = connectionService.getConnection(objectId);
 
             } catch (ConnectionNotFoundException e) {
-                return error("No connection with the provided id (" + id.toString() + ") could be found.",
+                return error("No connection with the provided id (" + objectId.toString() + ") could be found.",
                         Response.status(Response.Status.NOT_FOUND));
             }
 

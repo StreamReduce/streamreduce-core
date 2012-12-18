@@ -306,7 +306,7 @@ public class MessageResource extends AbstractTagableSobaResource {
     @Path("{messageId}/hashtag")
     @Consumes(MediaType.APPLICATION_JSON)
     @Override
-    public Response addTag(@PathParam("messageId") ObjectId messageId, JSONObject json) {
+    public Response addTag(@PathParam("messageId") String messageId, JSONObject json) {
 
         String hashtag = getJSON(json, HASHTAG);
 
@@ -317,7 +317,8 @@ public class MessageResource extends AbstractTagableSobaResource {
         User user = applicationManager.getSecurityService().getCurrentUser();
 
         try {
-            applicationManager.getMessageService().addHashtagToMessage(user.getAccount(), messageId, hashtag);
+            applicationManager.getMessageService().addHashtagToMessage(user.getAccount(), new ObjectId(messageId),
+                    hashtag);
 
         } catch (MessageNotFoundException e) {
             return error(e.getMessage(), Response.status(Response.Status.BAD_REQUEST));
@@ -340,12 +341,13 @@ public class MessageResource extends AbstractTagableSobaResource {
     @GET
     @Path("{messageId}/hashtag")
     @Override
-    public Response getTags(@PathParam("messageId") ObjectId messageId) {
+    public Response getTags(@PathParam("messageId") String messageId) {
 
         User user = applicationManager.getSecurityService().getCurrentUser();
         Set<String> tags;
         try {
-            SobaMessage sobaMessage = applicationManager.getMessageService().getMessage(user.getAccount(), messageId);
+            SobaMessage sobaMessage = applicationManager.getMessageService().getMessage(user.getAccount(),
+                    new ObjectId(messageId));
             tags = sobaMessage.getHashtags();
 
         } catch (MessageNotFoundException e) {
@@ -372,7 +374,7 @@ public class MessageResource extends AbstractTagableSobaResource {
     @DELETE
     @Path("{messageId}/hashtag/{tagname}")
     @Override
-    public Response removeTag(@PathParam("messageId") ObjectId messageId, @PathParam("tagname") String hashtag) {
+    public Response removeTag(@PathParam("messageId") String messageId, @PathParam("tagname") String hashtag) {
 
         if (isEmpty(hashtag)) {
             return error("Hashtag payload is empty", Response.status(Response.Status.BAD_REQUEST));
@@ -381,7 +383,8 @@ public class MessageResource extends AbstractTagableSobaResource {
         User user = applicationManager.getSecurityService().getCurrentUser();
 
         try {
-            applicationManager.getMessageService().removeHashtagFromMessage(user.getAccount(), messageId, hashtag);
+            applicationManager.getMessageService().removeHashtagFromMessage(user.getAccount(), new ObjectId(messageId),
+                    hashtag);
 
         } catch (MessageNotFoundException e) {
             return error(e.getMessage(), Response.status(Response.Status.BAD_REQUEST));

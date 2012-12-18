@@ -52,22 +52,7 @@ public class AbstractOwnableResourceTest {
 
     @Before
     public void setUp() {
-        testResource = new AbstractOwnableResource() {
-            @Override
-            protected Response addTag(ObjectId id, JSONObject hashtag) {
-                return null;
-            }
-
-            @Override
-            protected Response getTags(ObjectId id) {
-                return null;
-            }
-
-            @Override
-            protected Response removeTag(ObjectId id, String hashtag) {
-                return null;
-            }
-        };
+        testResource = mock(AbstractOwnableResource.class);
 
         testUser = new User.Builder().username("maynard").account(new Account.Builder().name("Tool").build()).build();
         testUser.setId(new ObjectId());

@@ -27,11 +27,11 @@ public abstract class AbstractTagableSobaResource extends AbstractResource {
 
     public static String HASHTAG = "hashtag";
 
-    protected abstract Response addTag(ObjectId id, JSONObject hashtag);
+    protected abstract Response addTag(String id, JSONObject hashtag);
 
-    protected abstract Response getTags(ObjectId id);
+    protected abstract Response getTags(String id);
 
-    protected abstract Response removeTag(ObjectId id, String hashtag);
+    protected abstract Response removeTag(String id, String hashtag);
 
 
 }

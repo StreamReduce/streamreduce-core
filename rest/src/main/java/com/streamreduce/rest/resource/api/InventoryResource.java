@@ -124,7 +124,7 @@ public class InventoryResource extends AbstractOwnableResource {
     @Path("{itemId}/hashtag")
     @Consumes(MediaType.APPLICATION_JSON)
     @Override
-    public Response addTag(@PathParam("itemId") ObjectId itemId, JSONObject json) {
+    public Response addTag(@PathParam("itemId") String itemId, JSONObject json) {
 
         String hashtag = getJSON(json, HASHTAG);
 
@@ -135,7 +135,7 @@ public class InventoryResource extends AbstractOwnableResource {
         InventoryItem inventoryItem;
 
         try {
-            inventoryItem = applicationManager.getInventoryService().getInventoryItem(itemId);
+            inventoryItem = applicationManager.getInventoryService().getInventoryItem(new ObjectId(itemId));
         } catch (InventoryItemNotFoundException e) {
             return error(e.getMessage(), Response.status(Response.Status.NOT_FOUND));
         }
@@ -164,11 +164,11 @@ public class InventoryResource extends AbstractOwnableResource {
     @GET
     @Path("{itemId}/hashtag")
     @Override
-    public Response getTags(@PathParam("itemId") ObjectId itemId) {
+    public Response getTags(@PathParam("itemId") String itemId) {
         InventoryItem inventoryItem;
 
         try {
-            inventoryItem = applicationManager.getInventoryService().getInventoryItem(itemId);
+            inventoryItem = applicationManager.getInventoryService().getInventoryItem(new ObjectId(itemId));
         } catch (InventoryItemNotFoundException e) {
             return error(e.getMessage(), Response.status(Response.Status.NOT_FOUND));
         }
@@ -194,7 +194,7 @@ public class InventoryResource extends AbstractOwnableResource {
     @DELETE
     @Path("{itemId}/hashtag/{tagname}")
     @Override
-    public Response removeTag(@PathParam("itemId") ObjectId itemId, @PathParam("tagname") String hashtag) {
+    public Response removeTag(@PathParam("itemId") String itemId, @PathParam("tagname") String hashtag) {
         if (isEmpty(hashtag)) {
             return error("Hashtag payload is empty", Response.status(Response.Status.BAD_REQUEST));
         }
@@ -202,7 +202,7 @@ public class InventoryResource extends AbstractOwnableResource {
         InventoryItem inventoryItem;
 
         try {
-            inventoryItem = applicationManager.getInventoryService().getInventoryItem(itemId);
+            inventoryItem = applicationManager.getInventoryService().getInventoryItem(new ObjectId(itemId));
         } catch (InventoryItemNotFoundException e) {
             return error(e.getMessage(), Response.status(Response.Status.NOT_FOUND));
         }

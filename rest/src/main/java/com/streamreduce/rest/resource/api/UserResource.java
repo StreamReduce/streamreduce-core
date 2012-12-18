@@ -474,7 +474,7 @@ public class UserResource extends AbstractTagableSobaResource {
     @Path("{userId}/hashtag")
     @Consumes(MediaType.APPLICATION_JSON)
     @Override
-    public Response addTag(@PathParam("userId") ObjectId userId, JSONObject json) {
+    public Response addTag(@PathParam("userId") String userId, JSONObject json) {
 
         String hashtag = getJSON(json, HASHTAG);
 
@@ -485,7 +485,7 @@ public class UserResource extends AbstractTagableSobaResource {
         }
 
         try {
-            User user = userService.getUserById(userId, currentUser.getAccount());
+            User user = userService.getUserById(new ObjectId(userId), currentUser.getAccount());
             user.addHashtag(hashtag);
             userService.updateUser(user);
 
@@ -509,13 +509,13 @@ public class UserResource extends AbstractTagableSobaResource {
     @GET
     @Path("{userId}/hashtag")
     @Override
-    public Response getTags(@PathParam("userId") ObjectId userId) {
+    public Response getTags(@PathParam("userId") String userId) {
 
         User currentUser = securityService.getCurrentUser();
 
         Set<String> tags;
         try {
-            User user = userService.getUserById(userId, currentUser.getAccount());
+            User user = userService.getUserById(new ObjectId(userId), currentUser.getAccount());
             tags = user.getHashtags();
 
         } catch (UserNotFoundException e) {
@@ -545,7 +545,7 @@ public class UserResource extends AbstractTagableSobaResource {
     @DELETE
     @Path("{userId}/hashtag/{tagname}")
     @Override
-    public Response removeTag(@PathParam("userId") ObjectId userId, @PathParam("tagname") String hashtag) {
+    public Response removeTag(@PathParam("userId") String userId, @PathParam("tagname") String hashtag) {
 
         if (isEmpty(hashtag)) {
             return error("Hashtag payload is empty", Response.status(Response.Status.BAD_REQUEST));
@@ -553,7 +553,7 @@ public class UserResource extends AbstractTagableSobaResource {
         User currentUser = securityService.getCurrentUser();
 
         try {
-            User user = userService.getUserById(userId, currentUser.getAccount());
+            User user = userService.getUserById(new ObjectId(userId), currentUser.getAccount());
             user.removeHashtag(hashtag);
             userService.updateUser(user);
 

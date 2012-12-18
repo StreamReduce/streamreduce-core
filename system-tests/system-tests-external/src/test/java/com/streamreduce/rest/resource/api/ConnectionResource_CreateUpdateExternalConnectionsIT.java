@@ -120,7 +120,8 @@ public class ConnectionResource_CreateUpdateExternalConnectionsIT extends BaseCo
         Response createResponse = connectionResource.createConnection(connectionObject);
         ConnectionResponseDTO createConnectionResponseDTO = (ConnectionResponseDTO) createResponse.getEntity();
         Assert.assertEquals(200, createResponse.getStatus());
-        Response updateResponse = connectionResource.updateConnection(createConnectionResponseDTO.getId(), updateObject);
+        Response updateResponse = connectionResource.updateConnection(createConnectionResponseDTO.getId().toString(),
+                updateObject);
         ErrorMessage errorMessage = (ErrorMessage) updateResponse.getEntity();
         Assert.assertEquals(errorMessage.getErrorMessage(), "The destination URL was invalid: no protocol: as/");
     }
@@ -194,7 +195,8 @@ public class ConnectionResource_CreateUpdateExternalConnectionsIT extends BaseCo
         Response createResponse = connectionResource.createConnection(createConnectionObject);
         ConnectionResponseDTO createConnectionResponseDTO = (ConnectionResponseDTO) createResponse.getEntity();
 
-        Response updateResponse = connectionResource.updateConnection(createConnectionResponseDTO.getId(), updateConnectionObject);
+        Response updateResponse = connectionResource.updateConnection(createConnectionResponseDTO.getId().toString(),
+                updateConnectionObject);
         Assert.assertEquals(200, updateResponse.getStatus());
         ConnectionResponseDTO updateConnectionResponseDTO = (ConnectionResponseDTO) updateResponse.getEntity();
         Assert.assertEquals(1, updateConnectionResponseDTO.getOutboundConfigurations().size());

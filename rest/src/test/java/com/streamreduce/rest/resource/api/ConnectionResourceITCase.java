@@ -76,7 +76,7 @@ public class ConnectionResourceITCase extends BaseConnectionResourceITCase {
         }
 
         long before = System.currentTimeMillis();
-        connectionResource.removeTag(stubConnection.getId(), "#baz");
+        connectionResource.removeTag(stubConnection.getId().toString(), "#baz");
         long after = System.currentTimeMillis();
 
         long lengthInMillis = after - before;

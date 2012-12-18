@@ -103,13 +103,13 @@
                         <configuration>
                             <webAppSourceDirectory>${project.basedir}/src/main/webapp</webAppSourceDirectory>
                             <classesDirectory>${project.build.directory}/classes</classesDirectory>
-                            <webAppConfig implementation="org.mortbay.jetty.plugin.Jetty6PluginWebAppContext">
-                              <sessionHandler implementation="org.mortbay.jetty.servlet.SessionHandler">
-                                <sessionManager implementation="org.mortbay.jetty.servlet.HashSessionManager">
-                                  <!-- Disable url sessions using JSessionID -->
-                                  <sessionURL>none</sessionURL>
-                                </sessionManager>
-                              </sessionHandler>
+                            <webAppConfig>
+                                <sessionHandler implementation="org.eclipse.jetty.server.session.SessionHandler">
+                                    <sessionManager implementation="org.eclipse.jetty.server.session.HashSessionManager">
+                                        <!-- Disable url sessions using JSessionID -->
+                                        <sessionIdPathParameterName>none</sessionIdPathParameterName>
+                                    </sessionManager>
+                                </sessionHandler>
                             </webAppConfig>
                         </configuration>
                         <executions>

@@ -70,11 +70,17 @@
          Servlets
          ================================================================== -->
     <servlet>
+        <servlet-name>SwaggerBootstrap</servlet-name>
+        <servlet-class>com.streamreduce.swagger.SwaggerBootstrap</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet>
         <servlet-name>Nodeable App</servlet-name>
         <servlet-class>com.sun.jersey.spi.spring.container.servlet.SpringServlet</servlet-class>
         <init-param>
             <param-name>com.sun.jersey.config.property.packages</param-name>
-            <param-value>com.streamreduce.rest.resource</param-value>
+            <param-value>com.streamreduce.rest.resource;com.wordnik.swagger.jaxrs.listing</param-value>
         </init-param>
         <init-param>
             <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>

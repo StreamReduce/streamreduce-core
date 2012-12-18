@@ -13,180 +13,6 @@
     <name>StreamReduce :: REST API</name>
     <description>All JAX-RS annotated resources that comprise the Nodeable Server REST API.</description>
 
-    <profiles>
-        <profile>
-            <id>generate-rest-documentation-private</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-javadoc-plugin</artifactId>
-                    </plugin>
-
-                    <plugin>
-                        <groupId>com.sun.jersey.contribs</groupId>
-                        <artifactId>maven-wadl-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>generate-admin-wadl</id>
-                                <goals>
-                                    <goal>generate</goal>
-                                </goals>
-                                <phase>compile</phase>
-                                <configuration>
-                                    <wadlFile>${project.build.outputDirectory}/application-admin.wadl</wadlFile>
-                                    <baseUri>/admin</baseUri>
-                                    <packagesResourceConfig>
-                                        <param>com.streamreduce.rest.resource.admin</param>
-                                    </packagesResourceConfig>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>generate-agent-wadl</id>
-                                <goals>
-                                    <goal>generate</goal>
-                                </goals>
-                                <phase>compile</phase>
-                                <configuration>
-                                    <wadlFile>${project.build.outputDirectory}/application-agent.wadl</wadlFile>
-                                    <baseUri>/agent</baseUri>
-                                    <packagesResourceConfig>
-                                        <param>com.streamreduce.rest.resource.agent</param>
-                                    </packagesResourceConfig>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>generate-status-wadl</id>
-                                <goals>
-                                    <goal>generate</goal>
-                                </goals>
-                                <phase>compile</phase>
-                                <configuration>
-                                    <wadlFile>${project.build.outputDirectory}/application-status.wadl</wadlFile>
-                                    <baseUri>/status</baseUri>
-                                    <packagesResourceConfig>
-                                        <param>com.streamreduce.rest.resource.status</param>
-                                    </packagesResourceConfig>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>xml-maven-plugin</artifactId>
-                    </plugin>
-
-                    <plugin>
-                        <artifactId>maven-antrun-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>copy-wadl-to-html</id>
-                                <goals>
-                                    <goal>run</goal>
-                                </goals>
-                                <phase>compile</phase>
-                                <configuration>
-                                    <tasks>
-                                        <!-- Copy transformed WADL to HTML -->
-                                        <copy file="${project.basedir}/target/generated-sources/html/application-admin.wadl"
-                                              tofile="${project.build.outputDirectory}/application-admin.html"/>
-                                        <copy file="${project.basedir}/target/generated-sources/html/application-agent.wadl"
-                                              tofile="${project.build.outputDirectory}/application-agent.html"/>
-                                        <copy file="${project.basedir}/target/generated-sources/html/application-status.wadl"
-                                              tofile="${project.build.outputDirectory}/application-status.html"/>
-                                    </tasks>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
-        <profile>
-            <id>generate-rest-documentation-public</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-javadoc-plugin</artifactId>
-                    </plugin>
-
-                    <plugin>
-                        <groupId>com.sun.jersey.contribs</groupId>
-                        <artifactId>maven-wadl-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>generate-api-wadl</id>
-                                <goals>
-                                    <goal>generate</goal>
-                                </goals>
-                                <phase>compile</phase>
-                                <configuration>
-                                    <wadlFile>${project.build.outputDirectory}/application-api.wadl</wadlFile>
-                                    <baseUri>/api</baseUri>
-                                    <packagesResourceConfig>
-                                        <param>com.streamreduce.rest.resource.api</param>
-                                    </packagesResourceConfig>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>generate-authentication-wadl</id>
-                                <goals>
-                                    <goal>generate</goal>
-                                </goals>
-                                <phase>compile</phase>
-                                <configuration>
-                                    <wadlFile>${project.build.outputDirectory}/application-authentication.wadl
-                                    </wadlFile>
-                                    <baseUri>/authentication</baseUri>
-                                    <packagesResourceConfig>
-                                        <param>com.streamreduce.rest.resource.authentication</param>
-                                    </packagesResourceConfig>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>xml-maven-plugin</artifactId>
-                    </plugin>
-
-                    <plugin>
-                        <artifactId>maven-antrun-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>copy-wadl-to-html</id>
-                                <goals>
-                                    <goal>run</goal>
-                                </goals>
-                                <phase>compile</phase>
-                                <configuration>
-                                    <tasks>
-                                        <!-- Copy transformed WADL to HTML -->
-                                        <copy file="${project.basedir}/target/generated-sources/html/application-api.wadl"
-                                              tofile="${project.build.outputDirectory}/application-api.html"/>
-                                        <copy file="${project.basedir}/target/generated-sources/html/application-authentication.wadl"
-                                              tofile="${project.build.outputDirectory}/application-authentication.html"/>
-                                    </tasks>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
-
     <dependencies>
         <dependency>
             <groupId>com.streamreduce</groupId>
@@ -213,6 +39,12 @@
             <artifactId>jersey-json</artifactId>
             <version>${jersey.version}</version>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.wordnik</groupId>
+            <artifactId>swagger-jaxrs_2.9.1</artifactId>
+            <version>1.2.1-SNAPSHOT</version>
         </dependency>
 
         <!-- Test Dependencies -->
