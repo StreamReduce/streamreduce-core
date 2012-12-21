@@ -53,7 +53,7 @@
                 /docs/** = anon
                 /authentication/login = authcBasic, roles[Users]
                 /logout = logout
-                /api/** = anon
+                /api/** = apiKey
                 /gateway/** = apiKey
                 /agent/** = apiKey
                 /admin/** = userToken, roles[Administrators]
