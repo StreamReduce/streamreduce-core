@@ -268,8 +268,6 @@ public class ConnectionServiceImpl implements ConnectionService {
         if (!silentUpdate) {
             checkForDuplicate(connection);
             validateExternalIntegrationConnections(connection);
-            // always ensure updated, validated connections are flagged as unbroken.
-            connection.setAsUnbroke();
             validateOutboundConfigurations(connection.getOutboundConfigurations());
         }
 
@@ -465,18 +463,6 @@ public class ConnectionServiceImpl implements ConnectionService {
         // TODO: Should this use MessageService#sendConnectionMessage(Event, Connection)?
         messageService.sendAccountMessage(event, tagger, target, new Date().getTime(),
                 MessageType.CONNECTION, target.getHashtags(), null);
-    }
-
-    @Override
-    public void flagConnectionAsBroken(Connection connection, String lastErrorMessage) {
-        connection.setAsBroke("[" + new Date() + "] - " + lastErrorMessage);
-        connectionDAO.save(connection);
-    }
-
-    @Override
-    public void clearBrokenFlag(Connection connection) {
-        connection.setAsUnbroke();
-        connectionDAO.save(connection);
     }
 
     @Override

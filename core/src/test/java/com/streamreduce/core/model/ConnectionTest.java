@@ -245,25 +245,6 @@ public class ConnectionTest {
         assertEquals(c, outboundConfiguration.getOriginatingConnection());
     }
 
-    @Test
-    public void testConnectionSetBrokenWithErrorMessage() {
-        Connection c = TestUtils.createCloudConnection();
-        String errorMessage = "The streams were crossed.";
-        c.setAsBroke(errorMessage);
-        Assert.assertEquals(true,c.isBroken());
-        Assert.assertEquals(errorMessage,c.getLastErrorMessage());
-    }
-
-    @Test
-    public void testConnectionSetUnBrokeClearsErrorMessage() {
-        Connection c = TestUtils.createCloudConnection();
-        String errorMessage = "The streams were crossed.";
-        c.setAsBroke(errorMessage);
-
-        c.setAsUnbroke();
-        Assert.assertEquals(false,c.isBroken());
-        Assert.assertNull(c.getLastErrorMessage());
-    }
 
     @Test
     public void testConnectionMergeWithJson_CopiesAllConnectionCredentialFields() {

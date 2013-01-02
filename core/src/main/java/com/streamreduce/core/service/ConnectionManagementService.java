@@ -32,13 +32,6 @@ public interface ConnectionManagementService {
     String getAllConnections(String type, boolean summary);
 
     /**
-     * Returns broken connections as a formatted string, ideally JSON.
-     *
-     * @return formatted String
-     */
-    String getBrokenConnections(String type, boolean summary);
-
-    /**
      * Returns disabled connections as a formatted string, ideally JSON.
      *
      * @return formatted String
@@ -52,19 +45,6 @@ public interface ConnectionManagementService {
      */
     String getConnection(String connectionObjectId);
 
-    /**
-     * Flags a connection as broken.
-     *
-     * @param connectionObjectId
-     */
-    void setAsBroken(String connectionObjectId);
-
-    /**
-     * Flags a connection as unbroken.
-     *
-     * @param connectionObjectId
-     */
-    void setAsUnbroken(String connectionObjectId);
 
     /**
      * Disables a connection.

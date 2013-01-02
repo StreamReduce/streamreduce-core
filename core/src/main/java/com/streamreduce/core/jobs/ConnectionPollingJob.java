@@ -107,7 +107,7 @@ public class ConnectionPollingJob {
         List<Connection> connectionsNeedingPolling = new ArrayList<>();
         List<Connection> allConnections = connectionService.getConnections(null);
         for (Connection connection : allConnections) {
-            if (connectionProviderFactory.pushConnectionProvider(connection.getProviderId()) != null || connection.isBroken() || connection.isDisabled()) {
+            if (connectionProviderFactory.pushConnectionProvider(connection.getProviderId()) != null  || connection.isDisabled()) {
                 continue;
             }
             long interval = getPollingIntervalForConnection(connection);

@@ -36,9 +36,6 @@ public abstract class AbstractOwnableResource extends AbstractTagableSobaResourc
         User currentUser = securityService.getCurrentUser();
         baseResponseDTO.setOwner(sobaObject.getUser().getId().equals(currentUser.getId()));
 
-        logger.debug("  Add user context info to the DTO: " + currentUser.getUsername());
-        logger.debug("    Is owner: " + baseResponseDTO.isOwner());
-
         return baseResponseDTO;
     }
 
@@ -84,8 +81,6 @@ public abstract class AbstractOwnableResource extends AbstractTagableSobaResourc
         dto.setUrl(connection.getUrl());
         dto.setProviderId(connection.getProviderId());
         dto.setAuthType(connection.getAuthType());
-        dto.setBroken(connection.isBroken());
-        dto.setLastErrorMessage(connection.getLastErrorMessage());
         dto.setOutboundConfigurations(OutboundConfigurationResponseDTO.toDTOs(connection.getOutboundConfigurations()));
 
         // return the identity for GMG connections only

@@ -28,8 +28,6 @@ public class ConnectionResponseDTO extends AbstractOwnableResponseSobaDTO {
     private AuthType authType;
     private String identity;
     private List<OutboundConfigurationResponseDTO> outboundConfigurations;
-    private boolean broken;
-    private String lastErrorMessage;
 
 
     public String getProviderId() {
@@ -79,21 +77,4 @@ public class ConnectionResponseDTO extends AbstractOwnableResponseSobaDTO {
     public void setOutboundConfigurations(List<OutboundConfigurationResponseDTO> outboundConfigurations) {
         this.outboundConfigurations = outboundConfigurations;
     }
-
-    public boolean isBroken() {
-        return broken;
-    }
-
-    public void setBroken(boolean broken) {
-        this.broken = broken;
-    }
-
-    public String getLastErrorMessage() {
-        return lastErrorMessage;
-    }
-
-    public void setLastErrorMessage(String lastErrorMessage) {
-        this.lastErrorMessage = lastErrorMessage;
-    }
-
 }

@@ -65,8 +65,6 @@ public class Connection extends AbstractActivityPollingSobaObject {
     private boolean pollingInProgress;
     private long pollingLastExecutionTime;
     private long pollingFailedCount;
-    private boolean broken;
-    private String lastErrorMessage;
     private boolean disabled = false;
 //    @Embedded
 //    private APIAuthenticationToken authenticationToken; // TODO: for IMG?
@@ -192,34 +190,6 @@ public class Connection extends AbstractActivityPollingSobaObject {
         }
     }
 
-    /**
-     * A boolean flag that signals whether a Connection can't be used for an indefinite amount of time until the
-     * Connection is updated or the external provider can be connected and authenticated to successfully again.
-     * Scenarios in which a Connection may be broken are when credentials have been changed on the external provider,
-     * but the Connection's ConnectionCredentials have not been updated to reflect that change.
-     *
-     * @return boolean representing whether the connection is broken or not.
-     */
-    public boolean isBroken() {
-        return broken;
-    }
-
-    /**
-     * Flags a connection as being broken with a specific error message.  Calling this method causes the broken property
-     * to be true and the lastErrorMessage property to be the passed in errorMessage.
-     *
-     * @param errorMessage - Error message detailing why this connection is broken.
-     */
-    public void setAsBroke(String errorMessage) {
-        this.broken = true;
-        this.lastErrorMessage = errorMessage;
-    }
-
-
-    public void setAsUnbroke() {
-        lastErrorMessage = null;
-        this.broken = false;
-    }
 
     /**
      * Returns true if this connection has been disabled (likely by an admin).
@@ -232,13 +202,6 @@ public class Connection extends AbstractActivityPollingSobaObject {
 
     public void setDisabled(boolean disabled) {
         this.disabled = disabled;
-    }
-
-    /**
-     * @return a String representing the last recorded error message on the Connection when it is broken.
-     */
-    public String getLastErrorMessage() {
-        return lastErrorMessage;
     }
 
     public boolean isPollingInProgress() {
@@ -265,13 +228,6 @@ public class Connection extends AbstractActivityPollingSobaObject {
         this.pollingFailedCount = pollingFailedCount;
     }
 
-//    public APIAuthenticationToken getAuthenticationToken() {
-//        return authenticationToken;
-//    }
-//
-//    public void setAuthenticationToken(APIAuthenticationToken authenticationToken) {
-//        this.authenticationToken = authenticationToken;
-//    }
 
     /**
      * Merges the following properties from a JSON object in to the Connection object:
@@ -333,15 +289,6 @@ public class Connection extends AbstractActivityPollingSobaObject {
         if (json.containsKey("authType")) {
             setAuthType(AuthType.valueOf(json.getString("authType")));
         }
-
-        if (json.containsKey("broken")) {
-            broken = json.getBoolean("broken");
-        }
-
-        if (json.containsKey("lastErrorMessage")) {
-            lastErrorMessage = json.getString("lastErrorMessage");
-        }
-
     }
 
     /* Extending this class is disabled on purpose.  If you need to extend the builder, please look at
@@ -471,9 +418,12 @@ public class Connection extends AbstractActivityPollingSobaObject {
     }
 
     @PrePersist
-    @SuppressWarnings("unused") //Used by Morphia
+    @SuppressWarnings("unused")
+        //Used by Morphia
     void setDefaultAuthTypeIfMissing() {
-        if (authType != null) { return;}
+        if (authType != null) {
+            return;
+        }
 
         //Set default authType if one isn't set already for any providers that existed prior to
         //authType being introduced
@@ -522,8 +472,6 @@ public class Connection extends AbstractActivityPollingSobaObject {
                     .append(this.hashtags, that.hashtags)
                     .append(this.id, that.id)
                     .append(this.outboundConfigurations, that.outboundConfigurations)
-                    .append(this.broken, that.broken)
-                    .append(this.lastErrorMessage, that.lastErrorMessage)
                     .isEquals();
 
         }
@@ -547,8 +495,6 @@ public class Connection extends AbstractActivityPollingSobaObject {
                 .append(this.hashtags)
                 .append(this.id)
                 .append(this.outboundConfigurations)
-                .append(this.broken)
-                .append(this.lastErrorMessage)
                 .toHashCode();
     }
 }

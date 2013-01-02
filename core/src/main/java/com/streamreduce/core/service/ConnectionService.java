@@ -143,23 +143,6 @@ public interface ConnectionService extends TaggableService<Connection> {
             InvalidCredentialsException, IOException;
 
     /**
-     * Flags a connection as broken. This method is used by the inventory polling jobs when it finds invalid credentials
-     * or successive exceptions in the refresh process. In the invalid credentials case the broken flag can only be reset
-     * in manual connection update.
-     *
-     * @param connection the connection that will be flagged as broken
-     */
-    void flagConnectionAsBroken(Connection connection, String lastErrorMessage);
-
-    /**
-     * Clears the connection broken flag. This method is used by the inventory polling jobs to automatically reactivate
-     * the refresh of broken connections after the configured elapsed time.
-     *
-     * @param connection the connection that will have the broken status cleared
-     */
-    void clearBrokenFlag(Connection connection);
-
-    /**
      * Returns all Connections whose externalId property matches the passed in externalId owned by a given user.
      * If a connection with a given externalId is not found, or if the passed externalId was null or empty, an empty
      * List is returned.  Otherwise a List<Connection> of all connections whose externalId property is equal to the

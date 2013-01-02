@@ -74,19 +74,6 @@ public class ConnectionManagementServiceImpl implements ConnectionManagementServ
     }
 
     @Override
-    @ManagedOperation(description = "Returns all broken connections")
-    @ManagedOperationParameters({
-            @ManagedOperationParameter(name = "type", description = "If not null, returns connections of a specific type."),
-            @ManagedOperationParameter(name = "summary", description = "If true, only connection summaries are returned.")})
-    public String getBrokenConnections(String type, boolean summary) {
-        if ("String".equals(type)) {
-            type = null;
-        }
-        List<Connection> connections = connectionDAO.allBrokenConnectionsOfType(type);
-        return toJSON(connections, summary);
-    }
-
-    @Override
     @ManagedOperation(description = "Returns all disabled connections")
     @ManagedOperationParameters({
             @ManagedOperationParameter(name = "type", description = "If not null, returns connections of a specific type."),
@@ -105,26 +92,6 @@ public class ConnectionManagementServiceImpl implements ConnectionManagementServ
             @ManagedOperationParameter(name = "connectionObjectId", description = "Connection ObjectID.")})
     public String getConnection(String connectionObjectId) {
         return toJSON(connectionDAO.get(new ObjectId(connectionObjectId)), false);
-    }
-
-    @Override
-    @ManagedOperation(description = "Sets a connection as broken.")
-    @ManagedOperationParameters({
-            @ManagedOperationParameter(name = "connectionObjectId", description = "Connection ObjectID.")})
-    public void setAsBroken(String connectionObjectId) {
-        Connection connection = connectionDAO.get(new ObjectId(connectionObjectId));
-        connection.setAsBroke("Set as broken by JMX user.");
-        connectionDAO.save(connection);
-    }
-
-    @Override
-    @ManagedOperation(description = "Sets a connection as unbroken.")
-    @ManagedOperationParameters({
-            @ManagedOperationParameter(name = "connectionObjectId", description = "Connection ObjectID.")})
-    public void setAsUnbroken(String connectionObjectId) {
-        Connection connection = connectionDAO.get(new ObjectId(connectionObjectId));
-        connection.setAsUnbroke();
-        connectionDAO.save(connection);
     }
 
     @Override
@@ -199,7 +166,6 @@ public class ConnectionManagementServiceImpl implements ConnectionManagementServ
             summaryConnection.put("created", connection.getCreated().toString());
             summaryConnection.put("lastActivityPollDate", connection.getLastActivityPollDate().toString());
             summaryConnection.put("pollingFailedCount", Long.toString(connection.getPollingFailedCount()));
-            summaryConnection.put("broken", Boolean.toString(connection.isBroken()));
             summaryConnection.put("disabled", Boolean.toString(connection.isDisabled()));
         }
         catch (NullPointerException npe) {

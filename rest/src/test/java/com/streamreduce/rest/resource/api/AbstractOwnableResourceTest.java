@@ -40,6 +40,7 @@ import org.mockito.Mockito;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -85,6 +86,8 @@ public class AbstractOwnableResourceTest {
                 )
                 .build();
 
+        when(testResource.toFullDTO(any(Connection.class))).thenCallRealMethod();
+        when(testResource.toOwnerDTO(any(Connection.class),any(ConnectionResponseDTO.class))).thenCallRealMethod();
         ConnectionResponseDTO dto = testResource.toFullDTO(c);
 
         //Test some fields
