@@ -116,7 +116,7 @@ public class ConnectionProviderFactory implements InitializingBean {
         });
     }
 
-    public PushConnectionProvider pushConnectionProvider(final String providerId) {
+    public PushConnectionProvider pushConnectionProviderFromId(final String providerId) {
         return Iterables.tryFind(allPushConnectionProviders, new Predicate<PushConnectionProvider>() {
             @Override
             public boolean apply(@Nullable PushConnectionProvider connectionProvider) {
