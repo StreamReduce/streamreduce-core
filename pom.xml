@@ -8,7 +8,7 @@
     <packaging>pom</packaging>
     <name>StreamReduce :: Parent</name>
     <version>1.0.1-SNAPSHOT</version>
-    <description>Parent Module for all Nodeable Server-Side Java Components.</description>
+    <description>Parent Module for all StreamReduce Server-Side Java Components.</description>
     <url>http://www.streamreduce.com</url>
 
     <modules>
